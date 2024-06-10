@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { Tabs, TabItem, Input, Label, Button, Select, Toast } from 'flowbite-svelte';
 	let session;
@@ -42,7 +41,7 @@
 		class="hover:text-[#3BC4A0]"
 		inactiveClasses="text-gray-500 hover:text-[#3BC4A0] p-4 sm:text-base text-xs"
 	>
-		<form action="?/addUserRol" method="post" use:enhance>
+		<form action="?/addUserRol" method="post">
 			<div class="grid grid-cols-1">
 				<div>
 					<Label class="w-4/5 m-auto text-xl text-[#3BC4A0]">NIA</Label>

@@ -1,8 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { enhance } from '$app/forms';
-	import type { PageData, ActionData } from './$types';
-	import { onMount } from 'svelte';
 	import { _handleResult } from './+page.ts';
 </script>
 
