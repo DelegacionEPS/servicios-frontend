@@ -1,6 +1,6 @@
 import type { PageServerLoad, Actions} from './$types';
 import size from '$lib/size';
-import { prueba, reservaTaquilla } from '$lib/api_taquillas';
+import { prueba, reservaTaquilla, BASE_URL_API } from '$lib/api_taquillas';
 
 
 export const load: PageServerLoad = async ({ request }) => {
@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ request }) => {
 	const edificio = split_url[0];
 	const planta = split_url[1][0];
 	const fetchOcupacionBloques = async () => {
-		const res = await fetch(`http://localhost:18080/api/ocupacionBloque/${edificio}/${planta}`);
+		const res = await fetch(`${BASE_URL_API}/api/ocupacionBloque/${edificio}/${planta}`);
 		const data = await res.json();
 		return data;
 	}
