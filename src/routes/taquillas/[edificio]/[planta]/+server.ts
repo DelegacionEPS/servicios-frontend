@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { BASE_URL_API } from '$lib/api_taquillas'
+import { BASE_URL_API } from '$lib/api_taquillas';
 
 
 export const GET: RequestHandler = async () => {

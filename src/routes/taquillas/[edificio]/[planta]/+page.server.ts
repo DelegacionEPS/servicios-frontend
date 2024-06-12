@@ -3,6 +3,7 @@ import size from '$lib/size';
 import { reservaTaquilla, BASE_URL_API } from '$lib/api_taquillas';
 
 
+
 export const load: PageServerLoad = async ({ request }) => {
 	const split_url = request.url.split('/').filter((element) => (element.length <= 2 && element.length >= 1));
 	split_url.map((url) => url.replace('?', ''));
@@ -11,7 +12,6 @@ export const load: PageServerLoad = async ({ request }) => {
 	const fetchOcupacionBloques = async () => {
 		const res = await fetch(`${BASE_URL_API}/api/ocupacionBloque/${edificio}/${planta}`);
 		const data = await res.json();
-		console.log(data);
 		return data;
 	}
 
