@@ -32,7 +32,6 @@ export async function reservaTaquilla(taquilla: FormDataEntryValue | null | Stri
 
 }
 
-
 export async function prueba(taquilla: FormDataEntryValue | null, nia: FormDataEntryValue | null) {
 	try {
 		const options = {
@@ -70,7 +69,7 @@ export async function ocupacionBloque(edificio: String, planta: String) {
 	}
 }
 
-export async function addUserRol(nia: FormDataEntryValue | null | String, rol: FormDataEntryValue | null | String) {
+export async function addUserRol(nia: FormDataEntryValue | null | String, rol: FormDataEntryValue | null | String, nia_delegado: String, nombre: String) {
 	rol = rol?.toString().toLowerCase() || 'general';
 	try {
 		const response = await fetch(`${BASE_URL_API}/api/addUserRol`, {
@@ -82,6 +81,8 @@ export async function addUserRol(nia: FormDataEntryValue | null | String, rol: F
 			body: JSON.stringify({
 				nia: nia,
 				rol: rol,
+				nia_delegado: nia_delegado,
+				nombre: nombre
 			})
 		});
 
@@ -96,7 +97,6 @@ export async function addUserRol(nia: FormDataEntryValue | null | String, rol: F
 		console.error(error);
 	}
 } 
-
 
 export async function add_user_db(email: String, name: String | null | undefined) {
 	const nia = email.split('@')[0];
@@ -155,7 +155,79 @@ export async function getReservasTaquilla(taquilla: FormDataEntryValue | null | 
 		console.error(error);
 	}
 }
-		
+	
+export async function aceptaReserva(taquilla: FormDataEntryValue | null | String, responsable: FormDataEntryValue | null | String){
+	console.log('taquilla:', taquilla, 'responsable:', responsable);
+	const taquilla_res = taquilla || '';
+	let responsable_res = responsable || '';
+	if (taquilla_res === '' || responsable_res === '') {
+		return JSON.stringify({status: 'Error, datos incompletos'});
+	}
+
+	responsable_res = responsable_res.toString().split('@')[0];
+
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/aceptaReserva`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				taquilla: taquilla_res,
+				responsable: responsable_res
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK aceptando reserva', response.status, response.statusText);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+	
+}
+
+export async function eliminaReserva(taquilla: FormDataEntryValue | null | String, responsable: FormDataEntryValue | null | String){
+	console.log('taquilla:', taquilla, 'responsable:', responsable);
+	const taquilla_res = taquilla || '';
+	let responsable_res = responsable || '';
+	if (taquilla_res === '' || responsable_res === '') {
+		return JSON.stringify({status: 'Error, datos incompletos'});
+	}
+
+	responsable_res = responsable_res.toString().split('@')[0];
+
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/eliminaReserva`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				taquilla: taquilla_res,
+				responsable: responsable_res
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK aceptando reserva', response.status, response.statusText);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+	
+}
+
 
 /*
 

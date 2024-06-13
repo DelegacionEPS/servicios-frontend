@@ -62,7 +62,7 @@
 <div class="w-screen h-full grid grid-rows-2 place-items-center">
 	<h1 class="text-3xl text-[#3BC4A0] text-center">Selecciona el bloque:</h1>
 	<Button color="green" size="lg" class="mt-4 w-1/10">
-		Bloque {block}: <ChevronDownOutline class="w-6 h-6 ms-2 text-green-500 dark: text-blue-500" />
+		Bloque {block}: <ChevronDownOutline class="w-6 h-6 ms-2 text-green-500 dark:text-blue-500" />
 	</Button>
 	<Dropdown bind:open={openDropdown}>
 		<div slot="header" class="px-4 py-2">
@@ -88,10 +88,8 @@
 		<ButtonGroup class="space-x-px">
 			<Button pill color="green" on:click={() => substractBlock()}>
 				<ArrowLeftOutline />
-				Previo
 			</Button>
 			<Button pill color="green" on:click={() => addBlock()}>
-				Siguiente
 				<ArrowRightOutline />
 			</Button>
 		</ButtonGroup>
@@ -116,7 +114,7 @@
 				<span class="sr-only">Error icon</span>
 			</svelte:fragment>
 			{form.message}
+			{handleReload()}
 		</Toast>
-		{handleReload()}
 	{/if}
 {/if}
