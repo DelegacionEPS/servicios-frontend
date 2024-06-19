@@ -77,7 +77,7 @@ export async function addUserRol(nia: FormDataEntryValue | null | String, rol: F
 			headers: {
 				'Content-Type': 'application/json',
 				'Access-Control-Allow-Origin': '*',
-				'origin': `${process.env.ORIGIN_SEC}`
+				'Origin': `https://${process.env.ORIGIN_SEC}`
 			},
 			body: JSON.stringify({
 				nia: nia,
