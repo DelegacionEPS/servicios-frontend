@@ -157,7 +157,6 @@ export async function getReservasTaquilla(taquilla: FormDataEntryValue | null | 
 }
 	
 export async function aceptaReserva(taquilla: FormDataEntryValue | null | String, responsable: FormDataEntryValue | null | String){
-	console.log('taquilla:', taquilla, 'responsable:', responsable);
 	const taquilla_res = taquilla || '';
 	let responsable_res = responsable || '';
 	if (taquilla_res === '' || responsable_res === '') {
@@ -193,7 +192,6 @@ export async function aceptaReserva(taquilla: FormDataEntryValue | null | String
 }
 
 export async function eliminaReserva(taquilla: FormDataEntryValue | null | String, responsable: FormDataEntryValue | null | String){
-	console.log('taquilla:', taquilla, 'responsable:', responsable);
 	const taquilla_res = taquilla || '';
 	let responsable_res = responsable || '';
 	if (taquilla_res === '' || responsable_res === '') {
@@ -227,6 +225,60 @@ export async function eliminaReserva(taquilla: FormDataEntryValue | null | Strin
 	}
 	
 }
+
+export async function backupDB(email: FormDataEntryValue | null | String) {
+	try {
+		console.log('email:', email);
+		const response = await fetch(`${BASE_URL_API}/api/backupDB`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				email: email
+			})
+		
+		});
+		if (response.ok) {
+			const data = await response.json();
+			console.log(data);
+			return data;
+		} else {
+			console.error('Server response was not OK when backing up DB', response.status, response.statusText);
+		}
+	
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function deleteDB(email: FormDataEntryValue | null | String) {
+	try {
+		console.log('email:', email);
+		const response = await fetch(`${BASE_URL_API}/api/deleteDB`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				email: email,
+			})
+		
+		});
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK when deleting DB', response.status, response.statusText);
+		}
+	
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 
 
 /*
