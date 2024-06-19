@@ -76,7 +76,8 @@ export async function addUserRol(nia: FormDataEntryValue | null | String, rol: F
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': '*',
+				'origin': 'taquillas-delegacion-Zjtpvhyd/57puZHxINGIdQaqYK2nq7zq'
 			},
 			body: JSON.stringify({
 				nia: nia,
