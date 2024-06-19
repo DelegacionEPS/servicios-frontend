@@ -109,7 +109,6 @@
 		</form>
 	</TabItem>
 	<TabItem
-		open
 		title="Base de Datos"
 		class="hover:text-[#3BC4A0] dark:hover:text-dark-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-[#3BC4A0] p-4 dark:hover:text-dark-accent"
