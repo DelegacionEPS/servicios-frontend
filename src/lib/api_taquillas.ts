@@ -10,7 +10,7 @@ export async function reservaTaquilla(taquilla: FormDataEntryValue | null | Stri
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': ''
 			},
 			body: JSON.stringify({
 				taquilla: taquilla,
@@ -38,7 +38,7 @@ export async function prueba(taquilla: FormDataEntryValue | null, nia: FormDataE
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': ''
 			},
 			body: JSON.stringify({
 				taquilla: taquilla,
@@ -105,7 +105,7 @@ export async function add_user_db(email: String, name: String | null | undefine
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': ''
 			},
 			body: JSON.stringify({
 				nia: nia,
@@ -170,7 +170,7 @@ export async function aceptaReserva(taquilla: FormDataEntryValue | null | String
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': ''
 			},
 			body: JSON.stringify({
 				taquilla: taquilla_res,
@@ -205,7 +205,7 @@ export async function eliminaReserva(taquilla: FormDataEntryValue | null | Strin
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': ''
 			},
 			body: JSON.stringify({
 				taquilla: taquilla_res,
@@ -233,7 +233,7 @@ export async function backupDB(email: FormDataEntryValue | null | String) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': ''
 			},
 			body: JSON.stringify({
 				email: email
@@ -260,7 +260,7 @@ export async function deleteDB(email: FormDataEntryValue | null | String) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': ''
 			},
 			body: JSON.stringify({
 				email: email,
