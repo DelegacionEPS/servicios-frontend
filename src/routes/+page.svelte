@@ -134,7 +134,7 @@
 			goto('./encuestas');
 		}}
 	>
-		<LockOpenOutline class="mt-1 h-8 w-1/4" />
+		<AnnotationSolid class="mt-1 h-8 w-1/4" />
 		<p class="text-left text-2xl w-full">Ver las encuestas</p>
 	</button>
 </div>
