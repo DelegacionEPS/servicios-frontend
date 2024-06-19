@@ -1,4 +1,3 @@
-import { signOut } from '@auth/sveltekit/client';
 import type { LayoutServerLoad } from './$types';
 import { BASE_URL_API, TOKEN, add_user_db } from '$lib/api_taquillas';
 

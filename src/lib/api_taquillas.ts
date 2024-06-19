@@ -1,5 +1,6 @@
-export const BASE_URL_API = process.env.DESTINO_API ?? 'http://127.0.0.1:18080';
-export const TOKEN = process.env.TOKEN ?? '';
+export const BASE_URL_API = process.env.DESTINO_API ?? 'http://127.0.0.1:8502'
+export const TOKEN = process.env.TOKEN_API ?? 'noup-casi';
+
 //const BASE_URL_API = 'https://et-emirates-springs-cinema.trycloudflare.com'
 
 
@@ -7,11 +8,13 @@ export const TOKEN = process.env.TOKEN ?? '';
 export async function reservaTaquilla(taquilla: FormDataEntryValue | null | String, usuario: FormDataEntryValue | null | Number, correo: FormDataEntryValue | null | String, nombre: FormDataEntryValue | null | String) {
 	// Llamada a la API de taquillas para reservar la taquill
 	try {
+		console.log('taquilla:', taquilla);
+		console.log('url:', `${BASE_URL_API}/api/reservaTaquilla${TOKEN}`);
 		const response = await fetch(`${BASE_URL_API}/api/reservaTaquilla${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin':'*'
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla,
@@ -39,7 +42,7 @@ export async function prueba(taquilla: FormDataEntryValue | null, nia: FormDataE
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin':'*'
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla,
@@ -83,8 +86,7 @@ export async function addUserRol(nia: FormDataEntryValue | null | String, rol: F
 				nia: nia,
 				rol: rol,
 				nia_delegado: nia_delegado,
-				nombre: nombre,
-				token: `${process.env.ORIGIN_SEC}`
+				nombre: nombre
 			})
 		});
 
@@ -107,7 +109,7 @@ export async function add_user_db(email: String, name: String | null | undefine
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin':'*'
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				nia: nia,
@@ -172,7 +174,7 @@ export async function aceptaReserva(taquilla: FormDataEntryValue | null | String
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin':'*'
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla_res,
@@ -207,7 +209,7 @@ export async function eliminaReserva(taquilla: FormDataEntryValue | null | Strin
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin':'*'
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla_res,
@@ -235,7 +237,7 @@ export async function backupDB(email: FormDataEntryValue | null | String) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin':'*'
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				email: email
@@ -262,7 +264,7 @@ export async function deleteDB(email: FormDataEntryValue | null | String) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin':'*'
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				email: email,
