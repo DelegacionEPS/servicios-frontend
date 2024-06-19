@@ -1,9 +1,9 @@
 import type { PageServerLoad, Actions} from './$types';
-import {addUserRol, backupDB, deleteDB, BASE_URL_API} from '$lib/api_taquillas';
+import {addUserRol, backupDB, deleteDB, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
 
 export const load = (async (event) => {
     const fetchAuthorizedEmails = async () => {
-		const res = await fetch(`${BASE_URL_API}/api/authorizedEmails/escuela`);
+		const res = await fetch(`${BASE_URL_API}/api/authorizedEmails/escuela${TOKEN}`);
 		const data = await res.json();
 		return data;
 	};

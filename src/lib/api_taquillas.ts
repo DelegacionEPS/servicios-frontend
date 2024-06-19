@@ -1,4 +1,5 @@
-export const BASE_URL_API = process.env.DESTINO_API ?? 'http://127.0.0.1:18080'
+export const BASE_URL_API = process.env.DESTINO_API ?? 'http://127.0.0.1:18080';
+export const TOKEN = process.env.TOKEN ?? '';
 //const BASE_URL_API = 'https://et-emirates-springs-cinema.trycloudflare.com'
 
 
@@ -6,11 +7,11 @@ export const BASE_URL_API = process.env.DESTINO_API ?? 'http://127.0.0.1:18080'
 export async function reservaTaquilla(taquilla: FormDataEntryValue | null | String, usuario: FormDataEntryValue | null | Number, correo: FormDataEntryValue | null | String, nombre: FormDataEntryValue | null | String) {
 	// Llamada a la API de taquillas para reservar la taquill
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/reservaTaquilla`, {
+		const response = await fetch(`${BASE_URL_API}/api/reservaTaquilla${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': ''
+				'Access-Control-Allow-Origin':'*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla,
@@ -38,14 +39,14 @@ export async function prueba(taquilla: FormDataEntryValue | null, nia: FormDataE
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': ''
+				'Access-Control-Allow-Origin':'*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla,
 				usuario: nia
 			})
 		};
-		const response = await fetch(`${BASE_URL_API}/api/reservaTaquilla`, options);
+		const response = await fetch(`${BASE_URL_API}/api/reservaTaquilla${TOKEN}`, options);
 		if (!response.ok) {
 			throw new Error('Network response was not ok');
 		}
@@ -58,7 +59,7 @@ export async function prueba(taquilla: FormDataEntryValue | null, nia: FormDataE
 
 export async function ocupacionBloque(edificio: String, planta: String) {
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/ocupacionBloque/${edificio}/${planta}`);
+		const response = await fetch(`${BASE_URL_API}/api/ocupacionBloque/${edificio}/${planta}${TOKEN}`);
 		if (!response.ok) {
 			throw new Error('Network response was not ok');
 		}
@@ -72,17 +73,18 @@ export async function ocupacionBloque(edificio: String, planta: String) {
 export async function addUserRol(nia: FormDataEntryValue | null | String, rol: FormDataEntryValue | null | String, nia_delegado: String, nombre: String) {
 	rol = rol?.toString().toLowerCase() || 'general';
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/addUserRol`, {
+		const response = await fetch(`${BASE_URL_API}/api/addUserRol${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': `${process.env.ORIGIN_SEC}`
+				'Access-Control-Allow-Origin': '*'
 			},
 			body: JSON.stringify({
 				nia: nia,
 				rol: rol,
 				nia_delegado: nia_delegado,
-				nombre: nombre
+				nombre: nombre,
+				token: `${process.env.ORIGIN_SEC}`
 			})
 		});
 
@@ -101,11 +103,11 @@ export async function addUserRol(nia: FormDataEntryValue | null | String, rol: F
 export async function add_user_db(email: String, name: String | null | undefined) {
 	const nia = email.split('@')[0];
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/createUser`, {
+		const response = await fetch(`${BASE_URL_API}/api/createUser${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': ''
+				'Access-Control-Allow-Origin':'*'
 			},
 			body: JSON.stringify({
 				nia: nia,
@@ -128,7 +130,7 @@ export async function add_user_db(email: String, name: String | null | undefine
 
 export async function getReservasNia(nia: FormDataEntryValue | null | String) {
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/getReservas/nia/${nia}`);
+		const response = await fetch(`${BASE_URL_API}/api/getReservas/nia/${nia}${TOKEN}`);
 		if (response.ok) {
 			const data = await response.json();
 			return data;
@@ -143,7 +145,7 @@ export async function getReservasNia(nia: FormDataEntryValue | null | String) {
 
 export async function getReservasTaquilla(taquilla: FormDataEntryValue | null | String) {
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/getReservas/taquilla/${taquilla}`);
+		const response = await fetch(`${BASE_URL_API}/api/getReservas/taquilla/${taquilla}${TOKEN}`);
 		if (response.ok) {
 			const data = await response.json();
 			return data;
@@ -166,11 +168,11 @@ export async function aceptaReserva(taquilla: FormDataEntryValue | null | String
 	responsable_res = responsable_res.toString().split('@')[0];
 
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/aceptaReserva`, {
+		const response = await fetch(`${BASE_URL_API}/api/aceptaReserva${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': ''
+				'Access-Control-Allow-Origin':'*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla_res,
@@ -201,11 +203,11 @@ export async function eliminaReserva(taquilla: FormDataEntryValue | null | Strin
 	responsable_res = responsable_res.toString().split('@')[0];
 
 	try {
-		const response = await fetch(`${BASE_URL_API}/api/eliminaReserva`, {
+		const response = await fetch(`${BASE_URL_API}/api/eliminaReserva${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': ''
+				'Access-Control-Allow-Origin':'*'
 			},
 			body: JSON.stringify({
 				taquilla: taquilla_res,
@@ -229,11 +231,11 @@ export async function eliminaReserva(taquilla: FormDataEntryValue | null | Strin
 export async function backupDB(email: FormDataEntryValue | null | String) {
 	try {
 		console.log('email:', email);
-		const response = await fetch(`${BASE_URL_API}/api/backupDB`, {
+		const response = await fetch(`${BASE_URL_API}/api/backupDB${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': ''
+				'Access-Control-Allow-Origin':'*'
 			},
 			body: JSON.stringify({
 				email: email
@@ -256,11 +258,11 @@ export async function backupDB(email: FormDataEntryValue | null | String) {
 export async function deleteDB(email: FormDataEntryValue | null | String) {
 	try {
 		console.log('email:', email);
-		const response = await fetch(`${BASE_URL_API}/api/deleteDB`, {
+		const response = await fetch(`${BASE_URL_API}/api/deleteDB${TOKEN}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': ''
+				'Access-Control-Allow-Origin':'*'
 			},
 			body: JSON.stringify({
 				email: email,

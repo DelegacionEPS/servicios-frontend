@@ -1,11 +1,11 @@
 import { signOut } from '@auth/sveltekit/client';
 import type { LayoutServerLoad } from './$types';
-import { BASE_URL_API, add_user_db } from '$lib/api_taquillas';
+import { BASE_URL_API, TOKEN, add_user_db } from '$lib/api_taquillas';
 
 // load serverside data
 export const load: LayoutServerLoad = async (event) => {
 	const fetchAuthorizedEmails = async (rango: String) => {
-		const res = await fetch(`${BASE_URL_API}/api/authorizedEmails/${rango}`);
+		const res = await fetch(`${BASE_URL_API}/api/authorizedEmails/${rango}${TOKEN}`);
 		const data = await res.json();
 		return data;
 	};

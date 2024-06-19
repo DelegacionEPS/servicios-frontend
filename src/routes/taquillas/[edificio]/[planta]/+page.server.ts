@@ -1,6 +1,6 @@
 import type { PageServerLoad, Actions} from './$types';
 import size from '$lib/size';
-import { reservaTaquilla, BASE_URL_API } from '$lib/api_taquillas';
+import { reservaTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
 
 
 
@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ request }) => {
 	const edificio = split_url[0];
 	const planta = split_url[1];
 	const fetchOcupacionBloques = async () => {
-		const res = await fetch(`${BASE_URL_API}/api/ocupacionBloque/${edificio}/${planta}`);
+		const res = await fetch(`${BASE_URL_API}/api/ocupacionBloque/${edificio}/${planta}${TOKEN}`);
 		const data = await res.json();
 		return data;
 	}
