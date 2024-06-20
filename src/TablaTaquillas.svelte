@@ -33,12 +33,18 @@
 		}}
 	>
 		<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Reservar Taquilla</h3>
-		<p>
-			Vas a realizar la reserva de una taquilla. El precio de las taquilla es de:
-			{#if selectedTaquilla.includes('G')}<span class="font-bold"> 6€ </span>
-			{:else}<span class="font-bold"> 4€ </span>
-			{/if} el año completo y la mitad por el segundo cuatrimestre. Este importe se abona en delegación
-			de estudiantes.
+		<p class="dark:text-white">
+			Vas a realizar la reserva de la taquilla {selectedTaquilla}. El precio de las taquilla
+			{#if selectedTaquilla.includes('G')}al ser <span class="italic">grande</span> es de
+				<span class="font-bold">6€</span> para
+			{:else}
+				al ser <span class="italic">pequeña</span> es de <span class="font-bold"> 4€ </span>para
+			{/if} el año completo y la mitad para el segundo cuatrimestre. Este importe se abona en delegación
+			de estudiantes
+			<a
+				href="https://maps.app.goo.gl/QaxfXbWVz5AvqsCW6"
+				class="underline hover:dark:text-dark-accent hover:text-accent">(1.0.H01)</a
+			>.
 		</p>
 		<Label class="space-y-2">
 			<span>NIA:</span>
