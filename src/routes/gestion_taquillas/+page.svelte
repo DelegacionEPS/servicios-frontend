@@ -40,6 +40,10 @@
 	let currentTaquilla: Taquilla;
 	let searchTerm = '';
 
+	let reservadas = 0;
+	let ocupadas = 0;
+	let no_disponibles = 0;
+
 	$: filteredItems = TablaPabloItems.filter(
 		(item) => item.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
 	);
@@ -187,6 +191,27 @@
 			form = '';
 		}}
 	>
+		{@const reservadas = TablaPabloItems.filter((item) => item.status === 'reservada').length}
+		{@const ocupadas = TablaPabloItems.filter((item) => item.status === 'ocupada').length}
+		{@const no_disponibles = TablaPabloItems.filter(
+			(item) => item.status === 'no disponible' || item.status === 'rota'
+		).length}
+
+		<div class="grid grid-cols-3 place-items-center">
+			<div class="text-center">
+				<p class="text-[#3BC4A0] dark:text-dark-primary">Reservadas</p>
+				<p class="text-2xl dark:text-dark-accent">{reservadas}</p>
+			</div>
+			<div class="text-center">
+				<p class="text-[#3BC4A0] dark:text-dark-primary">Ocupadas</p>
+				<p class="text-2xl dark:text-dark-accent">{ocupadas}</p>
+			</div>
+			<div class="text-center">
+				<p class="text-[#3BC4A0] dark:text-dark-primary">No disponibles</p>
+				<p class="text-2xl dark:text-dark-accent">{no_disponibles}</p>
+			</div>
+		</div>
+
 		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
 			<TableHead>
 				<TableHeadCell>Nombre</TableHeadCell>
@@ -208,8 +233,8 @@
 					</TableBodyRow>
 				{/each}
 			</TableBody>
-		</TableSearch></TabItem
-	>
+		</TableSearch>
+	</TabItem>
 </Tabs>
 
 <div class="w-screen grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center mt-2">
