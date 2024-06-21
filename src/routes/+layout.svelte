@@ -26,7 +26,8 @@
 		BarsOutline,
 		LockOpenOutline,
 		LockOutline,
-		UserCircleOutline
+		UserCircleOutline,
+		ArrowLeftToBracketOutline
 	} from 'flowbite-svelte-icons';
 	import { sineIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -98,32 +99,36 @@
 	<header
 		class="bg-[#3BC4A0] grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary"
 	>
-		<button on:click={() => (hidden2 = !hidden2)}>
+		<button class="sm:w-12 sm:h-12 w-16 h-10" on:click={() => (hidden2 = !hidden2)}>
 			<BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />
 		</button>
-		<a href="/"
-			><img class="sm:w-12 sm:h-auto w-10 h-auto sm:block hidden" src="/logo.webp" alt="logo" /></a
-		>
+		<a href="/" class="sm:block hidden">
+			<img class="sm:w-12 sm:h-auto w-10 h-auto" src="/logo.webp" alt="logo" />
+		</a>
 		<button
-			class="font-bold-italic text-white text-center py-2 lg:text-2xl sm:text-xl text-xs hover:underline w-auto"
+			class="font-bold-italic text-white text-center py-2 lg:text-2xl sm:text-xl text-lg hover:underline w-auto"
 			on:click={() => {
 				goto('/');
 			}}>Delegación EPS</button
 		>
 		{#if session}
-			<div class="flex items-center space-x-4 rtl:space-x-reverse">
-				<a href="/admin"
-					><p class="text-white italic text-center text-xs lg:text-sm sm:block hidden">
-						{session.user?.name}
-					</p></a
-				>
-				<a href="/admin"><Avatar src={session?.user?.image} class="lg:w-11 sm:w-24 h-auto" /></a>
+			<div class="grid sm:grid-cols-2 grid-cols-1 place-items-center rtl:space-x-reverse ">
+				<div class="sm:block hidden">
+					<a href="/admin" class="">
+						<p class="text-white italic text-center text-xs lg:text-sm ">
+							{session.user?.name}
+						</p>
+					</a>
+				</div>
+				<div class="min-w-10 w-auto ml-12">
+					<a href="/admin" class="">
+						<Avatar src={session?.user?.image} class="h-10 w-10" />
+					</a>
+				</div>		
 			</div>
-			<button
-				on:click={() => logout()}
-				class="bg-red-500 text-white rounded-2xl sm:text-base text-xs w-auto mr-2 mt-1 h-8 sm:mt-2 sm:ml-12 sm:w-3/5 lg:w-2/5 lg:ml-24"
-				>Sign-out</button
-			>
+			<button on:click={() => logout()} class="bg-red-500 rounded-3xl h-10 w-10 place-self-center">
+				<ArrowLeftToBracketOutline class="h-8 w-8 m-auto"/>
+			</button>
 		{:else}
 			{#if doing_login}
 				<div class="text-right mt-2">
