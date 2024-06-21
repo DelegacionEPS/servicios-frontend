@@ -52,6 +52,7 @@
 			openModalIniciaSesion = true;
 			return;
 		}
+
 		const response = await fetch('/api/realizar_reserva', {
 			method: 'POST',
 			headers: {
@@ -197,16 +198,18 @@
 				<TableHeadCell>Status</TableHeadCell>
 			</TableHead>
 			<TableBody tableBodyClass="divide-y">
-				{#each filteredItems as item}
-					<TableBodyRow>
-						<TableBodyCell>{item.nombre}</TableBodyCell>
-						<TableBodyCell>{item.nia}</TableBodyCell>
-						<TableBodyCell>{item.taquilla}</TableBodyCell>
-						<TableBodyCell>{item.codigo}</TableBodyCell>
-						<TableBodyCell>{item.date}</TableBodyCell>
-						<TableBodyCell>{item.status}</TableBodyCell>
-					</TableBodyRow>
-				{/each}
+				{#if filteredItems != null && filteredItems}
+					{#each filteredItems as item}
+						<TableBodyRow>
+							<TableBodyCell>{item.nombre}</TableBodyCell>
+							<TableBodyCell>{item.nia}</TableBodyCell>
+							<TableBodyCell>{item.taquilla}</TableBodyCell>
+							<TableBodyCell>{item.codigo}</TableBodyCell>
+							<TableBodyCell>{item.date}</TableBodyCell>
+							<TableBodyCell>{item.status}</TableBodyCell>
+						</TableBodyRow>
+					{/each}
+				{/if}
 			</TableBody>
 		</TableSearch></TabItem
 	>
@@ -234,7 +237,7 @@
 				</div>
 				{#if taquilla['status'] === 'reservada' || taquilla['status'] === 'ocupada'}
 					<p class="text-black text-sm mt-4 dark:text-white">
-						Reservada por <b>{taquilla['nia']}</b> el {taquilla['date']} a las {taquilla[
+						Reservada por <b>{taquilla['nia']}</b> el {taquilla['date'].split(' ')[0]} a las {taquilla[
 							'date'
 						].split(' ')[1]}
 					</p>
@@ -254,6 +257,13 @@
 								change_delete_modal(taquilla);
 							}}>Eliminar</button
 						>
+						</div>
+					<div class="grid grid-cols-1 mt-4 place-items-center">
+						<button
+							class="w-1/2 text-white bg-gray-500 rounded p-1"
+						>
+							Marcar como rota
+						</button>
 					</div>
 				{:else if taquilla['status'] === 'libre'}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
@@ -266,8 +276,36 @@
 						>
 							Reservar
 						</button>
+						<button
+							class="w-1/2 text-white bg-gray-500 rounded p-1 mt-4"
+						>
+							Marcar como rota
+						</button>
+					</div>
+				{:else if taquilla['status'] === 'ocupada'}
+					<div class="grid grid-cols-1 mt-4 place-items-center">
+						<button
+							class="w-2/3 text-white bg-red-500 rounded p-1"
+							on:click={() => {
+								change_delete_modal(taquilla);
+							}}>Eliminar</button
+						>
+						<button
+							class="w-2/3 text-white bg-gray-500 rounded p-1 mt-4"
+						>
+							Marcar como rota
+						</button>
+					</div>
+				{:else}
+					<div class="grid grid-cols-1 mt-4 place-items-center">
+						<button
+						class="w-1/2 text-white-500 bg-green-500 rounded p-1"
+						>
+							Marcar como reparada
+						</button>
 					</div>
 				{/if}
+			
 			</Card>
 		{/each}
 	{/if}
@@ -283,6 +321,7 @@
 			{/if} el año completo y la mitad por el segundo cuatrimestre. Este importe se abona en delegación
 			de estudiantes.
 		</p>
+		<Input type="hidden" id="correo" name="correo" value={session?.user?.email} required />
 		<Label class="space-y-2">
 			<span>NIA:</span>
 			<Input type="text" id="nia" name="nia" placeholder="100xxxxxx" required />

@@ -25,7 +25,8 @@
 		HomeSolid,
 		BarsOutline,
 		LockOpenOutline,
-		LockOutline
+		LockOutline,
+		UserCircleOutline
 	} from 'flowbite-svelte-icons';
 	import { sineIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -114,7 +115,7 @@
 						{session.user?.name}
 					</p></a
 				>
-				<a href="/admin"><Avatar src={session.user?.image} class="lg:w-11 sm:w-24 h-auto" /></a>
+				<a href="/admin"><Avatar src={session?.user?.image} class="lg:w-11 sm:w-24 h-auto" /></a>
 			</div>
 			<button
 				on:click={() => logout()}
@@ -129,13 +130,10 @@
 			{:else}
 				<div></div>
 			{/if}
-			<button
-				class="bg-white text-black rounded-2xl sm:text-base text-xs w-auto mr-2 mt-1 h-8 sm:mt-2 sm:ml-12 sm:w-3/5 lg:w-2/5 lg:ml-24"
-				on:click={() => login()}
-			>
-				Log-in
+			<button on:click={() => login()} class="bg-white rounded-3xl h-10 w-10 place-self-center">
+				<UserCircleOutline class="h-8 w-8 m-auto"/>
 			</button>
-		{/if}
+			{/if}
 	</header>
 
 	<Breadcrumb

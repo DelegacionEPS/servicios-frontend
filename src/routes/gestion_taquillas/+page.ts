@@ -7,7 +7,8 @@ import { redirect } from '@sveltejs/kit';
 export const load: PageLoad = async ({ parent, data }) => {
 	const { session } = await parent();
 
-	let authorizedEmails = data.authorizedEmails ?? [];
+	let authorizedEmailsDespacho = data.authorizedEmailsTaquillasDespacho ?? [];
+	let authorizedEmailsEscuela = data.authorizedEmailsTaquillasEscuela ?? [];
 	let tablaPablo = data.tablaPablo ?? [{
 			nombre: "No se ha ",
 			nia: "Podido encontrar",
@@ -17,13 +18,14 @@ export const load: PageLoad = async ({ parent, data }) => {
 			status: "% de su capacidad.",
 		}];
 
-	if (authorizedEmails.includes(session?.user?.email) === -1 || !session?.user?.email || authorizedEmails.includes(session?.user?.email) === false) { 
+	if ((authorizedEmailsDespacho.includes(session?.user?.email) === -1 && authorizedEmailsEscuela.includes(session?.user?.email) === -1) || !session?.user?.email || (authorizedEmailsDespacho.includes(session?.user?.email) === false && authorizedEmailsEscuela.includes(session?.user?.email) === false)) { 
 		throw redirect(302, '/');
 	}
 	
 	return {
 		session: session,
-		authorizedEmails: authorizedEmails,
+		authorizedEmailsDespacho: authorizedEmailsDespacho,
+		authorizedEmailsEscuela: authorizedEmailsEscuela,
 		tablaPablo : tablaPablo
 	};
 };

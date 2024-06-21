@@ -1,9 +1,9 @@
 import type { PageServerLoad, Actions} from './$types';
-import {getReservasNia, getReservasTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
+import {getReservasNia, getReservasTaquilla, reservaTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
 
 export const load = (async () => {
-    const fetchAuthorizedEmails = async () => {
-		const res = await fetch(`${BASE_URL_API}/api/authorizedEmails/escuela${TOKEN}`);
+    const fetchAuthorizedEmails = async (rango:String) => {
+		const res = await fetch(`${BASE_URL_API}/api/authorizedEmails/${rango}${TOKEN}`);
 		const data = await res.json();
 		return data;
 	};
@@ -14,8 +14,22 @@ export const load = (async () => {
 		return data;
 	};
 
+	let emailsDespacho = await fetchAuthorizedEmails('atencion');
+	if (emailsDespacho === null) {
+		emailsDespacho = [];
+	}
+	let emailsEscuela = await fetchAuthorizedEmails('escuela');
+	if (emailsEscuela === null) {
+		emailsEscuela = [];
+	}
+	emailsDespacho = emailsDespacho.concat(emailsEscuela);
+	// remove null values
+	emailsDespacho = emailsDespacho.filter((email: String) => email !== null);
+
+	console.log(emailsDespacho, emailsEscuela);
     return {
-        authorizedEmails: await fetchAuthorizedEmails(),
+        authorizedEmailsTaquillasEscuela: emailsEscuela,
+		authorizedEmailsTaquillasDespacho: emailsDespacho,
 		tablaPablo: await fetchTablaPablo(),
     };
 }) satisfies PageServerLoad;
@@ -34,6 +48,15 @@ export const actions = {
 		// -------- Aquí se llama a la función de la API que busca el estado de una Taquilla --------
 		const taquilla = data.get('Taquilla_s');
 		const result = getReservasTaquilla(taquilla);
+		return result;
+	},
+	registerTaquilla: async ({ cookies, request }) => {
+		const data = await request.formData();
+		const taquilla = data.get('taquilla');
+		const nia = data.get('nia');
+		const correo = data.get('correo');
+		const nombre = data.get('nombre');
+		const result = reservaTaquilla(taquilla, nia, correo, nombre);
 		return result;
 	},
 } satisfies Actions;

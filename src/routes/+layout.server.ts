@@ -28,7 +28,6 @@ export const load: LayoutServerLoad = async (event) => {
 	// remove null values
 	emailsDespacho = emailsDespacho.filter((email: String) => email !== null);
 
-
 	return {
 		session: session,
 		authorizedEmailsLayoutEscuela: emailsEscuela,
