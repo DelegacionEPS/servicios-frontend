@@ -101,7 +101,9 @@
 		<button on:click={() => (hidden2 = !hidden2)}>
 			<BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />
 		</button>
-		<img class="sm:w-12 sm:h-auto w-10 h-auto sm:block hidden" src="/logo.webp" alt="logo" />
+		<a href="/"
+			><img class="sm:w-12 sm:h-auto w-10 h-auto sm:block hidden" src="/logo.webp" alt="logo" /></a
+		>
 		<button
 			class="font-bold-italic text-white text-center py-2 lg:text-2xl sm:text-xl text-xs hover:underline w-auto"
 			on:click={() => {
@@ -147,7 +149,13 @@
 		{/each}
 	</Breadcrumb>
 
-	<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden2} id="sidebar2" divClass='overflow-y-auto z-50 p-4 bg-white dark:bg-dark-secondary'>
+	<Drawer
+		transitionType="fly"
+		{transitionParams}
+		bind:hidden={hidden2}
+		id="sidebar2"
+		divClass="overflow-y-auto z-50 p-4 bg-white dark:bg-dark-secondary"
+	>
 		<div class="flex items-center">
 			<h5
 				id="drawer-navigation-label-3"
