@@ -56,13 +56,13 @@
 	<TabItem
 		open
 		title="Cambiar Rol"
-		class="hover:text-[#3BC4A0] dark:hover:text-dark-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-[#3BC4A0] p-4 dark:hover:text-dark-accent"
+		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent"
 	>
 		<form action="?/addUserRol" method="post" use:enhance>
 			<div class="grid grid-cols-1 w-auto">
 				<div>
-					<Label class="w-4/5 text-xl m-auto text-[#3BC4A0]">NIA</Label>
+					<Label class="w-4/5 text-xl m-auto text-dele-color">NIA</Label>
 					<Input
 						type="text"
 						id="NIA_add"
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			<div class="grid grid-cols-1 w-auto mt-4 place-items-center">
-				<Label class="text-xl w-auto text-[#3BC4A0]">Selecciona un rol</Label>
+				<Label class="text-xl w-auto text-dele-color">Selecciona un rol</Label>
 				<Select
 					class="mt-2 sm:w-1/5 w-2/5"
 					id="rol_add"
@@ -96,7 +96,7 @@
 			<div class="grid grid-cols-1 w-auto place-items-center">
 				<Button
 					type="submit"
-					class="bg-[#3BC4A0] text-white mt-8 px-8 py-2 text-xl hover:bg-[#3BB4A0] dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-[#3BB4A0] dark:bg-dark-primary dark:hover:bg-dark-accent"
 					>Cambiar rol</Button
 				>
 				<div></div>
@@ -105,8 +105,8 @@
 	</TabItem>
 	<TabItem
 		title="Base de Datos"
-		class="hover:text-[#3BC4A0] dark:hover:text-dark-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-[#3BC4A0] p-4 dark:hover:text-dark-accent"
+		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent"
 	>
 		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
 			Administrar la Base de Datos
@@ -152,7 +152,7 @@
 
 			<section class="hidden">
 				<form action="?/RestoreDB2" method="POST" enctype="multipart/form-data" class="mt-8">
-					<Label class="text-xl w-auto text-[#3BC4A0]"
+					<Label class="text-xl w-auto text-dele-color"
 						>Selecciona el archivo de la base de datos</Label
 					>
 					<Input

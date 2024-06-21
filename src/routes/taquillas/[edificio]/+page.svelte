@@ -15,7 +15,7 @@
 <svelte:window bind:innerWidth bind:outerWidth bind:innerHeight bind:outerHeight />
 
 <h1
-	class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-8 text-[#3BC4A0] dark:text-dark-primary"
+	class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-8 text-dele-color dark:text-dark-primary"
 >
 	Edificio {building}
 </h1>
@@ -29,7 +29,7 @@
 				alt={`Edificio ${data.edificio}. ${i}`}
 			/>
 			<h1
-				class="absolute left-1/2 top-1/2 md:text-3xl sm:text-lg text-sm text-[#3BC4A0] px-6 py-2 rounded group-hover:block lg:hidden block dark:text-dark-primary"
+				class="absolute left-1/2 top-1/2 md:text-3xl sm:text-lg text-sm text-dele-color px-6 py-2 rounded group-hover:block lg:hidden block dark:text-dark-primary"
 				style="transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7)"
 			>
 				Piso {i}

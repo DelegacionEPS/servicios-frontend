@@ -41,6 +41,7 @@ const config = {
     'dark-secondary': '#111719',  // #111719 -- Negro
     'dark-accent': '#7962e5',   // #7962e5 -- Morado
     'dark-background': '#070a17',  // #070a17 -- Negro
+    'dele-color': '#3BC4A0',
     'dele-accent': '#FF6D2E' // Color de la delegación EPS
       },
    

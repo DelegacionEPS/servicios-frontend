@@ -56,20 +56,20 @@
 </script>
 
 <h1
-	class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-8 text-[#3BC4A0] dark:text-dark-primary"
+	class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-8 text-dele-color dark:text-dark-primary"
 >
 	Edificio {data.edificio} - Planta {data.planta}
 </h1>
 
 <div class="w-screen h-full grid grid-rows-2 place-items-center">
 	<h1
-		class="text-2xl sm:text-3xl lg:text-4xl xl:text-6xl text-[#3BC4A0] dark:text-dark-primary text-center"
+		class="text-2xl sm:text-3xl lg:text-4xl xl:text-6xl text-dele-color dark:text-dark-primary text-center"
 	>
 		Selecciona el bloque:
 	</h1>
 	<Button
 		size="lg"
-		class="mt-4 w-1/10 bg-[#3BC4A0] hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+		class="mt-4 w-1/10 bg-dele-color hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 	>
 		Bloque {block}
 		<ChevronDownOutline class="w-6 h-6 ms-2 text-black dark:text-red-500" />
@@ -98,14 +98,14 @@
 		<ButtonGroup class="space-x-px">
 			<Button
 				pill
-				class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-[#3BC4A0] hover:bg-dele-accent"
+				class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-dele-color hover:bg-dele-accent"
 				on:click={() => substractBlock()}
 			>
 				<ArrowLeftOutline />
 			</Button>
 			<Button
 				pill
-				class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-[#3BC4A0] hover:bg-dele-accent"
+				class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-dele-color hover:bg-dele-accent"
 				on:click={() => addBlock()}
 			>
 				<ArrowRightOutline />

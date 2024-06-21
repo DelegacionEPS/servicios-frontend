@@ -170,16 +170,16 @@
 	}
 </script>
 
-<h1 class="text-4xl text-center text-[#3BC4A0] m-5 dark:bg-dark-background dark:text-dark-primary">
+<h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
 	Gestión de Taquillas
 </h1>
 <Tabs tabStyle="underline" contentClass="p-4" class="px-8">
 	<TabItem
 		open
 		title="Búsqueda por NIA"
-		class="hover:text-[#3BC4A0] dark:hover:text-dark-accent dark:text-dark-accent"
+		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
 		activeClasses="sm:text-base text-xs p-4"
-		inactiveClasses="text-gray-500 hover:text-[#3BC4A0] p-4 dark:hover:text-dark-accent sm:text-base text-xs"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -187,7 +187,7 @@
 		<form action="?/busquedaNia" method="post" use:enhance>
 			<div class="grid grid-cols-1 w-auto">
 				<div>
-					<Label class="w-4/5 m-auto text-xl text-[#3BC4A0]">NIA</Label>
+					<Label class="w-4/5 m-auto text-xl text-dele-color">NIA</Label>
 					<Input
 						type="text"
 						id="NIA_s"
@@ -202,7 +202,7 @@
 			<div class="mt-8 grid grid-cols-1 w-auto place-items-center">
 				<Button
 					type="submit"
-					class="bg-[#3BC4A0] text-white px-8 py-2 text-xl hover:bg-[#3BB4A0] dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="bg-dele-color text-white px-8 py-2 text-xl hover:bg-[#3BB4A0] dark:bg-dark-primary dark:hover:bg-dark-accent"
 					>Buscar</Button
 				>
 			</div>
@@ -210,9 +210,9 @@
 	</TabItem>
 	<TabItem
 		title="Búsqueda por Taquilla"
-		class="hover:text-[#3BC4A0] dark:hover:text-dark-accent dark:text-dark-accent"
+		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
 		activeClasses="sm:text-base text-xs p-4"
-		inactiveClasses="text-gray-500 hover:text-[#3BC4A0] p-4 dark:hover:text-dark-accent sm:text-base text-xs"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -220,7 +220,7 @@
 		<form action="?/busquedaTaquilla" method="post" use:enhance>
 			<div class="grid grid-cols-1 w-auto">
 				<div>
-					<Label class="w-4/5 m-auto text-xl text-[#3BC4A0]">Taquilla</Label>
+					<Label class="w-4/5 m-auto text-xl text-dele-color">Taquilla</Label>
 					<Input
 						type="text"
 						id="Taquilla_s"
@@ -235,7 +235,7 @@
 			<div class="grid grid-cols-1 w-auto place-items-center">
 				<Button
 					type="submit"
-					class="bg-[#3BC4A0] text-white mt-8 px-8 py-2 text-xl hover:bg-[#3BB4A0] dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-[#3BB4A0] dark:bg-dark-primary dark:hover:bg-dark-accent"
 					>Buscar</Button
 				>
 			</div>
@@ -243,9 +243,9 @@
 	</TabItem>
 	<TabItem
 		title="Tabla Pablo"
-		class="hover:text-[#3BC4A0] dark:hover:text-dark-accent dark:text-dark-accent"
+		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
 		activeClasses="sm:text-base text-xs p-4"
-		inactiveClasses="text-gray-500 hover:text-[#3BC4A0] p-4 dark:hover:text-dark-accent sm:text-base text-xs"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -256,15 +256,15 @@
 
 		<div class="grid grid-cols-3 place-items-center">
 			<div class="text-center">
-				<p class="text-[#3BC4A0] dark:text-dark-primary">Reservadas</p>
+				<p class="text-dele-color dark:text-dark-primary">Reservadas</p>
 				<p class="text-2xl dark:text-dark-accent">{reservadas}</p>
 			</div>
 			<div class="text-center">
-				<p class="text-[#3BC4A0] dark:text-dark-primary">Ocupadas</p>
+				<p class="text-dele-color dark:text-dark-primary">Ocupadas</p>
 				<p class="text-2xl dark:text-dark-accent">{ocupadas}</p>
 			</div>
 			<div class="text-center">
-				<p class="text-[#3BC4A0] dark:text-dark-primary">No disponibles</p>
+				<p class="text-dele-color dark:text-dark-primary">No disponibles</p>
 				<p class="text-2xl dark:text-dark-accent">{no_disponibles}</p>
 			</div>
 		</div>
@@ -301,7 +301,7 @@
 		{#each form.reservas as taquilla}
 			<Card class="mt-2">
 				<div class="flex place-content-between">
-					<h5 class="text-2xl font-medium underline text-[#3BC4A0] dark:text-dark-primary">
+					<h5 class="text-2xl font-medium underline text-dele-color dark:text-dark-primary">
 						{taquilla['taquilla']}
 					</h5>
 					{#if taquilla['status'] === 'reservada'}

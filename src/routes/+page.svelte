@@ -31,7 +31,7 @@
 		on:click={() => {
 			infoModal = true;
 		}}
-		class="dark:text-white dark:text-dark-accent text-[#3BC4A0] hover:text-dele-accent"
+		class="dark:text-white dark:text-dark-accent text-dele-color hover:text-dele-accent"
 	>
 		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6" />
 	</button>
@@ -53,7 +53,7 @@
 <div class="grid grid-rows-2 place-items-center dark:bg-[#070a17]">
 	<Accordion class="md:w-1/2 w-11/12">
 		<AccordionItem
-			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-[#3BC4A0] mb-2 rounded-2xl hover:bg-dele-accent dark:hover:bg-dark-accent dark:text-white dark:border-black dark:bg-dark-primary"
+			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 rounded-2xl hover:bg-dele-accent dark:hover:bg-dark-accent dark:text-white dark:border-black dark:bg-dark-primary"
 			activeClass="bg-dele-accent"
 		>
 			<button
@@ -92,7 +92,7 @@
 				{#if session?.user?.email != null}
 					{#if authorizedEmailsDespacho != null && authorizedEmailsDespacho.includes(session?.user?.email) == true}
 						<AccordionItem
-							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-[#3BC4A0] hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
+							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 							activeClass="bg-dele-accent"
 						>
 							<button
@@ -114,7 +114,7 @@
 			{/await}
 		{/await}
 		<AccordionItem
-			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-[#3BC4A0] mb-2 hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
+			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 			activeClass="bg-dele-accent"
 		>
 			<button
@@ -143,7 +143,7 @@
 				{#if session?.user?.email != null}
 					{#if authorizedEmailsEscuela != null && authorizedEmailsEscuela.includes(session?.user?.email) == true}
 						<AccordionItem
-							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-[#3BC4A0] hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
+							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 							activeClass="bg-dele-accent"
 						>
 							<button
@@ -165,7 +165,7 @@
 			{/await}
 		{/await}
 		<AccordionItem
-			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-[#3BC4A0] hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
+			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 			activeClass="bg-dele-accent"
 		>
 			<button
@@ -209,7 +209,7 @@
 <!--Info de Taquillas-->
 
 <div
-	class="bg-[#3BC4A0] w-full py-6 lg:flex litems-center justify-center lg:gap-24 grid grid-rows-2 place-items-center dark:bg-dark-secondary"
+	class="bg-dele-color w-full py-6 lg:flex litems-center justify-center lg:gap-24 grid grid-rows-2 place-items-center dark:bg-dark-secondary"
 	id="Taquillas"
 >
 	<div
@@ -250,7 +250,7 @@
 		<p class="text-left text-2xl w-full">Osciloscopios</p>
 	</button>
 	<div
-		class="rounded-full bg-[#3BC4A0] py-6 flex items-center justify-center text-center lg:aspect-square lg:w-1/2 border-solid border-4 text-white w-11/12 dark:border-dark-primary dark:bg-dark-secondary"
+		class="rounded-full bg-dele-color py-6 flex items-center justify-center text-center lg:aspect-square lg:w-1/2 border-solid border-4 text-white w-11/12 dark:border-dark-primary dark:bg-dark-secondary"
 	>
 		<p class="flex items-center justify-center text-lg sm:p-12 p-16 sm:text-2xl">
 			El despacho de delegación cuenta con tres osciloscopios que los estudiantes pueden usar. Esta
@@ -262,7 +262,7 @@
 <!--Info de encuestas-->
 
 <div
-	class="bg-[#3BC4A0] w-full py-6 lg:flex litems-center justify-center lg:gap-24 grid grid-rows-2 place-items-center dark:bg-dark-secondary"
+	class="bg-dele-color w-full py-6 lg:flex litems-center justify-center lg:gap-24 grid grid-rows-2 place-items-center dark:bg-dark-secondary"
 	id="Encuestas"
 >
 	<div

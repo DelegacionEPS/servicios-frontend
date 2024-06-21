@@ -97,7 +97,7 @@
 />
 <body class="dark:bg-dark-background">
 	<header
-		class="bg-[#3BC4A0] grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary"
+		class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary"
 	>
 		<button class="sm:w-12 sm:h-12 w-16 h-10" on:click={() => (hidden2 = !hidden2)}>
 			<BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />
@@ -112,10 +112,10 @@
 			}}>Delegación EPS</button
 		>
 		{#if session}
-			<div class="grid sm:grid-cols-2 grid-cols-1 place-items-center rtl:space-x-reverse ">
+			<div class="grid sm:grid-cols-2 grid-cols-1 place-items-center rtl:space-x-reverse">
 				<div class="sm:block hidden">
 					<a href="/admin" class="">
-						<p class="text-white italic text-center text-xs lg:text-sm ">
+						<p class="text-white italic text-center text-xs lg:text-sm">
 							{session.user?.name}
 						</p>
 					</a>
@@ -124,10 +124,10 @@
 					<a href="/admin" class="">
 						<Avatar src={session?.user?.image} class="h-10 w-10" />
 					</a>
-				</div>		
+				</div>
 			</div>
 			<button on:click={() => logout()} class="bg-red-500 rounded-3xl h-10 w-10 place-self-center">
-				<ArrowLeftToBracketOutline class="h-8 w-8 m-auto"/>
+				<ArrowLeftToBracketOutline class="h-8 w-8 m-auto" />
 			</button>
 		{:else}
 			{#if doing_login}
@@ -138,9 +138,9 @@
 				<div></div>
 			{/if}
 			<button on:click={() => login()} class="bg-white rounded-3xl h-10 w-10 place-self-center">
-				<UserCircleOutline class="h-8 w-8 m-auto"/>
+				<UserCircleOutline class="h-8 w-8 m-auto" />
 			</button>
-			{/if}
+		{/if}
 	</header>
 
 	<Breadcrumb
