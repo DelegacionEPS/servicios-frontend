@@ -105,6 +105,35 @@
 		}
 	}
 
+	async function marcar_rota(taquilla: String) {
+		// Call a function that only runs in the server side:
+		let res_email = session?.user?.email || '';
+		if (res_email === '') {
+			formModalReservation = false;
+			openModalIniciaSesion = true;
+			return;
+		}
+		const response = await fetch('/api/marcar_rota', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ taquilla: taquilla, email: res_email })
+		});
+
+		let result = await response.json();
+		result = result['result']['message'];
+		if (result.includes('rota')) {
+			successToast = true;
+			setTimeout(() => {
+				successToast = false;
+				location.reload();
+			}, 2000);
+		} else {
+			unSuccessToast = true;
+		}
+	}
+
 	function change_delete_modal(taquilla: Taquilla) {
 		deleteModal = true;
 		currentTaquilla = taquilla;
@@ -267,12 +296,20 @@
 					</p>
 				{/if}
 				{#if taquilla['status'] === 'reservada'}
-					<div class="grid grid-cols-2 mt-4 place-items-center">
+					<div class="grid grid-cols-1 place-items-center mt-4">
 						<button
-							class="w-2/3 text-white bg-green-500 rounded p-1"
+							class="w-10/12 text-white bg-green-500 rounded p-1"
 							on:click={() => {
 								realizar_reserva(taquilla['taquilla']);
 							}}>Confirmar</button
+						>
+					</div>
+					<div class="grid grid-cols-2 place-items-center mt-4">
+						<button
+							class="w-2/3 text-white bg-gray-500 rounded p-1"
+							on:click={() => {
+								marcar_rota(taquilla['taquilla']);
+							}}>Marcar rota</button
 						>
 
 						<button
@@ -281,9 +318,6 @@
 								change_delete_modal(taquilla);
 							}}>Eliminar</button
 						>
-					</div>
-					<div class="grid grid-cols-1 mt-4 place-items-center">
-						<button class="w-1/2 text-white bg-gray-500 rounded p-1"> Marcar como rota </button>
 					</div>
 				{:else if taquilla['status'] === 'libre'}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
@@ -296,7 +330,12 @@
 						>
 							Reservar
 						</button>
-						<button class="w-1/2 text-white bg-gray-500 rounded p-1 mt-4">
+						<button
+							class="w-1/2 text-white bg-gray-500 rounded p-1 mt-4"
+							on:click={() => {
+								marcar_rota(taquilla['taquilla']);
+							}}
+						>
 							Marcar como rota
 						</button>
 					</div>
@@ -308,7 +347,12 @@
 								change_delete_modal(taquilla);
 							}}>Eliminar</button
 						>
-						<button class="w-2/3 text-white bg-gray-500 rounded p-1 mt-4">
+						<button
+							class="w-2/3 text-white bg-gray-500 rounded p-1 mt-4"
+							on:click={() => {
+								marcar_rota(taquilla['taquilla']);
+							}}
+						>
 							Marcar como rota
 						</button>
 					</div>

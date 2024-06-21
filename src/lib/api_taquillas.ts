@@ -277,3 +277,56 @@ export async function deleteDB(email: FormDataEntryValue | null | String) {
 		console.error(error);
 	}
 }
+
+
+export async function marcarRota(taquilla: FormDataEntryValue | null | String, correo: FormDataEntryValue | null | String) {
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/marcarRota${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				taquilla: taquilla,
+				correo: correo,
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK when marking rota', response.status, response.statusText);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function arreglarTaquilla(taquilla: FormDataEntryValue | null | String, correo: FormDataEntryValue | null | String) {
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/arreglarTaquilla${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				taquilla: taquilla,
+				correo: correo,
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK when marking rota', response.status, response.statusText);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}

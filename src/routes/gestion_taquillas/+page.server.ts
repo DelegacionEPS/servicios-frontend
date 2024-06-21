@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions} from './$types';
-import {getReservasNia, getReservasTaquilla, reservaTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
+import {getReservasNia, getReservasTaquilla, reservaTaquilla, marcarRota, arreglarTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
 
 export const load = (async () => {
     const fetchAuthorizedEmails = async (rango:String) => {
@@ -58,4 +58,18 @@ export const actions = {
 		const result = reservaTaquilla(taquilla, nia, correo, nombre);
 		return result;
 	},
+	setRota: async ({ request }) => {
+		const data = await request.formData();
+		const taquilla = data.get('taquilla');
+		const correo = data.get('correo');
+		const result = marcarRota(taquilla, correo);
+		return result;
+	},
+	fixTaquilla: async ({ request }) => {
+		const data = await request.formData();
+		const taquilla = data.get('taquilla');
+		const correo = data.get('correo');
+		const result = arreglarTaquilla(taquilla, correo);
+		return result;
+	}
 } satisfies Actions;
