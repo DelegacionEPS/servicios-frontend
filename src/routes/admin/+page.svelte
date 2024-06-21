@@ -17,11 +17,6 @@
 	let unSuccessToast = false;
 	$: session = $page.data.session;
 
-
-	setTimeout(() => {
-		console.log(session?.user?.email);
-	}, 1000);
-
 	function change_confirmation_modal() {
 		openConfirmation = true;
 	}
@@ -146,7 +141,9 @@
 					/>
 					<Button
 						class="w-full1 bg-red-500 hover:bg-[#FF6D2E] dark:bg-red-500 dark:hover:bg-dark-accent"
-						on:click={() => {change_confirmation_modal();}}
+						on:click={() => {
+							change_confirmation_modal();
+						}}
 					>
 						Eliminar la base de datos</Button
 					>
@@ -183,7 +180,10 @@
 
 <Modal bind:open={openConfirmation} size="xs" autoclose={false} class="w-full">
 	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Eliminar la base de datos</h3>
-	<p>Antes de eliminar la base de datos, se te mandará un correo con una copia de seguridad. Haz click en el siguiente botón para confirmar el borrado.</p>
+	<p>
+		Antes de eliminar la base de datos, se te mandará un correo con una copia de seguridad. Haz
+		click en el siguiente botón para confirmar el borrado.
+	</p>
 	<div class="grid grid-cols-1 place-items-center">
 		<Button
 			type="button"

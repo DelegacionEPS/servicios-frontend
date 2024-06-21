@@ -15,6 +15,7 @@
 		TableSearch
 	} from 'flowbite-svelte';
 	import ModalIniciaSesion from '../../ModalIniciaSesion.svelte';
+	import { goto } from '$app/navigation';
 	let session = $page.data.session;
 
 	// Reactive statement to update session whenever $page.data.session changes
@@ -40,9 +41,7 @@
 	let currentTaquilla: Taquilla;
 	let searchTerm = '';
 
-	let reservadas = 0;
-	let ocupadas = 0;
-	let no_disponibles = 0;
+	let show_results = true;
 
 	$: filteredItems = TablaPabloItems.filter(
 		(item) => item.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
@@ -70,7 +69,7 @@
 			successToast = true;
 			setTimeout(() => {
 				successToast = false;
-				location.reload();
+				goto('/gestion_taquillas');
 			}, 2000);
 		} else {
 			unSuccessToast = true;
@@ -241,7 +240,7 @@
 </Tabs>
 
 <div class="w-screen grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center mt-2">
-	{#if form != null && form}
+	{#if form != null && form && form.reservas}
 		{#each form.reservas as taquilla}
 			<Card class="mt-2">
 				<div class="flex place-content-between">
@@ -282,13 +281,9 @@
 								change_delete_modal(taquilla);
 							}}>Eliminar</button
 						>
-						</div>
+					</div>
 					<div class="grid grid-cols-1 mt-4 place-items-center">
-						<button
-							class="w-1/2 text-white bg-gray-500 rounded p-1"
-						>
-							Marcar como rota
-						</button>
+						<button class="w-1/2 text-white bg-gray-500 rounded p-1"> Marcar como rota </button>
 					</div>
 				{:else if taquilla['status'] === 'libre'}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
@@ -301,9 +296,7 @@
 						>
 							Reservar
 						</button>
-						<button
-							class="w-1/2 text-white bg-gray-500 rounded p-1 mt-4"
-						>
+						<button class="w-1/2 text-white bg-gray-500 rounded p-1 mt-4">
 							Marcar como rota
 						</button>
 					</div>
@@ -315,22 +308,17 @@
 								change_delete_modal(taquilla);
 							}}>Eliminar</button
 						>
-						<button
-							class="w-2/3 text-white bg-gray-500 rounded p-1 mt-4"
-						>
+						<button class="w-2/3 text-white bg-gray-500 rounded p-1 mt-4">
 							Marcar como rota
 						</button>
 					</div>
 				{:else}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
-						<button
-						class="w-1/2 text-white-500 bg-green-500 rounded p-1"
-						>
+						<button class="w-1/2 text-white-500 bg-green-500 rounded p-1">
 							Marcar como reparada
 						</button>
 					</div>
 				{/if}
-			
 			</Card>
 		{/each}
 	{/if}
@@ -363,7 +351,9 @@
 		<Button
 			type="submit"
 			class="w-full1 bg-green-500 hover:bg-[#FF6D2E] dark:bg-dark-primary dark:hover:bg-dark-accent"
-			>Reservar Taquilla</Button
+			on:click={() => {
+				show_results = false;
+			}}>Reservar Taquilla</Button
 		>
 	</form>
 </Modal>

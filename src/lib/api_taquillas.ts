@@ -8,8 +8,6 @@ export const TOKEN = process.env.TOKEN_API ?? 'noup-casi';
 export async function reservaTaquilla(taquilla: FormDataEntryValue | null | String, usuario: FormDataEntryValue | null | Number, correo: FormDataEntryValue | null | String, nombre: FormDataEntryValue | null | String) {
 	// Llamada a la API de taquillas para reservar la taquill
 	try {
-		console.log('taquilla:', taquilla);
-		console.log('url:', `${BASE_URL_API}/api/reservaTaquilla${TOKEN}`);
 		const response = await fetch(`${BASE_URL_API}/api/reservaTaquilla${TOKEN}`, {
 			method: 'POST',
 			headers: {
@@ -232,7 +230,6 @@ export async function eliminaReserva(taquilla: FormDataEntryValue | null | Strin
 
 export async function backupDB(email: FormDataEntryValue | null | String) {
 	try {
-		console.log('email:', email);
 		const response = await fetch(`${BASE_URL_API}/api/backupDB${TOKEN}`, {
 			method: 'POST',
 			headers: {
@@ -246,7 +243,6 @@ export async function backupDB(email: FormDataEntryValue | null | String) {
 		});
 		if (response.ok) {
 			const data = await response.json();
-			console.log(data);
 			return data;
 		} else {
 			console.error('Server response was not OK when backing up DB', response.status, response.statusText);
@@ -259,7 +255,6 @@ export async function backupDB(email: FormDataEntryValue | null | String) {
 
 export async function deleteDB(email: FormDataEntryValue | null | String) {
 	try {
-		console.log('email:', email);
 		const response = await fetch(`${BASE_URL_API}/api/deleteDB${TOKEN}`, {
 			method: 'POST',
 			headers: {
