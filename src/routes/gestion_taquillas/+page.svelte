@@ -43,9 +43,10 @@
 
 	let show_results = true;
 
-	$: filteredItems = TablaPabloItems.filter(
-		(item) => item.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-	);
+	$: filteredItems = TablaPabloItems.filter((item) => {
+		item.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
+		item.status != 'rota';
+	});
 
 	async function realizar_reserva(taquilla: String) {
 		// Call a function that only runs in the server side:
