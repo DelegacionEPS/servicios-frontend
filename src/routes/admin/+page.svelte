@@ -123,7 +123,7 @@
 					/>
 					<Button
 						type="submit"
-						class="w-full1 bg-green-500 hover:bg-[#FF6D2E] dark:bg-dark-primary dark:hover:bg-dark-accent"
+						class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 					>
 						Hacer una copia de seguridad</Button
 					>
@@ -140,7 +140,7 @@
 						value={session?.user?.email}
 					/>
 					<Button
-						class="w-full1 bg-red-500 hover:bg-[#FF6D2E] dark:bg-red-500 dark:hover:bg-dark-accent"
+						class="w-full1 bg-red-500 hover:bg-dele-accent dark:bg-red-500 dark:hover:bg-dark-accent"
 						on:click={() => {
 							change_confirmation_modal();
 						}}
@@ -168,7 +168,7 @@
 					<Input type="hidden" id="nia_admin" name="nia_admin" value={data.session?.user?.email} />
 					<Button
 						type="submit"
-						class="w-full1 bg-green-500 hover:bg-[#FF6D2E] dark:bg-dark-primary dark:hover:bg-dark-accent"
+						class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 					>
 						Restaurar la copia de seguridad del archivo subido</Button
 					>
@@ -187,7 +187,7 @@
 	<div class="grid grid-cols-1 place-items-center">
 		<Button
 			type="button"
-			class="w-full1 bg-green-500 hover:bg-[#FF6D2E] dark:bg-dark-primary dark:hover:bg-dark-accent"
+			class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 			on:click={() => {
 				eliminar_db();
 			}}

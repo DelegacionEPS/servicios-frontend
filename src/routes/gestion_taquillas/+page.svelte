@@ -427,7 +427,7 @@
 
 		<Button
 			type="submit"
-			class="w-full1 bg-green-500 hover:bg-[#FF6D2E] dark:bg-dark-primary dark:hover:bg-dark-accent"
+			class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 			on:click={() => {
 				show_results = false;
 			}}>Reservar Taquilla</Button
@@ -458,7 +458,7 @@
 		</Label>
 		<Button
 			type="submit"
-			class="w-full1 bg-green-500 hover:bg-[#FF6D2E] dark:bg-dark-primary dark:hover:bg-dark-accent"
+			class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 			on:click={(ev) => {
 				ev.preventDefault();
 				deleteModal = false;
