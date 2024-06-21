@@ -26,7 +26,6 @@ export const load = (async () => {
 	// remove null values
 	emailsDespacho = emailsDespacho.filter((email: String) => email !== null);
 
-	console.log(emailsDespacho, emailsEscuela);
     return {
         authorizedEmailsTaquillasEscuela: emailsEscuela,
 		authorizedEmailsTaquillasDespacho: emailsDespacho,
