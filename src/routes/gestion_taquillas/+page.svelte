@@ -251,9 +251,7 @@
 	>
 		{@const reservadas = TablaPabloItems.filter((item) => item.status === 'reservada').length}
 		{@const ocupadas = TablaPabloItems.filter((item) => item.status === 'ocupada').length}
-		{@const no_disponibles = TablaPabloItems.filter(
-			(item) => item.status === 'no disponible' || item.status === 'rota'
-		).length}
+		{@const no_disponibles = TablaPabloItems.filter((item) => item.status === 'rota').length}
 
 		<div class="grid grid-cols-3 place-items-center">
 			<div class="text-center">
