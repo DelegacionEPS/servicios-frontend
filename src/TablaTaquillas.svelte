@@ -99,10 +99,10 @@
 	</Button>
 </Modal>
 
-<div class="w-10/12 overflow-auto m-auto p-8">
+<div class="w-10/12 overflow-auto m-auto mt-6">
 	<table
 		style="border: 2px solid black; border-collapse: 10px; border-radius: 13px; border-spacing: 0; "
-		class="m-auto mb-10"
+		class="m-auto"
 	>
 		{#each ocupacion_bloques[block - 1] as row}
 			<tr>

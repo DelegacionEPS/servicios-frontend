@@ -56,15 +56,13 @@
 	export let form;
 </script>
 
-<h1
-	class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-8 text-dele-color dark:text-dark-primary"
->
-	Edificio {data.edificio} - Planta {data.planta}
+<h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-4 text-dele-color dark:text-dark-primary">
+	Selección de Taquilla
 </h1>
 
 <div class="w-screen grid grid-cols-1 place-items-center mb-4">
 	<Button id="pop_edificio" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
-		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6"/>
+		<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
 	</Button>
 </div>
 
@@ -76,10 +74,10 @@
 	<b>Recuerda hacer login en una cuenta de la UC3M para reservar la taquilla.<b>
 </Popover >
 
-<div class="w-screen h-full grid grid-rows-2 place-items-center">
+<div class="w-screen h-full grid grid-rows-1 place-items-center">
 	<Button
 		size="lg"
-		class="mt-4 w-1/10 bg-dele-color hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+		class="w-1/10 bg-dele-color hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 	>
 		Bloque {block}
 		<ChevronDownOutline class="w-6 h-6 ms-2 text-black dark:text-red-500" />
@@ -101,34 +99,32 @@
 	</Dropdown>
 </div>
 
-<div class="w-screen h-auto grid grid-rows-1 place-items-center -mt-8 mb-8">
-	<ButtonGroup class="space-x-px">
-		<Button pill class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-[#3BC4A0] hover:bg-[#FF6D2E]" on:click={() => substractBlock()}>
-			<ArrowLeftOutline />
-		</Button>
-		<Button pill class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-[#3BC4A0] hover:bg-[#FF6D2E]" on:click={() => addBlock()}>
-			<ArrowRightOutline />
-		</Button>
-	</ButtonGroup>
-</div>
-
 {#if drawBlocks}
-	<TablaTaquillas bind:ocupacion_bloques={ocupacionBloques} bind:block bind:data></TablaTaquillas>
-	<div class="grid grid-cols-1 place-self-center -mt-10 mb-8">
-		<div class="w-auto m-auto dark:text-white grid sm:grid-cols-4 grid-rows-4">
+	<div class="grid grid-cols-1 place-self-center mt-6">
+		<div class="w-auto m-auto dark:text-white grid sm:grid-cols-4 grid-cols-2">
 			<span class="flex items-center"><Indicator size="lg" color="green" class="me-1.5" />Libre</span>
 			<span class="flex items-center"><Indicator size="lg" color="yellow" class="me-1.5" />Reservada</span>
 			<span class="flex items-center"><Indicator size="lg" color="red" class="me-1.5" />Ocupada</span>
 			<span class="flex items-center"><Indicator size="lg" color="dark" class="me-1.5" />No Disponible</span>
 		</div>
 	</div>
-	<div class="w-screen grid grid-rows-1 place-items-center px-4 mb-12">
+	<TablaTaquillas bind:ocupacion_bloques={ocupacionBloques} bind:block bind:data></TablaTaquillas>
+	<div class="w-screen h-auto grid grid-rows-1 place-items-center mt-6">
+		<ButtonGroup class="space-x-px">
+			<Button pill class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-[#3BC4A0] hover:bg-[#FF6D2E]" on:click={() => substractBlock()}>
+				<ArrowLeftOutline />
+			</Button>
+			<Button pill class="dark:bg-dark-primary dark:hover:bg-dark-accent bg-[#3BC4A0] hover:bg-[#FF6D2E]" on:click={() => addBlock()}>
+				<ArrowRightOutline />
+			</Button>
+		</ButtonGroup>
+	</div>
+	<div class="w-screen grid grid-rows-1 place-items-center px-4 mt-6 mb-6">
 		<img src={urlMapa} alt="Mapa" class="max-w-[800px] md:w-7/12 w-10/12 dark:invert" />
 	</div>
 {:else}
 	<p class="text-center p-6 dark:text-dark-primary">Loading...</p>
 {/if}
-
 {#if form}
 	{#if form.message.includes('Error')}
 		<Toast color="red" position="bottom-right">

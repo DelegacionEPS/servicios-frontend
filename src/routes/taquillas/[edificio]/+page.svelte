@@ -19,20 +19,20 @@
 <h1
 	class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-8 text-dele-color dark:text-dark-primary"
 >
-	Edificio {building}
+	Selección de Piso
 </h1>
 
 <div class="w-screen grid grid-cols-1 place-items-center mb-4">
 	<Button id="pop_edificio" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
-		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6"/>
+		<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
 	</Button>
 </div>
 
-<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Tutorial Taquillas - Selección de Planta" triggeredBy="#pop_edificio">
-	Ahora, selecciona la planta donde se encuentra la taquilla que quieres reservar.
+<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Tutorial Taquillas - Selección de Piso" triggeredBy="#pop_edificio">
+	Ahora, selecciona la piso donde se encuentra la taquilla que quieres reservar.
 </Popover >
 
-<div class="flex flex-col items-center mb-12">
+<div class="flex flex-col items-center mb-6">
 	{#each pisos as i}
 		<a href="{building}/{i}" class="flex justify-center group relative">
 			<img

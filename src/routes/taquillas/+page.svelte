@@ -34,7 +34,7 @@
 
 <div class="w-screen grid grid-cols-1 place-items-center mb-4">
 	<Button id="pop_edificio" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
-		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6"/>
+		<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
 	</Button>
 </div>
 
@@ -43,7 +43,7 @@
 	quieres reservar la taquilla. Usa las flechas de la galería o las imágenes inferiores para rotar entre los edificios.
 </Popover >
 
-<div class="grid grid-cols-1 place-items-center w-screen mt-10">
+<div class="grid grid-cols-1 place-items-center w-screen mt-6 mb-6">
 	<div class="max-w-4xl space-y-4">
 		<Carousel {images} {forward} let:Indicators let:Controls bind:index>
 			<a class="group" slot="slide" href={images[index]?.href} let:Slide let:index>

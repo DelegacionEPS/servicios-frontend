@@ -60,9 +60,26 @@
 		const currentURL = $page.url.pathname;
 		const urlSegments = currentURL.split('/').filter((segment) => segment !== '');
 		let _breadcrumItems = [];
+		let text: String;
+		let inTaquillas = false;
+		let inEdificio = true;		
 		for (let i = 0; i < urlSegments.length; i++) {
+			text = urlSegments[i].charAt(0).toUpperCase() + urlSegments[i].slice(1).replace('_', ' ');
+			if (inTaquillas) {
+
+				if (inEdificio) {
+					text = "Edificio " + text;
+					inEdificio = false;
+				}
+				else {
+					text = "Planta " + text;
+				}
+			}
+			if (text === "Taquillas") {
+				inTaquillas = true;
+			}
 			_breadcrumItems.push({
-				text: urlSegments[i].charAt(0).toUpperCase() + urlSegments[i].slice(1).replace('_', ' '),
+				text: text,
 				href: `/${urlSegments.slice(0, i + 1).join('/')}`
 			});
 		}
@@ -106,21 +123,21 @@
 			<img class="sm:w-12 sm:h-auto w-10 h-auto" src="/logo.webp" alt="logo" />
 		</a>
 		<button
-			class="font-bold-italic text-white text-center py-2 lg:text-2xl sm:text-xl text-lg hover:underline w-auto"
+			class="font-bold-italic text-white text-center py-2 lg:text-2xl sm:text-xl text-base hover:underline w-auto"
 			on:click={() => {
 				goto('/');
 			}}>Delegación EPS</button
 		>
 		{#if session}
-			<div class="grid sm:grid-cols-2 grid-cols-1 place-items-center rtl:space-x-reverse">
-				<div class="sm:block hidden">
+			<div class="grid sm:grid-cols-12 grid-cols-1 place-items-center rtl:space-x-reverse">
+				<div class="sm:block hidden col-span-9">
 					<a href="/admin" class="">
 						<p class="text-white italic text-center text-xs lg:text-sm">
 							{session.user?.name}
 						</p>
 					</a>
 				</div>
-				<div class="min-w-10 w-auto ml-12">
+				<div class="min-w-10 w-auto ml-12 col-span-3">
 					<a href="/admin" class="">
 						<Avatar src={session?.user?.image} class="h-10 w-10" />
 					</a>
@@ -132,7 +149,7 @@
 		{:else}
 			{#if doing_login}
 				<div class="text-right mt-2">
-					<Spinner size={8} color="orange" />
+					<Spinner size={8} color="red" />
 				</div>
 			{:else}
 				<div></div>

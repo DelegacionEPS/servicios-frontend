@@ -16,6 +16,7 @@
 	} from 'flowbite-svelte';
 	import ModalIniciaSesion from '../../ModalIniciaSesion.svelte';
 	import { goto } from '$app/navigation';
+  import TablaTaquillas from '../../TablaTaquillas.svelte';
 	let session = $page.data.session;
 
 	// Reactive statement to update session whenever $page.data.session changes
@@ -42,12 +43,11 @@
 	let searchTerm = '';
 
 	let show_results = true;
-
-	$: filteredItems = TablaPabloItems.filter((item) => {
-		item.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
-		item.status != 'rota';
+	
+	$: filteredItems = TablaPabloItems.filter((item) =>{
+		return item.status != "rota";
 	});
-
+	
 	async function realizar_reserva(taquilla: String) {
 		// Call a function that only runs in the server side:
 		let res_email = session?.user?.email || '';
@@ -177,9 +177,9 @@
 	<TabItem
 		open
 		title="Búsqueda por NIA"
-		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
-		activeClasses="sm:text-base text-xs p-4"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent sm:text-base text-xs"
+		class=""
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -210,9 +210,9 @@
 	</TabItem>
 	<TabItem
 		title="Búsqueda por Taquilla"
-		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
-		activeClasses="sm:text-base text-xs p-4"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent sm:text-base text-xs"
+		class=""
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -243,9 +243,9 @@
 	</TabItem>
 	<TabItem
 		title="Tabla Pablo"
-		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
-		activeClasses="sm:text-base text-xs p-4"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent sm:text-base text-xs"
+		class=""
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}

@@ -29,7 +29,7 @@
 
 <div class="w-screen grid grid-cols-1 place-items-center mb-4">
 	<Button id="pop_home" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
-		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6"/>
+		<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
 	</Button>
 </div>
 
