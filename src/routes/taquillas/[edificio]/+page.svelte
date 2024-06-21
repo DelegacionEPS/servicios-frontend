@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { Popover, Button  } from 'flowbite-svelte';
+	import {QuestionCircleSolid} from 'flowbite-svelte-icons';
 	export let data: PageData;
 
 	const building = data.edificio;
@@ -20,7 +22,17 @@
 	Edificio {building}
 </h1>
 
-<div class="flex flex-col items-center">
+<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+	<Button id="pop_edificio" class="">
+		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6"/>
+	</Button>
+</div>
+
+<Popover class="text-white dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Tutorial Taquillas - Selección de Planta" triggeredBy="#pop_edificio">
+	Ahora, selecciona la planta donde se encuentra la taquilla que quieres reservar.
+</Popover >
+
+<div class="flex flex-col items-center mb-12">
 	{#each pisos as i}
 		<a href="{building}/{i}" class="flex justify-center group relative">
 			<img
@@ -29,8 +41,8 @@
 				alt={`Edificio ${data.edificio}. ${i}`}
 			/>
 			<h1
-				class="absolute left-1/2 top-1/2 md:text-3xl sm:text-lg text-sm text-[#3BC4A0] px-6 py-2 rounded group-hover:block lg:hidden block dark:text-dark-primary"
-				style="transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7)"
+				class="absolute left-1/2 top-1/2 md:text-3xl sm:text-lg text-sm text-[#3BC4A0] px-6 py-2 rounded block dark:text-dark-primary"
+				style="transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.8)"
 			>
 				Piso {i}
 			</h1>
