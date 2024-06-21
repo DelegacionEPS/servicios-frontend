@@ -92,9 +92,7 @@
 </div>
 
 {#if drawBlocks}
-	<TablaTaquillas bind:ocupacion_bloques={ocupacionBloques} bind:block bind:data></TablaTaquillas>
-
-	<div class="w-screen h-auto grid grid-rows-3 place-items-center -mt-8">
+	<div class="w-screen h-auto grid grid-rows-1 place-items-center mt-8">
 		<ButtonGroup class="space-x-px">
 			<Button
 				pill
@@ -112,6 +110,9 @@
 			</Button>
 		</ButtonGroup>
 	</div>
+
+	<TablaTaquillas bind:ocupacion_bloques={ocupacionBloques} bind:block bind:data></TablaTaquillas>
+
 	<div class="w-screen grid grid-rows-1 place-items-center mt-4 px-4">
 		<img src={urlMapa} alt="Mapa" class="max-w-[800px] md:w-7/12 w-10/12 dark:invert" />
 	</div>
