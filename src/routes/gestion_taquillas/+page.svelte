@@ -45,8 +45,12 @@
 	let show_results = true;
 	
 	$: filteredItems = TablaPabloItems.filter((item) =>{
-		return item.status != "rota";
+		return (item.status != "rota" && item.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 	});
+
+	$: taquillasRotas = TablaPabloItems.filter((item) => {
+		return (item.status == "rota" && item.taquilla.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+	})
 	
 	async function realizar_reserva(taquilla: String) {
 		// Call a function that only runs in the server side:
@@ -288,6 +292,43 @@
 							<TableBodyCell>{item.codigo}</TableBodyCell>
 							<TableBodyCell>{item.date}</TableBodyCell>
 							<TableBodyCell>{item.status}</TableBodyCell>
+						</TableBodyRow>
+					{/each}
+				{/if}
+			</TableBody>
+		</TableSearch>
+	</TabItem>
+	<TabItem
+		title="Taquillas Rotas"
+		class=""
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		on:focus={() => {
+			form = '';
+		}}
+	>
+		<TableSearch placeholder="Busca por Taquilla" hoverable={true} bind:inputValue={searchTerm}>
+			<TableHead>
+				<TableHeadCell>Taquilla</TableHeadCell>
+				<TableHeadCell>No disponible desde</TableHeadCell>
+				<TableHeadCell>Reparar</TableHeadCell>
+			</TableHead>
+			<TableBody tableBodyClass="divide-y">
+				{#if taquillasRotas != null && taquillasRotas}
+					{#each taquillasRotas as item}
+						<TableBodyRow>
+							<TableBodyCell>{item.taquilla}</TableBodyCell>
+							<TableBodyCell>{item.date}</TableBodyCell>
+							<TableBodyCell>
+								<button
+									class="w-full text-white-500 bg-green-500 dark:text-white rounded p-1"
+									on:click={() => {
+										marcar_reparada(item.taquilla);
+									}}
+								>
+									Marcar como reparada
+								</button>
+							</TableBodyCell>
 						</TableBodyRow>
 					{/each}
 				{/if}
