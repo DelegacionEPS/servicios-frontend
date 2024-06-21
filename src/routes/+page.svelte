@@ -1,5 +1,5 @@
 <script>
-	import { AccordionItem, Accordion, Button, Modal } from 'flowbite-svelte';
+	import { AccordionItem, Accordion, Button, Popover } from 'flowbite-svelte';
 	import { goto } from '$app/navigation';
 	import {
 		AnnotationSolid,
@@ -26,29 +26,18 @@
 <h1 class="sm:text-5xl text-3xl text-center w-full py-6 dark:text-white dark:bg-[#070a17]">
 	Servicios de Delegación
 </h1>
+
 <div class="w-screen grid grid-cols-1 place-items-center mb-4">
-	<button
-		on:click={() => {
-			infoModal = true;
-		}}
-		class="dark:text-white dark:text-dark-accent text-dele-color hover:text-dele-accent"
-	>
-		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6" />
-	</button>
+	<Button id="pop_home" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
+		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6"/>
+	</Button>
 </div>
 
-<Modal bind:open={infoModal} size="sm">
-	<div class="grid grid-cols-1 place-items-center">
-		<p class="dark:text-white text-black text-justify mt-4">
-			Esta es la versión pre-release de la aplicación de delegación. Siéntete libre de realizar
-			reservas, ya que al principio del curso reiniciaremos la base de datos. Todo el feedback que
-			tengas será bien recibido para mejorar esta página.
-		</p>
-		<p class="dark:text-white text-black text-justify mt-4">
-			<b>¡Muchas gracias por tu colaboración!</b>
-		</p>
-	</div>
-</Modal>
+<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Home" triggeredBy="#pop_home">
+	Esta es la versión pre-release de la aplicación de delegación. Siéntete libre de realizar
+	reservas, ya que al principio del curso reiniciaremos la base de datos. Todo el feedback que
+	tengas será bien recibido para mejorar esta página.
+</Popover >
 
 <div class="grid grid-rows-2 place-items-center dark:bg-[#070a17]">
 	<Accordion class="md:w-1/2 w-11/12">

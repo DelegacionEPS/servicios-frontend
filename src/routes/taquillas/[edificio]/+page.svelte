@@ -23,12 +23,12 @@
 </h1>
 
 <div class="w-screen grid grid-cols-1 place-items-center mb-4">
-	<Button id="pop_edificio" class="">
+	<Button id="pop_edificio" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
 		<QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6"/>
 	</Button>
 </div>
 
-<Popover class="text-white dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Tutorial Taquillas - Selección de Planta" triggeredBy="#pop_edificio">
+<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Tutorial Taquillas - Selección de Planta" triggeredBy="#pop_edificio">
 	Ahora, selecciona la planta donde se encuentra la taquilla que quieres reservar.
 </Popover >
 
