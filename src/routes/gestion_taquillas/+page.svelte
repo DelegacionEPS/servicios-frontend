@@ -134,6 +134,35 @@
 		}
 	}
 
+	async function marcar_reparada(taquilla: String) {
+		// Call a function that only runs in the server side:
+		let res_email = session?.user?.email || '';
+		if (res_email === '') {
+			formModalReservation = false;
+			openModalIniciaSesion = true;
+			return;
+		}
+		const response = await fetch('/api/marcar_reparada', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ taquilla: taquilla, email: res_email })
+		});
+
+		let result = await response.json();
+		result = result['result']['message'];
+		if (result.includes('correctamente')) {
+			successToast = true;
+			setTimeout(() => {
+				successToast = false;
+				location.reload();
+			}, 2000);
+		} else {
+			unSuccessToast = true;
+		}
+	}
+
 	function change_delete_modal(taquilla: Taquilla) {
 		deleteModal = true;
 		currentTaquilla = taquilla;
@@ -358,7 +387,12 @@
 					</div>
 				{:else}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
-						<button class="w-1/2 text-white-500 bg-green-500 rounded p-1">
+						<button
+							class="w-1/2 text-white-500 bg-green-500 dark:text-white rounded p-1"
+							on:click={() => {
+								marcar_reparada(taquilla['taquilla']);
+							}}
+						>
 							Marcar como reparada
 						</button>
 					</div>
