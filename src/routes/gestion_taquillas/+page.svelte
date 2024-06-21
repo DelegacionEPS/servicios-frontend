@@ -123,7 +123,7 @@
 
 		let result = await response.json();
 		result = result['result']['message'];
-		if (result.includes('rota')) {
+		if (result.includes('correctamente')) {
 			successToast = true;
 			setTimeout(() => {
 				successToast = false;
