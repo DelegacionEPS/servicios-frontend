@@ -96,7 +96,7 @@
 			<div class="grid grid-cols-1 w-auto place-items-center">
 				<Button
 					type="submit"
-					class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-[#3BB4A0] dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-dele-color dark:bg-dark-primary dark:hover:bg-dark-accent"
 					>Cambiar rol</Button
 				>
 				<div></div>

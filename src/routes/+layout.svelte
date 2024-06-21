@@ -164,7 +164,7 @@
 		<div class="flex items-center">
 			<h5
 				id="drawer-navigation-label-3"
-				class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
+				class="text-base font-semibold text-gray-600 uppercase dark:text-gray-400"
 			>
 				Menu de Navegación
 			</h5>

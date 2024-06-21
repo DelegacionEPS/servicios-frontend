@@ -74,7 +74,7 @@
 	{/if}
 </header>
 
-<div bind:this={menu} class="bg-[#FFFFFF] w-1/4 h-screen border-2 absolute hidden">
+<div bind:this={menu} class="bg-white w-1/4 h-screen border-2 absolute hidden">
 	<button
 		class="bg-dele-color text-center w-full h-20"
 		on:click={() => {
