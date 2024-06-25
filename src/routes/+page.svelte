@@ -45,35 +45,21 @@
 			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 rounded-2xl hover:bg-dele-accent dark:hover:bg-dark-accent dark:text-white dark:border-black dark:bg-dark-primary"
 			activeClass="bg-dele-accent"
 		>
-			<button
+			<p
 				slot="header"
 				class="flex gap-2 w-full"
-				on:click={() => {
-					goto('./taquillas');
-				}}
 			>
 				<LockOpenOutline class="mt-1 h-8 w-8" />
 				Taquillas
-			</button>
+			</p>
 
-			<p class="sm:text-base text-sm dark:text-white">
-				<a class="sm:text-base text-sm dark:text-white underline" href="#Taquillas">
-					Reserva o comprueba el estado de una taquilla.
+			<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./taquillas")}}>
+				Reserva o comprueba el estado de una taquilla.
+			</button>
+			<p class="w-auto sm:text-base text-sm text-gray-700 dark:text-gray-400 hover:text-dele-accent dark:hover:text-dark-accent underline cursor-pointer">
+				<a href="#Taquillas" class="w-auto">
+						Más info...
 				</a>
-				Para poder reservar una taquilla, tienes que
-				<button
-					on:click={() => {
-						signIn('google');
-					}}
-				>
-					<span class="underline italic hover:dark:text-dark-accent hover:text-accent"
-						>iniciar sesión</span
-					></button
-				>
-				con la cuenta de Google de la Universidad. Puedes ir a la página
-				<span class="underline hover:dark:text-dark-accent hover:text-accent"
-					><a href="./taquillas">aquí</a></span
-				>.
 			</p>
 		</AccordionItem>
 		{#await authorizedEmailsDespacho then}
@@ -84,19 +70,16 @@
 							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 							activeClass="bg-dele-accent"
 						>
-							<button
+							<p
 								slot="header"
 								class="flex gap-2 w-full"
-								on:click={() => {
-									goto('./gestion_taquillas');
-								}}
 							>
 								<LockOutline class="mt-1 h-8 w-8" />
 								Gestión de Taquillas
-							</button>
-							<p class="sm:text-base text-sm dark:text-white">
-								Administra y consulta las reservas de las taquillas
 							</p>
+							<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./gestion_taquillas")}}>
+								Administra y consulta las reservas de las taquillas
+							</button>
 						</AccordionItem>
 					{/if}
 				{/if}
@@ -106,25 +89,20 @@
 			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 			activeClass="bg-dele-accent"
 		>
-			<button
+			<p
 				slot="header"
 				class="flex gap-2 w-full"
-				on:click={() => {
-					goto('./osciloscopio');
-				}}
 			>
 				<DrawSquareOutline class="mt-1 h-8 w-8" />
 				Osciloscopios [WIP]
+			</p>
+			<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./osciloscopio")}}>
+				Reserva un osciloscopio en el despacho [WIP].
 			</button>
-			<p class="sm:text-base text-sm dark:text-white">
-				<a class="sm:text-base text-sm dark:text-white underline" href="#Osciloscopios">
-					Reserva un osciloscopio en el despacho [WIP].
+			<p class="w-auto sm:text-base text-sm text-gray-700 dark:text-gray-400 hover:text-dele-accent dark:hover:text-dark-accent underline cursor-pointer">
+				<a href="#Osciloscopios" class="w-auto">
+						Más info...
 				</a>
-				Puedes reservar un osciloscopio a la semana, y cada reserva dura dos horas. Para más información,
-				puedes ir a la
-				<span class="underline hover:dark:text-dark-accent hover:text-accent"
-					><a href="./osciloscopios">página</a></span
-				> o preguntar en el despacho (1.0.H01).
 			</p>
 		</AccordionItem>
 		{#await authorizedEmailsEscuela then}
@@ -135,19 +113,16 @@
 							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 							activeClass="bg-dele-accent"
 						>
-							<button
+							<p
 								slot="header"
 								class="flex gap-2 w-full"
-								on:click={() => {
-									goto('./admin');
-								}}
 							>
 								<UsersSolid class="mt-1 h-8 w-8" />
 								Administrador
-							</button>
-							<p class="sm:text-base text-sm dark:text-white">
-								Administra los roles y la base de datos
 							</p>
+							<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./admin")}}>
+								Administra los roles y la base de datos
+							</button>
 						</AccordionItem>
 					{/if}
 				{/if}
@@ -157,22 +132,20 @@
 			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
 			activeClass="bg-dele-accent"
 		>
-			<button
+			<p
 				slot="header"
 				class="flex gap-2 w-full"
-				on:click={() => {
-					goto('./encuestas');
-				}}
 			>
 				<AnnotationSolid class="mt-1 h-8 w-8" />
 				Encuestas 2ºC 2024
+			</p>
+			<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./encuestas")}}>
+				Consulta el índice de participación de las encuestas.
 			</button>
-			<p class="sm:text-base text-sm dark:text-white">
-				<a class="sm:text-base text-sm dark:text-white underline" href="#Encuestas">
-					Consulta el índice de participación de las encuestas.
+			<p class="w-auto sm:text-base text-sm text-gray-700 dark:text-gray-400 hover:text-dele-accent dark:hover:text-dark-accent underline cursor-pointer">
+				<a href="#Encuestas" class="w-auto">
+						Más info...
 				</a>
-				Es muy importante participar en las encuestas, ya que con los resultados, podemos centrar los
-				esfuerzos en las asignaturas que más lo necesitan.
 			</p>
 		</AccordionItem>
 	</Accordion>
@@ -207,7 +180,8 @@
 		<p class="flex items-center justify-center text-lg sm:p-12 p-16 sm:text-2xl">
 			Delegación gestiona las taquillas de la universidad. Si quieres alquilar una, simplemente
 			tendrás que elegir la que quieres y luego rellenar un formulario para reservarla.
-			<br /><br />Para poder reservar, primero debes escoger el edificio y la planta. Tras ello,
+			<br /><br />
+			Para poder reservar, primero debes escoger el edificio y la planta. Tras ello,
 			deberás seleccionar un bloque para escoger la taquilla que quieras reservar.
 		</p>
 	</div>
@@ -261,6 +235,9 @@
 			Si quieres saber el porcentaje de participación por grado en las encuestas de evaluación del
 			profesorado, haz click en el siguiente botón. Actualmente, se muestran las encuestas del
 			segundo cuatrimeste del curso 2023/2024.
+			<br /><br />
+			Es muy importante participar en las encuestas, ya que con los resultados, podemos centrar los
+			esfuerzos en las asignaturas que más lo necesitan.
 		</p>
 	</div>
 	<button
