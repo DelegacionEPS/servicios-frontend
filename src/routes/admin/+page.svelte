@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { Tabs, TabItem, Input, Label, Button, Select, Modal, Card } from 'flowbite-svelte';
+	import { Tabs, TabItem, Input, Label, Button, Select, Modal, Card, TableSearch, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell } from 'flowbite-svelte';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 
@@ -15,14 +15,51 @@
 	let openConfirmation = false;
 	let successToast = false;
 	let unSuccessToast = false;
+	let successBackupToast = false;
+	let unSuccessBackupToast = false;
 	$: session = $page.data.session;
+	
+	let users = $page.data.users;
+	let searchTerm = '';
+	$: filteredItems = users.filter((person) =>{
+		return (person.rango != "general" && person.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+	});
 
 	function change_confirmation_modal() {
 		openConfirmation = true;
 	}
 
+	async function do_backup() {
+		
+		// Call a function that only runs in the server side:
+		let res_email = session?.user?.email || '';
+		if (res_email === '') {
+			openConfirmation = false;
+			return;
+		}
+		const response = await fetch('/api/backupDB', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email: res_email })
+		});
+
+		let result = await response.json();
+		result = result['result']['message'];
+		if (result.includes('correctamente')) {
+			successBackupToast = true;
+			setTimeout(() => {
+				successBackupToast = false;
+				location.reload();
+			}, 2000);
+		} else {
+			unSuccessBackupToast = true;
+		}
+	}
+
 	async function eliminar_db() {
-		openConfirmation = true;
+		openConfirmation = false;
 
 		// Call a function that only runs in the server side:
 		let res_email = session?.user?.email || '';
@@ -56,8 +93,8 @@
 	<TabItem
 		open
 		title="Cambiar Rol"
-		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 	>
 		<form action="?/addUserRol" method="post" use:enhance>
 			<div class="grid grid-cols-1 w-auto">
@@ -104,16 +141,42 @@
 		</form>
 	</TabItem>
 	<TabItem
+		title="Roles Usuarios"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+	>
+		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
+			<TableHead>
+				<TableHeadCell>Nombre</TableHeadCell>
+				<TableHeadCell>Nia</TableHeadCell>
+				<TableHeadCell>Correo</TableHeadCell>
+				<TableHeadCell>Rango</TableHeadCell>
+			</TableHead>
+			<TableBody tableBodyClass="divide-y">
+				{#if filteredItems != null && filteredItems}
+					{#each filteredItems as item}
+						<TableBodyRow>
+							<TableBodyCell>{item.nombre}</TableBodyCell>
+							<TableBodyCell>{item.nia}</TableBodyCell>
+							<TableBodyCell>{item.correo}</TableBodyCell>
+							<TableBodyCell>{item.rango.charAt(0).toUpperCase() + item.rango.slice(1)}</TableBodyCell>
+						</TableBodyRow>
+					{/each}
+				{/if}
+			</TableBody>
+		</TableSearch>
+	</TabItem>
+	<TabItem
 		title="Base de Datos"
-		class="hover:text-dele-color dark:hover:text-dark-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-accent"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 	>
 		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
 			Administrar la Base de Datos
 		</h2>
 		<section class="grid grid-rows-3 place-items-center mt-8">
 			<section>
-				<form action="?/BackupDB" method="post" use:enhance>
+				<form method="post" use:enhance>
 					<Input
 						type="hidden"
 						required
@@ -122,14 +185,16 @@
 						value={session?.user?.email}
 					/>
 					<Button
-						type="submit"
+						type="button"
 						class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+						on:click={() => {
+							do_backup();
+						}}
 					>
 						Hacer una copia de seguridad</Button
 					>
 				</form>
 			</section>
-
 			<section>
 				<form method="post" use:enhance class="mt-8">
 					<Input
@@ -176,18 +241,21 @@
 			</section>
 		</section>
 	</TabItem>
+	
 </Tabs>
 
 <Modal bind:open={openConfirmation} size="xs" autoclose={false} class="w-full">
 	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Eliminar la base de datos</h3>
-	<p>
-		Antes de eliminar la base de datos, se te mandará un correo con una copia de seguridad. Haz
-		click en el siguiente botón para confirmar el borrado.
+	<p class="text-black dark:text-white">
+		Antes de eliminar la base de datos, se te mandará un correo con una copia de seguridad. Ten en cuenta que este borrado <b>solo</b> afecta a las reservas,
+		no a los usuarios.
+		<br><br>
+		Haz click en el siguiente botón para confirmar el borrado.
 	</p>
 	<div class="grid grid-cols-1 place-items-center">
 		<Button
 			type="button"
-			class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+			class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
 			on:click={() => {
 				eliminar_db();
 			}}
@@ -197,15 +265,29 @@
 	</div>
 </Modal>
 
+{#if successBackupToast}
+	<div class="fixed bottom-0 right-0 m-5">
+		<Card class="bg-green-500 dark:text-white text-white dark:bg-green-500">
+			<p class="p-2">Se ha realizado con éxito el Backup.</p>
+		</Card>
+	</div>
+{:else if unSuccessBackupToast}
+	<div class="fixed bottom-0 right-0 m-5">
+		<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
+			<p class="p-2">No se ha podido realizar el Backup.</p>
+		</Card>
+	</div>
+{/if}
+
 {#if successToast}
 	<div class="fixed bottom-0 right-0 m-5">
-		<Card class="bg-green-500 text-white">
+		<Card class="bg-green-500 dark:text-white text-white dark:bg-green-500">
 			<p class="p-2">Base de datos borrada con éxito.</p>
 		</Card>
 	</div>
 {:else if unSuccessToast}
 	<div class="fixed bottom-0 right-0 m-5">
-		<Card class="bg-red-500 text-white">
+		<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
 			<p class="p-2">No se ha podido borrar la base de datos.</p>
 		</Card>
 	</div>

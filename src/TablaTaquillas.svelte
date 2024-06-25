@@ -34,7 +34,7 @@
 	>
 		<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Reservar Taquilla</h3>
 		<p class="dark:text-white">
-			Vas a realizar la reserva de la taquilla {selectedTaquilla}. El precio de las taquilla
+			 la reserva de la taquilla {selectedTaquilla}. El precio de las taquilla
 			{#if selectedTaquilla.includes('G')}al ser <span class="italic">grande</span> es de
 				<span class="font-bold">6€</span> para
 			{:else}

@@ -16,7 +16,7 @@
 	} from 'flowbite-svelte';
 	import ModalIniciaSesion from '../../ModalIniciaSesion.svelte';
 	import { goto } from '$app/navigation';
-  import TablaTaquillas from '../../TablaTaquillas.svelte';
+  	import TablaTaquillas from '../../TablaTaquillas.svelte';
 	let session = $page.data.session;
 
 	// Reactive statement to update session whenever $page.data.session changes
@@ -353,13 +353,16 @@
 						<p class="text-center p-1 text-white bg-green-500 rounded">Libre</p>
 					{:else if taquilla['status'] === 'ocupada'}
 						<p class="text-center p-1 text-white bg-red-500 rounded">Ocupada</p>
+					{:else if taquilla['status'] === 'null'}
+						<p class="text-center p-1 text-white bg-black rounded">No existe</p>
 					{:else}
 						<p class="text-center p-1 text-white bg-black rounded">No disponible</p>
 					{/if}
+
 				</div>
 				{#if taquilla['status'] === 'reservada' || taquilla['status'] === 'ocupada'}
 					<p class="text-black text-sm mt-4 dark:text-white">
-						Reservada por <b>{taquilla['nia']}</b> el {taquilla['date'].split(' ')[0]} a las {taquilla[
+						Reservada por {taquilla['nombre']} (<b>{taquilla['nia']}</b>) el {taquilla['date'].split(' ')[0]} a las {taquilla[
 							'date'
 						].split(' ')[1]}
 					</p>
@@ -425,6 +428,8 @@
 							Marcar como rota
 						</button>
 					</div>
+				{:else if taquilla['status'] === 'null'}
+					<div></div>
 				{:else}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
 						<button
@@ -449,7 +454,7 @@
 			Vas a realizar la reserva de una taquilla. El precio de las taquilla es de:
 			{#if selectedTaquilla.includes('G')}<span class="font-bold"> 6€ </span>
 			{:else}<span class="font-bold"> 4€ </span>
-			{/if} el año completo y la mitad por el segundo cuatrimestre. Este importe se abona en delegación
+			{/if} el año completo y la mitad por el segundo cuatrimestre. Este importe se abonará en delegación
 			de estudiantes.
 		</p>
 		<Input type="hidden" id="correo" name="correo" value={session?.user?.email} required />

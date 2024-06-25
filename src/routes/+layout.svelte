@@ -112,6 +112,7 @@
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
 	rel="stylesheet"
 />
+
 <body class="dark:bg-dark-background">
 	<header
 		class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary"
@@ -119,8 +120,8 @@
 		<button class="sm:w-12 sm:h-12 w-16 h-10" on:click={() => (hidden2 = !hidden2)}>
 			<BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />
 		</button>
-		<a href="/" class="sm:block hidden">
-			<img class="sm:w-12 sm:h-auto w-10 h-auto" src="/logo.webp" alt="logo" />
+		<a href="/" class="sm:block hidden p-1">
+			<img class="sm:w-12 sm:h-auto w-10 h-auto bg-white dark:bg-dark-primary rounded-xl p-1" src="/eps_logo.png" alt="logo" />
 		</a>
 		<button
 			class="font-bold-italic text-white text-center py-2 lg:text-2xl sm:text-xl text-base hover:underline w-auto"

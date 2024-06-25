@@ -125,6 +125,7 @@
 {:else}
 	<p class="text-center p-6 dark:text-dark-primary">Loading...</p>
 {/if}
+
 {#if form}
 	{#if form.message.includes('Error')}
 		<Toast color="red" position="bottom-right">
