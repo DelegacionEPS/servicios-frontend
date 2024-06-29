@@ -58,7 +58,7 @@
 					</Card>
 				{/each}
 			{:else}
-				<p class="text-4xl text-center text-dele-color m-5 dark:text-white">Todavía no has hecho ninguna reserva</p>
+				<p class="text-4xl text-center text-dele-color mt-5 col-span-3 dark:text-white">Todavía no has hecho ninguna reserva</p>
 			{/if}
 		</div>
 	</TabItem>
