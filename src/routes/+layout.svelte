@@ -120,7 +120,7 @@
 		<button class="sm:w-12 sm:h-12 w-16 h-10" on:click={() => (hidden2 = !hidden2)}>
 			<BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />
 		</button>
-		<a href="/" class="sm:block hidden p-1">
+		<a href="/perfil" class="sm:block hidden p-1">
 			<img class="sm:w-12 sm:h-auto w-10 h-auto bg-white dark:bg-dark-primary rounded-xl p-1" src="/eps_logo.png" alt="logo" />
 		</a>
 		<button
@@ -132,14 +132,14 @@
 		{#if session}
 			<div class="grid sm:grid-cols-12 grid-cols-1 place-items-center rtl:space-x-reverse">
 				<div class="sm:block hidden col-span-9">
-					<a href="/admin" class="">
+					<a href="/perfil" class="">
 						<p class="text-white italic text-center text-xs lg:text-sm">
 							{session.user?.name}
 						</p>
 					</a>
 				</div>
 				<div class="min-w-10 w-auto ml-12 col-span-3">
-					<a href="/admin" class="">
+					<a href="/perfil" class="">
 						<Avatar src={session?.user?.image} class="h-10 w-10" />
 					</a>
 				</div>
@@ -194,6 +194,13 @@
 					<SidebarItem label="Inicio" href="/" on:click={() => hideNavBar()}>
 						<svelte:fragment slot="icon">
 							<HomeSolid
+								class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+							/>
+						</svelte:fragment>
+					</SidebarItem>
+					<SidebarItem label="Perfil" href="/perfil" on:click={() => hideNavBar()}>
+						<svelte:fragment slot="icon">
+							<UserCircleOutline
 								class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
 							/>
 						</svelte:fragment>

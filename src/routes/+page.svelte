@@ -7,7 +7,8 @@
 		LockOpenOutline,
 		UsersSolid,
 		LockOutline,
-		QuestionCircleSolid
+		QuestionCircleSolid,
+		UserCircleOutline
 	} from 'flowbite-svelte-icons';
 	import { page } from '$app/stores';
 	import Konami from './Konami.svelte';
@@ -39,8 +40,27 @@
 	tengas será bien recibido para mejorar esta página.
 </Popover >
 
-<div class="grid grid-rows-2 place-items-center dark:bg-[#070a17]">
+<div class="grid grid-rows-2 place-items-center dark:bg-[#070a17]" style="min-height: 75vh;">
 	<Accordion class="md:w-1/2 w-11/12">
+		{#await session then}
+			{#if session?.user?.email != null}
+				<AccordionItem
+					class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
+					activeClass="bg-dele-accent"
+				>
+					<p
+						slot="header"
+						class="flex gap-2 w-full"
+					>
+						<UserCircleOutline class="mt-1 h-8 w-8" />
+						Perfil
+					</p>
+					<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./perfil")}}>
+						Comprueba las taquillas que has reservado
+					</button>
+				</AccordionItem>
+			{/if}
+		{/await}
 		<AccordionItem
 			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 rounded-2xl hover:bg-dele-accent dark:hover:bg-dark-accent dark:text-white dark:border-black dark:bg-dark-primary"
 			activeClass="bg-dele-accent"

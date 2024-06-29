@@ -74,8 +74,8 @@
 			successToast = true;
 			setTimeout(() => {
 				successToast = false;
-				goto('/gestion_taquillas');
-			}, 2000);
+				location.reload();
+			}, 1000);
 		} else {
 			unSuccessToast = true;
 		}
@@ -104,7 +104,7 @@
 			setTimeout(() => {
 				successToast = false;
 				location.reload();
-			}, 2000);
+			}, 1000);
 		} else {
 			unSuccessToast = true;
 		}
@@ -280,7 +280,8 @@
 				<TableHeadCell>Taquilla</TableHeadCell>
 				<TableHeadCell>Código</TableHeadCell>
 				<TableHeadCell>Fecha</TableHeadCell>
-				<TableHeadCell>Status</TableHeadCell>
+				<TableHeadCell>Estado</TableHeadCell>
+				<TableHeadCell>Acciones</TableHeadCell>
 			</TableHead>
 			<TableBody tableBodyClass="divide-y">
 				{#if filteredItems != null && filteredItems}
@@ -291,7 +292,35 @@
 							<TableBodyCell>{item.taquilla}</TableBodyCell>
 							<TableBodyCell>{item.codigo}</TableBodyCell>
 							<TableBodyCell>{item.date}</TableBodyCell>
-							<TableBodyCell>{item.status}</TableBodyCell>
+							<TableBodyCell>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
+							<TableBodyCell>
+								<div>
+									{#if item.status === "reservada"}
+										<button
+											class="w-5/12 text-white bg-green-500 rounded p-1"
+											on:click={() => {
+												realizar_reserva(item.taquilla);
+											}}>
+											Confirmar
+										</button>
+										<button
+											class="w-5/12 m-auto text-white bg-red-500 rounded p-1"
+											on:click={() => {
+												change_delete_modal(item);
+											}}>
+											Eliminar
+										</button>
+									{:else if item.status === "ocupada"}
+										<button
+											class="w-5/6 m-auto text-white bg-red-500 rounded p-1"
+											on:click={() => {
+												change_delete_modal(item);
+											}}>
+											Eliminar
+										</button>
+									{/if}
+								</div>
+							</TableBodyCell>
 						</TableBodyRow>
 					{/each}
 				{/if}
