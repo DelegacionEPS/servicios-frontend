@@ -120,7 +120,7 @@
 		<button class="sm:w-12 sm:h-12 w-16 h-10" on:click={() => (hidden2 = !hidden2)}>
 			<BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />
 		</button>
-		<a href="/perfil" class="sm:block hidden p-1">
+		<a href="/" class="sm:block hidden p-1">
 			<img class="sm:w-12 sm:h-auto w-10 h-auto bg-white dark:bg-dark-primary rounded-xl p-1" src="/eps_logo.png" alt="logo" />
 		</a>
 		<button
