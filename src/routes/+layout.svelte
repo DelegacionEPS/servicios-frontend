@@ -198,13 +198,17 @@
 							/>
 						</svelte:fragment>
 					</SidebarItem>
-					<SidebarItem label="Perfil" href="/perfil" on:click={() => hideNavBar()}>
-						<svelte:fragment slot="icon">
-							<UserCircleOutline
-								class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-							/>
-						</svelte:fragment>
-					</SidebarItem>
+					{#await session then}
+						{#if session?.user?.email != null}
+							<SidebarItem label="Perfil" href="/perfil" on:click={() => hideNavBar()}>
+								<svelte:fragment slot="icon">
+									<UserCircleOutline
+										class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+									/>
+								</svelte:fragment>
+							</SidebarItem>
+						{/if}
+					{/await}
 					<SidebarItem label="Taquillas" href="/taquillas" on:click={() => hideNavBar()}>
 						<svelte:fragment slot="icon">
 							<LockOpenOutline
