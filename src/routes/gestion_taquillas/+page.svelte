@@ -294,17 +294,17 @@
 							<TableBodyCell>{item.date}</TableBodyCell>
 							<TableBodyCell>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
 							<TableBodyCell>
-								<div class="grid grid-cols-1 lg:grid-cols-2">
+								<div class="grid grid-cols-1 xl:grid-cols-2">
 									{#if item.status === "reservada"}
 										<button
-											class="w-5/12 text-white bg-green-500 rounded p-1"
+											class="xl:w-[95%] w-full mb-2 xl:mb-0 text-xs lg:text-md text-white bg-green-500 rounded p-1"
 											on:click={() => {
 												realizar_reserva(item.taquilla);
 											}}>
 											Confirmar
 										</button>
 										<button
-											class="w-5/12 m-auto text-white bg-red-500 rounded p-1"
+											class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-red-500 rounded p-1"
 											on:click={() => {
 												change_delete_modal(item);
 											}}>
@@ -312,7 +312,7 @@
 										</button>
 									{:else if item.status === "ocupada"}
 										<button
-											class="w-5/6 m-auto text-white bg-red-500 rounded p-1 lg:col-span-2"
+											class="w-full text-xs lg:text-md text-white bg-red-500 rounded p-1 xl:col-span-2"
 											on:click={() => {
 												change_delete_modal(item);
 											}}>
