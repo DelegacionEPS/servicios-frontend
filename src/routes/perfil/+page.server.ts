@@ -10,6 +10,7 @@ export const load = (async (event) => {
 
 	let session = await event.locals.auth();
 	let nia = session?.user?.email?.split('@')[0];
+	
 	let reserva =  await fetchReservas(nia);
 	if (reserva == null) {
 		reserva = []

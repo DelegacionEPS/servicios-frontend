@@ -294,7 +294,7 @@
 							<TableBodyCell>{item.date}</TableBodyCell>
 							<TableBodyCell>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
 							<TableBodyCell>
-								<div>
+								<div class="grid grid-cols-1 lg:grid-cols-2">
 									{#if item.status === "reservada"}
 										<button
 											class="w-5/12 text-white bg-green-500 rounded p-1"
@@ -312,7 +312,7 @@
 										</button>
 									{:else if item.status === "ocupada"}
 										<button
-											class="w-5/6 m-auto text-white bg-red-500 rounded p-1"
+											class="w-5/6 m-auto text-white bg-red-500 rounded p-1 lg:col-span-2"
 											on:click={() => {
 												change_delete_modal(item);
 											}}>
@@ -350,7 +350,7 @@
 							<TableBodyCell>{item.date}</TableBodyCell>
 							<TableBodyCell>
 								<button
-									class="w-full text-white-500 bg-green-500 dark:text-white rounded p-1"
+									class="w-full text-white bg-green-500 dark:text-white rounded p-1"
 									on:click={() => {
 										marcar_reparada(item.taquilla);
 									}}
