@@ -1,5 +1,5 @@
-<script>
-	import { AccordionItem, Accordion, Button, Popover } from 'flowbite-svelte';
+<script lang="ts">
+	import { AccordionItem, Accordion, Button, Popover, Alert } from 'flowbite-svelte';
 	import { goto } from '$app/navigation';
 	import {
 		AnnotationSolid,
@@ -13,11 +13,20 @@
 	import { page } from '$app/stores';
 	import Konami from './Konami.svelte';
 	import { signIn, signOut } from '@auth/sveltekit/client';
-
+	
 	$: session = $page.data.session;
 	$: authorizedEmailsEscuela = $page.data.authorizedEmailsLayoutEscuela;
 	$: authorizedEmailsDespacho = $page.data.authorizedEmailsLayoutDespacho;
 	let infoModal = false;
+	$: copied = false;
+
+	const copy = () => {
+		navigator.clipboard.writeText("delegeps@uc3m.es");
+		copied = true;
+		setTimeout(() => {
+			copied = false;	
+		}, 2000);
+	}
 </script>
 
 <Konami />
@@ -55,9 +64,11 @@
 						<UserCircleOutline class="mt-1 h-8 w-8" />
 						Perfil
 					</p>
-					<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./perfil")}}>
-						Comprueba las taquillas que has reservado
-					</button>
+					<div class="w-full grid grid-cols-1 place-items-center">
+						<button class="m-auto sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./perfil")}}>
+							Comprueba las taquillas que has reservado
+						</button>
+					</div>
 				</AccordionItem>
 			{/if}
 		{/await}
@@ -72,15 +83,17 @@
 				<LockOpenOutline class="mt-1 h-8 w-8" />
 				Taquillas
 			</p>
-
-			<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./taquillas")}}>
-				Reserva o comprueba el estado de una taquilla.
-			</button>
-			<p class="w-auto sm:text-base text-sm text-gray-700 dark:text-gray-400 hover:text-dele-accent dark:hover:text-dark-accent underline cursor-pointer">
-				<a href="#Taquillas" class="w-auto">
-						Más info...
-				</a>
-			</p>
+			
+			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
+				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./taquillas")}}>
+					Reserva o comprueba el estado de una taquilla
+				</button>
+				<button class="w-auto sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent cursor-pointer">
+					<a href="#Taquillas" class="w-auto">
+							Más info...
+					</a>
+				</button>
+			</div>
 		</AccordionItem>
 		{#await authorizedEmailsDespacho then}
 			{#await session then}
@@ -97,9 +110,11 @@
 								<LockOutline class="mt-1 h-8 w-8" />
 								Gestión de Taquillas
 							</p>
-							<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./gestion_taquillas")}}>
-								Administra y consulta las reservas de las taquillas
-							</button>
+							<div class="w-full grid grid-cols-1 place-items-center">
+								<button class="sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./gestion_taquillas")}}>
+									Administra y consulta las reservas de las taquillas
+								</button>
+							</div>
 						</AccordionItem>
 					{/if}
 				{/if}
@@ -116,14 +131,16 @@
 				<DrawSquareOutline class="mt-1 h-8 w-8" />
 				Osciloscopios [WIP]
 			</p>
-			<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./osciloscopio")}}>
-				Reserva un osciloscopio en el despacho [WIP].
-			</button>
-			<p class="w-auto sm:text-base text-sm text-gray-700 dark:text-gray-400 hover:text-dele-accent dark:hover:text-dark-accent underline cursor-pointer">
-				<a href="#Osciloscopios" class="w-auto">
-						Más info...
-				</a>
-			</p>
+			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
+				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./osciloscopio")}}>
+					Reserva un osciloscopio en el despacho [WIP]
+				</button>
+				<button class="w-auto sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent cursor-pointer">
+					<a href="#Osciloscopios" class="w-auto">
+							Más info...
+					</a>
+				</button>
+			</div>
 		</AccordionItem>
 		{#await authorizedEmailsEscuela then}
 			{#await session then}
@@ -140,9 +157,11 @@
 								<UsersSolid class="mt-1 h-8 w-8" />
 								Administrador
 							</p>
-							<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./admin")}}>
-								Administra los roles y la base de datos
-							</button>
+							<div class="w-full grid grid-cols-1 place-items-center">
+								<button class="sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./admin")}}>
+									Administra los roles y la base de datos
+								</button>
+							</div>
 						</AccordionItem>
 					{/if}
 				{/if}
@@ -159,14 +178,16 @@
 				<AnnotationSolid class="mt-1 h-8 w-8" />
 				Encuestas 2ºC 2024
 			</p>
-			<button class="sm:text-base text-sm text-black dark:text-white underline cursor-pointer hover:text-dele-accent dark:hover:text-dark-accent" on:click={() => {goto("./encuestas")}}>
-				Consulta el índice de participación de las encuestas.
-			</button>
-			<p class="w-auto sm:text-base text-sm text-gray-700 dark:text-gray-400 hover:text-dele-accent dark:hover:text-dark-accent underline cursor-pointer">
-				<a href="#Encuestas" class="w-auto">
-						Más info...
-				</a>
-			</p>
+			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
+				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./encuestas")}}>
+					Consulta el índice de participación de las encuestas
+				</button>
+				<button class="w-auto sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent cursor-pointer">
+					<a href="#Encuestas" class="w-auto">
+							Más info...
+					</a>
+				</button>
+			</div>
 		</AccordionItem>
 	</Accordion>
 	<div class="md:w-1/2 w-11/12">
@@ -183,10 +204,18 @@
 					>iniciar sesión</span
 				></button
 			> con tu cuenta de Google de la universidad. Si tienes algún problema, puedes contactar con nosotros
-			en el despacho de delegación, en el edificio 1, en el 1.0.H01 (Al lado del banco Santander).
+			en el despacho de delegación, en el edificio 1, en el 1.0.H01 (Al lado del banco Santander) o escríbenos un correo a 
+				
+				<a class="underline text-dele-color dark:text-dark-primary hover:text-dele-accent hover:dark:text-dark-accent cursor-pointer" 
+					on:click={copy}>
+					delegeps@uc3m.es</a>.
 		</p>
 	</div>
 </div>
+
+<Alert class="text-white bg-dele-color dark:text-white dark:bg-dark-primary m-auto sm:w-1/6 w-1/2 mb-4 mt-[-8vh] {copied ? "block" : "hidden"}">
+	<p class="text-md sm:text-lg w-auto text-center">Correo copiado!</p>
+</Alert>
 
 <!--Info de Taquillas-->
 

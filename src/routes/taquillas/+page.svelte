@@ -8,13 +8,19 @@
 			src: 'edificios/1-betancourt.webp',
 			href: '/taquillas/1'
 		},
-		{ alt: 'Edificio 2. Sabatini', src: 'edificios/2-sabatini.webp', href: '/taquillas/2' },
+		{ 
+			alt: 'Edificio 2. Sabatini', 
+			src: 'edificios/2-sabatini.webp', 
+			href: '/taquillas/2' },
 		{
 			alt: 'Edificio 4. Torres Quevedo',
 			src: 'edificios/4-Torres_Quevedo.webp',
 			href: '/taquillas/4'
 		},
-		{ alt: 'Edificio 7. Juan Benet', src: 'edificios/7-Juan_Benet.webp', href: '/taquillas/7' }
+		{ 
+			alt: 'Edificio 7. Juan Benet', 
+			src: 'edificios/7-Juan_Benet.webp',
+			href: '/taquillas/7' }
 	];
 	let index = 0;
 	let forward = true;
