@@ -4,7 +4,7 @@
 	import {QuestionCircleSolid} from 'flowbite-svelte-icons';
 	export let data: PageData;
 
-	constbuilding  = data.edificio;
+	const building  = data.edificio;
 	const pisos = data.pisos.reverse();
 
 	// Para hacerlo responsive, así se sacan las dimensiones de la ventana
