@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions} from './$types';
-import {getReservasNia, getReservasTaquilla, reservaTaquilla, marcarRota, arreglarTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
+import {getReservasNia, getReservasTaquilla, reservaTaquilla, reservaTaquillaAsociacion, marcarRota, arreglarTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
 
 export const load = (async () => {
     const fetchAuthorizedEmails = async (rango:String) => {
@@ -10,6 +10,18 @@ export const load = (async () => {
 
 	const fetchTablaPablo = async () => {
 		const res = await fetch(`${BASE_URL_API}/api/tablaPablo${TOKEN}`);
+		const data = await res.json();
+		return data;
+	};
+
+	const fetchTablaPabloAsociaciones = async () => {
+		const res = await fetch(`${BASE_URL_API}/api/tablaPabloAsociaciones${TOKEN}`);
+		const data = await res.json();
+		return data;
+	};
+
+	const fetchAsociaciones = async () => {
+		const res = await fetch(`${BASE_URL_API}/api/getAsociaciones${TOKEN}`);
 		const data = await res.json();
 		return data;
 	};
@@ -30,6 +42,8 @@ export const load = (async () => {
         authorizedEmailsTaquillasEscuela: emailsEscuela,
 		authorizedEmailsTaquillasDespacho: emailsDespacho,
 		tablaPablo: await fetchTablaPablo(),
+		tablaPabloAsociaciones: await fetchTablaPabloAsociaciones(),
+		asociaciones: await fetchAsociaciones(),
     };
 }) satisfies PageServerLoad;
 
@@ -56,6 +70,14 @@ export const actions = {
 		const correo = data.get('correo');
 		const nombre = data.get('nombre');
 		const result = reservaTaquilla(taquilla, nia, correo, nombre);
+		return result;
+	},
+	registerTaquillaAssociation: async ({ cookies, request }) => {
+		const data = await request.formData();
+		const taquilla = data.get('taquilla');
+		const correo = data.get('correo');
+		const nombre = data.get('nombre');
+		const result = reservaTaquillaAsociacion(taquilla, correo, nombre);
 		return result;
 	},
 	setRota: async ({ request }) => {

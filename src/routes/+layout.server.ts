@@ -1,5 +1,5 @@
 import type { LayoutServerLoad } from './$types';
-import { BASE_URL_API, TOKEN, add_user_db } from '$lib/api_taquillas';
+import { BASE_URL_API, TOKEN, add_user_db, add_association_db } from '$lib/api_taquillas';
 
 // load serverside data
 export const load: LayoutServerLoad = async (event) => {
@@ -12,9 +12,12 @@ export const load: LayoutServerLoad = async (event) => {
 	let session = await event.locals.auth();
 
 	// Store the user in the Database using the api
-	if (session?.user?.email?.endsWith('uc3m.es')){
+	if (session?.user?.email?.endsWith('@alumnos.uc3m.es')){
 		add_user_db(session?.user?.email, session?.user?.name);
 	}
+	else if (session?.user?.email?.endsWith('uc3m.es')) {
+		add_association_db(session?.user?.email, session?.user.name);
+	}	
 
 	let emailsDespacho = await fetchAuthorizedEmails('atencion');
 	if (emailsDespacho === null) {
@@ -24,6 +27,7 @@ export const load: LayoutServerLoad = async (event) => {
 	if (emailsEscuela === null) {
 		emailsEscuela = [];
 	}
+
 	emailsDespacho = emailsDespacho.concat(emailsEscuela);
 	// remove null values
 	emailsDespacho = emailsDespacho.filter((email: String) => email !== null);

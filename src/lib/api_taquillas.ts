@@ -34,6 +34,34 @@ export async function reservaTaquilla(taquilla: FormDataEntryValue | null | Stri
 
 }
 
+export async function reservaTaquillaAsociacion(taquilla: FormDataEntryValue | null | String, correo: FormDataEntryValue | null | String, nombre: FormDataEntryValue | null | String) {
+	// Llamada a la API de taquillas para reservar la taquill
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/reservaTaquillaAsociacion${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				taquilla: taquilla,
+				correo: correo,
+				nombre: nombre,
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK reservando taquilla', response.status, response.statusText);
+		}
+	} catch (error) {
+		console.error('Error:', error);
+	}
+
+}
+
 export async function prueba(taquilla: FormDataEntryValue | null, nia: FormDataEntryValue | null) {
 	try {
 		const options = {
@@ -121,6 +149,32 @@ export async function add_user_db(email: String, name: String | null | undefine
 			return data;
 		} else {
 			console.error('Server response was not OK add_user_db', response.status, response.statusText);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function add_association_db(email: String, name: String | null | undefined) {
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/createAssociation${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				email: email,
+				name: name
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK add_association_db', response.status, response.statusText);
 		}
 
 	} catch (error) {
