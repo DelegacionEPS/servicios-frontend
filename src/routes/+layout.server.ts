@@ -1,5 +1,9 @@
 import type { LayoutServerLoad } from './$types';
 import { BASE_URL_API, TOKEN, add_user_db, add_association_db } from '$lib/api_taquillas';
+import { dev } from '$app/environment';
+import { inject } from '@vercel/analytics';
+ 
+inject({ mode: dev ? 'development' : 'production' });
 
 // load serverside data
 export const load: LayoutServerLoad = async (event) => {
