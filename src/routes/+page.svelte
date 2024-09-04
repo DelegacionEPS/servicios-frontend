@@ -33,24 +33,42 @@
 
 <!--Página principal de home-->
 
-<h1 class="sm:text-5xl text-3xl text-center w-full py-6 dark:text-white dark:bg-[#070a17]">
-	Servicios de Delegación
-</h1>
-
-<div class="w-screen grid grid-cols-1 place-items-center mb-4">
-	<Button id="pop_home" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
-		<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
-	</Button>
-</div>
-
-<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Home" triggeredBy="#pop_home">
-	Esta es la versión pre-release de la aplicación de delegación. Siéntete libre de realizar
-	reservas, ya que al principio del curso reiniciaremos la base de datos. Todo el feedback que
-	tengas será bien recibido para mejorar esta página.
-</Popover >
-
-<div class="grid grid-rows-2 place-items-center dark:bg-[#070a17]" style="min-height: 75vh;">
-	<Accordion class="md:w-1/2 w-11/12">
+<div class="grid grid-rows-2 place-items-center dark:bg-[#070a17]" style="min-height: 80vh;">
+	<h1 class="sm:text-5xl text-3xl text-center w-full py-6 dark:text-white dark:bg-[#070a17]">
+		Servicios de Delegación
+	</h1>
+	
+	<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+		<Button id="pop_home" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
+			<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
+		</Button>
+	</div>
+	
+	<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Home" triggeredBy="#pop_home">
+		<p class=" dark:text-white text-sm sm:text-base text-justify">
+			Para poder reservar una <span class="underline hover:dark:text-dark-accent hover:text-accent"
+				><a href="/taquillas">taquilla</a></span
+			>, o un osciloscopio, necesitas
+			<button
+				on:click={() => {
+					signIn('google');
+				}}
+			>
+				<span class="underline italic hover:dark:text-dark-accent hover:text-accent"
+					>iniciar sesión
+				</span>
+				</button> 
+				con tu cuenta de Google de la universidad. <br><br>
+				Si tienes algún problema, puedes contactar con nosotros
+				en el despacho de delegación localizado en la sala 1.0.H01 (al lado del banco Santander) o escríbenos un correo a 
+				
+				<a class="underline text-dele-color dark:text-dark-primary hover:text-dele-accent hover:dark:text-dark-accent cursor-pointer" 
+					on:click={copy}>
+					delegeps@uc3m.es
+				</a>.
+		</p>
+	</Popover >
+	<Accordion class="md:w-1/2 w-11/12 mb-36">
 		{#await session then}
 			{#if session?.user?.email != null}
 				<AccordionItem
@@ -190,30 +208,10 @@
 			</div>
 		</AccordionItem>
 	</Accordion>
-	<div class="md:w-1/2 w-11/12">
-		<p class=" dark:text-white text-sm sm:text-base">
-			Para poder reservar una <span class="underline hover:dark:text-dark-accent hover:text-accent"
-				><a href="/taquillas">taquilla</a></span
-			>, o un osciloscopio, necesitas
-			<button
-				on:click={() => {
-					signIn('google');
-				}}
-			>
-				<span class="underline italic hover:dark:text-dark-accent hover:text-accent"
-					>iniciar sesión</span
-				></button
-			> con tu cuenta de Google de la universidad. Si tienes algún problema, puedes contactar con nosotros
-			en el despacho de delegación, en el edificio 1, en el 1.0.H01 (Al lado del banco Santander) o escríbenos un correo a 
-				
-				<a class="underline text-dele-color dark:text-dark-primary hover:text-dele-accent hover:dark:text-dark-accent cursor-pointer" 
-					on:click={copy}>
-					delegeps@uc3m.es</a>.
-		</p>
-	</div>
+	
 </div>
 
-<Alert class="text-white bg-dele-color dark:text-white dark:bg-dark-primary m-auto sm:w-1/6 w-1/2 mb-4 mt-[-8vh] {copied ? "block" : "hidden"}">
+<Alert class="text-white bg-dele-color dark:text-white dark:bg-dark-primary m-auto sm:w-1/6 w-1/2 absolute bottom-[5vh] right-[5vw] {copied ? "block" : "hidden"}">
 	<p class="text-md sm:text-lg w-auto text-center">Correo copiado!</p>
 </Alert>
 
