@@ -595,7 +595,7 @@
 <Modal bind:open={formModalReservation} size="xs" autoclose={false} class="w-full">
 	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Reservar Taquilla</h3>
 	<p>
-		El precio de las taquilla es de
+		El precio de la taquilla es de
 		{#if selectedTaquilla.includes('G')}<span class="font-bold"> 6€ </span>
 		{:else}<span class="font-bold"> 4€ </span>
 		{/if} el año completo y la mitad por el segundo cuatrimestre.
