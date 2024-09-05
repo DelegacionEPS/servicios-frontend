@@ -648,7 +648,7 @@
 				<Input type="hidden" id="nombre" name="nombre" value={association_selected["nombre"]} required />
 				<Label class="mb-4">
 					<Button class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent">
-						Asosiación: {association_selected["nombre"]} <ChevronDownOutline class="w-6 h-6 ms-2 text-white dark:text-white" />
+						Asociación: {association_selected["nombre"]} <ChevronDownOutline class="w-6 h-6 ms-2 text-white dark:text-white" />
 					</Button>
 					<Dropdown bind:open={openDropdown}>
 						<div slot="header" class="px-4 py-2">
