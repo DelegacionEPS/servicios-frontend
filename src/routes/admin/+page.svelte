@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { Tabs, TabItem, Input, Label, Button, Select, Modal, Card, TableSearch, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell } from 'flowbite-svelte';
+	import { Tabs, TabItem, Input, Label, Button, Select, Modal, Card, TableSearch, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell, Popover } from 'flowbite-svelte';
+	import { QuestionCircleSolid} from 'flowbite-svelte-icons';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 
@@ -96,6 +97,17 @@
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 	>
+		<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+			<Button id="pop_change_rol" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
+				<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
+			</Button>
+		</div>
+		
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Cambiar rol" triggeredBy="#pop_change_rol">
+			<p class=" dark:text-white text-sm sm:text-base text-justify">
+				Para cambiar el rol de una persona, simplemente introduce su NIA y selecciona el nuevo rol que debe tener.
+			</p>
+		</Popover >
 		<form action="?/addUserRol" method="post" use:enhance>
 			<div class="grid grid-cols-1 w-auto">
 				<div>
@@ -174,6 +186,19 @@
 		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
 			Administrar la Base de Datos
 		</h2>
+
+		<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+			<Button id="pop_db" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
+				<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
+			</Button>
+		</div>
+		
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Base de Datos" triggeredBy="#pop_db">
+			<p class=" dark:text-white text-sm sm:text-base text-justify">
+				Para hacer una copia de seguridad, haz click en el botón "Hacer una copia de seguridad".<br><br>
+				Para borrar la base de datos, haz click en el botón "Eliminar la base de datos", pero no lo hagas a la ligera.
+			</p>
+		</Popover >
 		<section class="grid grid-rows-3 place-items-center mt-8">
 			<section>
 				<form method="post" use:enhance>
