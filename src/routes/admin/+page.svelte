@@ -97,7 +97,7 @@
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 	>
-		<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+		<div class="w-auto grid grid-cols-1 place-items-center mb-4">
 			<Button id="pop_change_rol" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
 				<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
 			</Button>
@@ -158,7 +158,7 @@
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 	>
-		<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+		<div class="w-auto grid grid-cols-1 place-items-center mb-4">
 			<Button id="pop_table" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
 				<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
 			</Button>
@@ -199,7 +199,7 @@
 			Administrar la Base de Datos
 		</h2>
 
-		<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+		<div class="w-auto grid grid-cols-1 place-items-center mb-4">
 			<Button id="pop_db" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
 				<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
 			</Button>
