@@ -105,7 +105,8 @@
 		
 		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Cambiar rol" triggeredBy="#pop_change_rol">
 			<p class=" dark:text-white text-sm sm:text-base text-justify">
-				Para cambiar el rol de una persona, simplemente introduce su NIA y selecciona el nuevo rol que debe tener.
+				Este tab sirve para cambiar el rol de un usuario que ya se haya registrado en el sistema<br><br>
+				Para cambiar el rol de esa persona, simplemente introduce su NIA y selecciona el nuevo rol que debe tener.
 			</p>
 		</Popover >
 		<form action="?/addUserRol" method="post" use:enhance>
@@ -157,6 +158,17 @@
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 	>
+		<div class="w-screen grid grid-cols-1 place-items-center mb-4">
+			<Button id="pop_table" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
+				<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
+			</Button>
+		</div>
+		
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Cambiar rol" triggeredBy="#pop_table">
+			<p class=" dark:text-white text-sm sm:text-base text-justify">
+				Esta página muestra a todas las personas que tengan un rol de atención o de escuela.
+			</p>
+		</Popover >
 		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
 			<TableHead>
 				<TableHeadCell>Nombre</TableHeadCell>
@@ -195,8 +207,9 @@
 		
 		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Base de Datos" triggeredBy="#pop_db">
 			<p class=" dark:text-white text-sm sm:text-base text-justify">
-				Para hacer una copia de seguridad, haz click en el botón "Hacer una copia de seguridad".<br><br>
-				Para borrar la base de datos, haz click en el botón "Eliminar la base de datos", pero no lo hagas a la ligera.
+				Esta página sirve para hacer copias de seguridad y para eliminar la base de datos.<br><br>
+				Antes de eliminar la base de datos se realiza una copia de seguridad, pero no la borres a no ser que tengas que hacerlo.
+				Como nota adicional, la eliminación de la base de datos solo borra las reservas y deja a los usuarios intactos. 
 			</p>
 		</Popover >
 		<section class="grid grid-rows-3 place-items-center mt-8">
