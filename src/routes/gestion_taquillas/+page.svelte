@@ -202,6 +202,16 @@
 		openDropdown = false;
 		association_selected = association;
 	}
+
+	function handleFormSubmit(event) {
+        // Verificar si el nombre de la asociación está vacío
+        if (!association_selected["nombre"]) {
+            event.preventDefault(); // Prevenir el envío del formulario
+        } else {
+            // Permitir el envío del formulario
+            event.target.submit();
+        }
+    }
 </script>
 
 <h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
@@ -508,7 +518,7 @@
 						</p>
 					{:else}
 						<p class="text-black text-sm mt-4 dark:text-white">
-							Reservada por {taquilla['nombre']} el {taquilla['date'].split(' ')[0]} a las {taquilla['date'].split(' ')[1]}
+							Reservada por {taquilla['asociacion']} el {taquilla['date'].split(' ')[0]} a las {taquilla['date'].split(' ')[1]}
 						</p>
 					{/if}
 				{/if}
@@ -528,13 +538,22 @@
 								marcar_rota(taquilla['taquilla']);
 							}}>Marcar rota</button
 						>
-
-						<button
-							class="w-2/3 text-white bg-red-500 rounded p-1"
-							on:click={() => {
-								change_delete_modal(taquilla);
-							}}>Eliminar</button
-						>
+						{#if taquilla["nia"]} 
+							<button
+								class="w-2/3 text-white bg-red-500 rounded p-1"
+								on:click={() => {
+									change_delete_modal(taquilla);
+								}}>Eliminar</button
+							>
+						{:else}
+							<button
+								class="w-2/3 text-white bg-red-500 rounded p-1"
+								on:click={() => {
+									change_delete_modal_asociaciones(taquilla);
+								}}>Eliminar</button
+							>
+						{/if}
+						
 					</div>
 				{:else if taquilla['status'] === 'libre'}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
@@ -558,12 +577,21 @@
 					</div>
 				{:else if taquilla['status'] === 'ocupada'}
 					<div class="grid grid-cols-1 mt-4 place-items-center">
-						<button
-							class="w-2/3 text-white bg-red-500 rounded p-1"
-							on:click={() => {
-								change_delete_modal(taquilla);
-							}}>Eliminar</button
-						>
+						{#if taquilla["nia"]} 
+							<button
+								class="w-2/3 text-white bg-red-500 rounded p-1"
+								on:click={() => {
+									change_delete_modal(taquilla);
+								}}>Eliminar</button
+							>
+						{:else}
+							<button
+								class="w-2/3 text-white bg-red-500 rounded p-1"
+								on:click={() => {
+									change_delete_modal_asociaciones(taquilla);
+								}}>Eliminar</button
+							>
+						{/if}
 						<button
 							class="w-2/3 text-white bg-gray-500 rounded p-1 mt-4"
 							on:click={() => {
@@ -639,7 +667,7 @@
 			activeClasses="sm:text-base text-xs p-2 text-dele-accent dark:text-dark-accent"
 			inactiveClasses="text-gray-500 hover:text-dele-color p-2 dark:hover:text-dark-primary sm:text-base text-xs"
 		>
-			<form class="flex flex-col" action="?/registerTaquillaAssociation" method="post">
+			<form class="flex flex-col" action="?/registerTaquillaAssociation" method="post" on:submit|preventDefault={handleFormSubmit}>
 				<Label class="mb-4">
 					<span>Taquilla</span>
 					<Input type="text" id="taquilla" name="taquilla" value={selectedTaquilla} readonly required />
@@ -648,7 +676,13 @@
 				<Input type="hidden" id="nombre" name="nombre" value={association_selected["nombre"]} required />
 				<Label class="mb-4">
 					<Button class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent">
-						Asociación: {association_selected["nombre"]} <ChevronDownOutline class="w-6 h-6 ms-2 text-white dark:text-white" />
+						Asociación: 
+							{#if association_selected["nombre"]}
+								{association_selected["nombre"]} 
+							{:else}
+								
+							{/if}
+							<ChevronDownOutline class="w-6 h-6 ms-2 text-white dark:text-white" />
 					</Button>
 					<Dropdown bind:open={openDropdown}>
 						<div slot="header" class="px-4 py-2">
@@ -658,7 +692,7 @@
 							<DropdownItem 
 							class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
 							on:click={() => closeModalAssignAssociation(asociacion)}>
-								{#if asociacion["nombre"]}
+								{#if asociacion["nombre"] && asociacion["nombre"] != ""}
 									{asociacion["nombre"]}
 								{/if}
 							</DropdownItem>
@@ -717,7 +751,7 @@
 		<p>Vas a eliminar una reserva con los siguientes datos:</p>
 		<Label class="space-y-2">
 			<span>Nombre Asociación</span>
-			<Input type="text" id="nombre" name="nombre" value={currentTaquilla['nombre']} readonly required />
+			<Input type="text" id="nombre" name="nombre" value={currentTaquilla['asociacion']} readonly required />
 		</Label>
 		<Label class="space-y-2">
 			<span>Taquilla</span>
