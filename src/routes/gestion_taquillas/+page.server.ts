@@ -14,12 +14,6 @@ export const load = (async () => {
 		return data;
 	};
 
-	const fetchTablaPabloAsociaciones = async () => {
-		const res = await fetch(`${BASE_URL_API}/api/tablaPabloAsociaciones${TOKEN}`);
-		const data = await res.json();
-		return data;
-	};
-
 	const fetchAsociaciones = async () => {
 		const res = await fetch(`${BASE_URL_API}/api/getAsociaciones${TOKEN}`);
 		const data = await res.json();
@@ -42,7 +36,6 @@ export const load = (async () => {
         authorizedEmailsTaquillasEscuela: emailsEscuela,
 		authorizedEmailsTaquillasDespacho: emailsDespacho,
 		tablaPablo: await fetchTablaPablo(),
-		tablaPabloAsociaciones: await fetchTablaPabloAsociaciones(),
 		asociaciones: await fetchAsociaciones(),
     };
 }) satisfies PageServerLoad;

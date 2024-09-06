@@ -18,14 +18,6 @@ export const load: PageLoad = async ({ parent, data }) => {
 			status: "% de su capacidad.",
 		}];
 
-	let tablaPabloAsociaciones = data.tablaPabloAsociaciones ?? [{
-		nombre: "No se ha podido",
-		taquilla: "encontrar ninguna taquilla.",
-		codigo: "La base está al",
-		fecha: 100000000,
-		status: "% de su capacidad.",
-	}];
-
 	if ((authorizedEmailsDespacho.includes(session?.user?.email) === -1 && authorizedEmailsEscuela.includes(session?.user?.email) === -1) || !session?.user?.email || (authorizedEmailsDespacho.includes(session?.user?.email) === false && authorizedEmailsEscuela.includes(session?.user?.email) === false)) { 
 		throw redirect(302, '/');
 	}
@@ -37,7 +29,6 @@ export const load: PageLoad = async ({ parent, data }) => {
 		authorizedEmailsDespacho: authorizedEmailsDespacho,
 		authorizedEmailsEscuela: authorizedEmailsEscuela,
 		tablaPablo : tablaPablo,
-		tablaPabloAsociaciones: tablaPabloAsociaciones,
 		asociaciones: asociaciones,
 	};
 };

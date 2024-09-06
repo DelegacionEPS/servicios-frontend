@@ -41,8 +41,14 @@
 		correo: string;
 	}
 
-	let TablaPabloItems: [Taquilla] = $page.data.tablaPablo;
-	let TablaPabloAsociacionesItems: [Taquilla] = $page.data.tablaPabloAsociaciones;
+	let TablaPabloItems: [Taquilla] = $page.data.tablaPablo.filter((item) => {
+		return (item.nia);
+	});
+	let TablaPabloAsociacionesItems: [Taquilla] = $page.data.tablaPablo.filter((item) => {
+		return (!item.nia);
+	});
+	console.log($page.data.tablaPablo);
+
 	let asociaciones = $page.data.asociaciones;
 	let association_selected = {"nombre": "", "correo": ""};
 
@@ -68,7 +74,7 @@
 		return (item.status != "rota" && item.nombre.toLowerCase().indexOf(searchTermAsociaciones.toLowerCase()) !== -1);
 	});
 
-	$: taquillasRotas = TablaPabloItems.filter((item) => {
+	$: taquillasRotas = $page.data.tablaPablo.filter((item) => {
 		return (item.status == "rota" && item.taquilla.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 	})
 	
@@ -378,7 +384,7 @@
 	>
 		{@const reservadas = TablaPabloAsociacionesItems.filter((item) => item.status === 'reservada').length}
 		{@const ocupadas = TablaPabloAsociacionesItems.filter((item) => item.status === 'ocupada').length}
-		{@const no_disponibles = TablaPabloAsociacionesItems.filter((item) => item.status === 'rota').length}
+		{@const no_disponibles = $page.data.tablaPablo.filter((item) => item.status === 'rota').length}
 
 		<div class="grid grid-cols-3 place-items-center">
 			<div class="text-center">
