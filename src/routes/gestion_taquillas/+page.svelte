@@ -496,7 +496,7 @@
 	{#if form != null && form && form.reservas}
 		{#each form.reservas as taquilla}
 			<Card class="mt-2">
-				<div class="flex place-content-between">
+				<div class="flex place-content-between ">
 					<h5 class="text-2xl font-medium underline text-dele-color dark:text-dark-primary">
 						{taquilla['taquilla']}
 					</h5>
