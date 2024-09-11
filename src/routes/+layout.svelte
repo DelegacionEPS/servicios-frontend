@@ -35,6 +35,7 @@
 	import { _toLeftRightCenter } from 'chart.js/helpers';
 	import { dev } from '$app/environment';
     
+	
 	let hidden2 = true;
 	let transitionParams = {
 		width: 'w-40',
