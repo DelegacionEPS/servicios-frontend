@@ -297,3 +297,32 @@
 		<p class="text-left text-2xl w-full">Ver las encuestas</p>
 	</button>
 </div>
+
+<div class="text-justified" style="min-height: 50vh;">
+	<h1 class="sm:text-4xl text-2xl text-center w-full py-6 dark:text-white dark:bg-[#070a17] mt-6 mb-6">
+		INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS
+	</h1>
+	<div class="w-10/12 m-auto grid grid-cols-3">
+		<h2 class="w-11/12 text-dele-color dark:text-dark-primary">RESPONSABLE DEL TRATAMIENTO
+			<p class="text-black dark:text-white">Universidad Carlos III de Madrid</p>
+		</h2> 
+		<h2 class="w-11/12 text-dele-color dark:text-dark-primary">IDENTIFICACIÓN DEL TRATAMIENTO
+			<p class="text-black dark:text-white">Gestión de taquillas EPS</p>
+		</h2>
+		<h2 class="w-11/12 text-dele-color dark:text-dark-primary">FINALIDAD
+			<p class="text-black dark:text-white">Gestión del uso de las taquillas por los estudiantes y empleados de la universidad<p>
+		</h2>
+		<h2 class="w-11/12 text-dele-color dark:text-dark-primary">EJERCICIO DE DERECHOS
+			<p class="text-black dark:text-white">Podrá ejercer sus derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición a su tratamiento, mediante el envío de un correo a la siguiente dirección: dpd@uc3m.es</p>
+		</h2> 
+		<h2 class="w-11/12 text-dele-color dark:text-dark-primary">INFORMACIÓN ADICIONAL
+			<p class="text-black dark:text-white">Puede consultar la información adicional y detallada sobre nuestra Política de Privacidad 
+				<a href="https://www.uc3m.es/protecciondedatos" 
+				   class="underline text-dele-color dark:text-dark-primary hover:text-dele-accent dark:hover:text-dark-accent">
+						aquí
+				</a>
+				.
+			</p><br>
+		</h2> 
+	</div>
+</div>
