@@ -34,6 +34,37 @@ export async function reservaTaquilla(taquilla: FormDataEntryValue | null | Stri
 
 }
 
+export async function reservaOsciloscopio(puesto: FormDataEntryValue | null | Number, nia: FormDataEntryValue | null | String, hora: FormDataEntryValue | null | Number, dia: FormDataEntryValue | null | Date,  correo: FormDataEntryValue | null | String, nombre: FormDataEntryValue | null | String, semana: FormDataEntryValue | null | Number) {
+	// Llamada a la API de taquillas para reservar el osciloscopio
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/reservaOsciloscopio${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				puesto: puesto,
+				nia: nia,
+				hora: hora,
+				dia: dia,
+				correo: correo,
+				nombre: nombre,
+				semana: semana,
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK reservando osciloscopio', response.status, response.statusText);
+		}
+	} catch (error) {
+		console.error('Error:', error);
+	}
+}
+
 export async function reservaTaquillaAsociacion(taquilla: FormDataEntryValue | null | String, correo: FormDataEntryValue | null | String, nombre: FormDataEntryValue | null | String) {
 	// Llamada a la API de taquillas para reservar la taquill
 	try {
@@ -280,6 +311,41 @@ export async function eliminaReserva(taquilla: FormDataEntryValue | null | Strin
 		console.error(error);
 	}
 	
+}
+
+export async function eliminaReservaOsciloscopio(puesto: FormDataEntryValue | null | Number, hora: FormDataEntryValue | null | Number, fecha: FormDataEntryValue | null | String, responsable: FormDataEntryValue | null | String) {
+	let responsable_res = responsable || '';
+	if (responsable_res === '') {
+		return JSON.stringify({status: 'Error, datos incompletos'});
+	}
+
+	responsable_res = responsable_res.toString().split('@')[0];
+
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/eliminaReservaOsciloscopios${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				puesto: puesto,
+				hora: hora,
+				fecha: fecha,
+				responsable: responsable_res
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK aceptando reserva', response.status, response.statusText);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 export async function backupDB(email: FormDataEntryValue | null | String) {

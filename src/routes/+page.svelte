@@ -147,11 +147,11 @@
 				class="flex gap-2 w-full"
 			>
 				<DrawSquareOutline class="mt-1 h-8 w-8" />
-				Osciloscopios [WIP]
+				Osciloscopios
 			</p>
 			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
-				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./osciloscopio")}}>
-					Reserva un osciloscopio en el despacho [WIP]
+				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./")}}>
+					Reserva un osciloscopio en el despacho
 				</button>
 				<button class="w-auto sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent cursor-pointer">
 					<a href="#Osciloscopios" class="w-auto">
@@ -160,6 +160,31 @@
 				</button>
 			</div>
 		</AccordionItem>
+		{#await authorizedEmailsDespacho then}
+			{#await session then}
+				{#if session?.user?.email != null}
+					{#if authorizedEmailsDespacho != null && authorizedEmailsDespacho.includes(session?.user?.email) == true}
+						<AccordionItem
+							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent dark:hover:bg-dark-accent rounded-2xl dark:text-white dark:border-black dark:bg-dark-primary"
+							activeClass="bg-dele-accent"
+						>
+							<p
+								slot="header"
+								class="flex gap-2 w-full"
+							>
+								<LockOutline class="mt-1 h-8 w-8" />
+								Gestión de Osciloscopios
+							</p>
+							<div class="w-full grid grid-cols-1 place-items-center">
+								<button class="sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./gestion_osciloscopios")}}>
+									Administra y consulta las reservas de los osciloscopios
+								</button>
+							</div>
+						</AccordionItem>
+					{/if}
+				{/if}
+			{/await}
+		{/await}
 		{#await authorizedEmailsEscuela then}
 			{#await session then}
 				{#if session?.user?.email != null}
@@ -253,7 +278,7 @@
 	<button
 		class="text-white lg:text-3xl text-xl px-8 lg:py-3 py-6 bg-dele-accent hover:bg-dele-accent-hove rounded-2xl lg:w-1/3 w-5/6 flex gap-2 dark:bg-dark-primary dark:hover:bg-dark-accent"
 		on:click={() => {
-			goto('./osciloscopios');
+			goto('./');
 		}}
 	>
 		<DrawSquareOutline class="mt-1 h-8 w-1/4" />
@@ -263,8 +288,8 @@
 		class="rounded-full bg-dele-color py-6 flex items-center justify-center text-center lg:aspect-square lg:w-1/2 border-solid border-4 text-white w-11/12 dark:border-dark-primary dark:bg-dark-secondary"
 	>
 		<p class="flex items-center justify-center text-lg sm:p-12 p-16 sm:text-2xl">
-			El despacho de delegación cuenta con tres osciloscopios que los estudiantes pueden usar. Esta
-			página está actualmente en mantenimiento, pero estará habilitada en un futuro.
+			El despacho de delegación cuenta con tres osciloscopios que los estudiantes pueden usar y prestamos un servicio de reserva.
+			Para dar servicio a la máxima cantidad posible de estudiantes, sólo se podrá reservar una franja de 2 horas por semana.
 		</p>
 	</div>
 </div>
