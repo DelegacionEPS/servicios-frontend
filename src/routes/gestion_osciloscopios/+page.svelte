@@ -39,10 +39,6 @@
 		return (item.status != "no_disponible" && item.nombre.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 	});
 
-	$: notAvailableItems = $page.data.tablaPabloOsciloscopios.filter((item) => {
-		return (item.status == "no_disponible" && item.taquilla.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
-	})
-
 	$: bannedUsers = $page.data.bannedUsers;
 
 	function change_delete_modal(reserva) {
@@ -476,14 +472,16 @@
 							<TableBodyCell>{user.nia}</TableBodyCell>
 							<TableBodyCell>{user.start}</TableBodyCell>
 							<TableBodyCell>{user.end}</TableBodyCell>
-							<TableBodyCell>
-								<Button class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-red-500 rounded p-1"
-									on:click={() => {
-										change_unban_modal(user.nia);
-									}}>
-									Eliminar	
-								</Button>
-							</TableBodyCell>
+							{#if user.nombre != "No se ha podido"}
+								<TableBodyCell>
+									<Button class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-red-500 rounded p-1"
+										on:click={() => {
+											change_unban_modal(user.nia);
+										}}>
+										Eliminar	
+									</Button>
+								</TableBodyCell>
+							{/if}
 						</TableBodyRow>
 					{/each}
 				{/if}

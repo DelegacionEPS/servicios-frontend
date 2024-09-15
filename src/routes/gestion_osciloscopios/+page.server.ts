@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions} from './$types';
-import {getReservasNia, getReservasTaquilla, reservaTaquilla, reservaTaquillaAsociacion, marcarRota, arreglarTaquilla, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
+import {BASE_URL_API, TOKEN} from '$lib/api_taquillas';
 
 export const load = (async () => {
     const fetchAuthorizedEmails = async (rango:String) => {

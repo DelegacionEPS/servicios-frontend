@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { Tabs, TabItem, Input, Label, Button, Select, Modal, Card, TableSearch, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell, Popover } from 'flowbite-svelte';
+	import { Tabs, TabItem, Input, Label, Button, Select, Modal, Card, TableSearch, TableHead, TableHeadCell, TableBody, TableBodyRow, TableBodyCell, Popover, Indicator } from 'flowbite-svelte';
 	import { QuestionCircleSolid} from 'flowbite-svelte-icons';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
+	import { Datepicker, themes } from 'svelte-calendar';
+	import dayjs from 'dayjs';
 
 	// Users' rols
 	const rols = [
@@ -23,6 +25,40 @@
 		{ value: 1, name: "Disponible"}
 	];
 
+	const franjas = [9, 11, 15, 17]
+
+	// Calendar
+	const theme = {
+		calendar: {
+			width: '38vw',
+			shadow: '5px 5px 5px rgba(0, 0, 0, 0.25)',
+			colors: {
+				background: {
+					hover: "#FF6D2E",
+					highlight: '#3BC4A0',
+				}
+			},
+			grid: {
+				"border-radius": '30px',
+				"border": "1px black solid",
+			},
+		}
+	};
+
+	// Calendar mobile
+	const theme_mobile = {
+		calendar: {
+			width: '80vw',
+			shadow: '0px 0px 5px rgba(0, 0, 0, 0.25)',
+			colors: {
+				background: {
+					highlight: '#3BC4A0'
+				}
+			}
+
+		}
+	};
+
 	export let data;
 	let openConfirmation = false;
 	let puestoModal = false;
@@ -32,7 +68,9 @@
 	let unSuccessChangeToast = false;
 	let successBackupToast = false;
 	let unSuccessBackupToast = false;
+	let unSuccessAvailabilityToast = false;
 	$: session = $page.data.session;
+	let store;
 	
 	let users = $page.data.users;
 	let searchTerm = '';
@@ -149,6 +187,52 @@
 			unSuccessChangeToast = true;
 		}
 	}
+
+	let availabilityModal;
+	let fechaDisponibilidad;
+	let horaDisponibilidad;
+	let estadoDisponibilidad;
+
+	function change_availability_modal(dia, hora, estado) {
+		fechaDisponibilidad = dia;
+		horaDisponibilidad = hora;
+		estadoDisponibilidad = estado;
+		availabilityModal = true;
+	}
+
+	async function change_disponibilidad_hora() {
+		availabilityModal = false;
+
+		// Call a function that only runs in the server side:
+		let res_email = session?.user?.email || '';
+		if (res_email === '') {
+			availabilityModal = false;
+			return;
+		}
+		const response = await fetch('/api/change_hora_state', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email: res_email, dia: fechaDisponibilidad, hora: horaDisponibilidad, estado: estadoDisponibilidad })
+		});
+
+		let result = await response.json();
+		result = result['result']['message'];
+		if (result.includes('cambiado')) {
+			setTimeout(() => {
+				location.reload();
+			}, 500);
+		} else {
+			unSuccessAvailabilityToast = true;
+			setTimeout(() => {
+				unSuccessAvailabilityToast = false;
+			}, 1000);
+		}
+	}
+
+	export let form;
+	
 </script>
 
 <Tabs tabStyle="underline" contentClass="p-4" class="px-8">
@@ -157,6 +241,9 @@
 		title="Cambiar Rol"
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		on:focus={() => {
+			form = '';
+		}}
 	>
 		<div class="w-auto grid grid-cols-1 place-items-center mb-4">
 			<Button id="pop_change_rol" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
@@ -218,6 +305,9 @@
 		title="Roles Usuarios"
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		on:focus={() => {
+			form = '';
+		}}
 	>
 		<div class="w-auto grid grid-cols-1 place-items-center mb-4">
 			<Button id="pop_table" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
@@ -255,6 +345,9 @@
 		title="Base de Datos"
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		on:focus={() => {
+			form = '';
+		}}
 	>
 		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
 			Administrar la Base de Datos
@@ -345,6 +438,9 @@
 		title="Gestionar Osciloscopios"
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		on:focus={() => {
+			form = '';
+		}}
 	>
 		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
 			Gestionar Osciloscopios
@@ -400,6 +496,98 @@
 			</form>
 		</section>
 	</TabItem>
+	<TabItem
+		title="Turnos de Despacho"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		on:focus={() => {
+			form = '';
+		}}
+	>
+		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
+			Turnos del Despacho
+		</h2>
+		<div class="grid grid-cols-1 place-items-center mt-6">
+			{#if window.innerWidth <= 768}
+				<Datepicker bind:store format='dddd - DD/MM/YYYY' startOfWeekIndex={1} start={new Date()} {theme_mobile}/>
+			{:else}
+				<Datepicker bind:store format='dddd - DD/MM/YYYY' startOfWeekIndex={1} start={new Date()} {theme}/>
+			{/if}
+		</div>
+		<form action="?/ReservasDia" method="post" use:enhance>
+			<div class="grid grid-cols-1 place-items-center mt-6">
+				<Input
+					type="hidden"
+					required
+					id="dia_r"
+					name="dia_r"
+					value={dayjs($store?.selected).format('D-M-YYYY')}
+				/>
+				<Button
+					class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-dele-color dark:bg-dark-primary dark:hover:bg-dark-accent"
+					type="submit"
+					>
+					Buscar
+				</Button>
+			</div>
+		</form>
+		{#if form != null && form && form.reservas}
+			<div class="grid grid-cols-1 place-self-center mt-6">
+				<div class="w-auto m-auto dark:text-white grid sm:grid-cols-3 grid-cols-2">
+					<span class="flex items-center"
+						><Indicator size="lg" color="green" class="me-1.5" />Libre</span
+					>
+					<span class="flex items-center"
+						><Indicator size="lg" color="red" class="me-1.5" />Ocupada</span
+					>
+					<span class="flex items-center"
+						><Indicator size="lg" color="dark" class="me-1.5" />No Disponible</span
+					>
+				</div>
+			</div>
+			<table
+				style="border: 2px solid black; border-radius: 13px; border-spacing: 0; "
+				class="m-auto mt-6"
+			>
+				<tbody>
+					<tr>
+						{#each franjas as start_hour}
+							{#if form.reservas[(dayjs($store?.selected).format('D/M/YYYY')) + "-" + start_hour]}
+								{#if form.reservas[(dayjs($store?.selected).format('D/M/YYYY')) + "-" + start_hour] == 'no_disponible'}
+									<td 
+										style="border: 1px solid black;"
+										class="bg-black text-white text-center p-3 cursor-pointer"
+										on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'disponible');}}
+										>
+										
+										{start_hour}:00 - {start_hour + 2}:00
+									</td>
+								{:else}
+									<td 
+										style="border: 1px solid black;"
+										class="bg-red-500 text-center p-3 cursor-pointer"
+										on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'no_disponible');}}
+										>
+										
+										{start_hour}:00 - {start_hour + 2}:00
+									</td>
+								{/if}
+							{:else}
+								<td 
+									style="border: 1px solid black;"
+									class="bg-green-500 text-center p-3 cursor-pointer"
+									on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'no_disponible');}}
+									>
+									
+									{start_hour}:00 - {start_hour + 2}:00
+								</td>
+							{/if}
+						{/each}
+					</tr>
+				</tbody>
+			</table>
+		{/if}
+	</TabItem>
 	
 </Tabs>
 
@@ -453,6 +641,29 @@
 
 </Modal>
 
+<Modal bind:open={availabilityModal} size="xs" autoclose={false} class="w-full">
+	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Cambiar la disponibilidad</h3>
+	<p class="text-black dark:text-white">
+		Vas a cambiar la disponibilidad de todos los puestos a la siguiente hora y fecha:
+	</p>
+	<form class="flex flex-col space-y-6">
+		<Input type="text" id="fecha_disponibilidad" name="fecha_disponibilidad" value={fechaDisponibilidad} readonly required/>
+		<Input type="text" id="hora_disponibilidad" name="hora_disponibilidad" value={(horaDisponibilidad + ":00 - " + (horaDisponibilidad + 2) + ":00")} readonly required/>
+		<p class="font-bold text-xl text-center">Vas a cambiarlo al siguiente estado:</p>
+		<Input type="text" id="estado_disponibilidad" name="estado_disponibilidad" value={estadoDisponibilidad} readonly required/>
+		<p class="font-bold text-xl text-center">¿Quieres cambiarlo?</p>
+		<Button
+			type="button"
+			class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+			on:click={() => {
+				change_disponibilidad_hora();
+			}}
+		>
+			Cambiar el Estado
+		</Button>
+	</form>
+</Modal>
+
 {#if successBackupToast}
 	<div class="fixed bottom-0 right-0 m-5">
 		<Card class="bg-green-500 dark:text-white text-white dark:bg-green-500">
@@ -493,4 +704,12 @@
 			<p class="p-2">No se ha podido cambiar el estado del puesto.</p>
 		</Card>
 	</div>
+{/if}
+
+{#if unSuccessAvailabilityToast}
+<div class="fixed bottom-0 right-0 m-5">
+	<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
+		<p class="p-2">No se ha podido cambiar el estado de la hora</p>
+	</Card>
+</div>
 {/if}

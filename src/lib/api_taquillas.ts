@@ -230,6 +230,7 @@ export async function getReservasNia(nia: FormDataEntryValue | null | String) {
 
 export async function getReservasTaquilla(taquilla: FormDataEntryValue | null | String) {
 	try {
+		
 		const response = await fetch(`${BASE_URL_API}/api/getReservas/taquilla/${taquilla}${TOKEN}`);
 		if (response.ok) {
 			const data = await response.json();
@@ -468,6 +469,21 @@ export async function deleteDB(email: FormDataEntryValue | null | String) {
 	}
 }
 
+export async function getReservasDia(dia: FormDataEntryValue | null | String) {
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/getReservasDia/${dia}${TOKEN}`);
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK when getting bookings per day', response.status, response.statusText);
+		}
+	
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 
 export async function marcarRota(taquilla: FormDataEntryValue | null | String, correo: FormDataEntryValue | null | String) {
 	try {
@@ -602,6 +618,34 @@ export async function changeOsciloscopioState(email: FormDataEntryValue | null |
 			return data;
 		} else {
 			console.error('Server response was not OK when changing the osciloscopio state', response.status, response.statusText);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function changeHoraState(email: FormDataEntryValue | null | String, dia: FormDataEntryValue | null | String, hora: FormDataEntryValue | null | Number, estado: FormDataEntryValue | null | String) {
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/changeHoraState${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				email: email,
+				dia: dia,
+				hora: hora,
+				estado: estado,
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK when changing the hour state', response.status, response.statusText);
 		}
 
 	} catch (error) {

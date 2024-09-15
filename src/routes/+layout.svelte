@@ -239,7 +239,7 @@
 						{/await}
 					{/await}
 
-					<SidebarItem label="Osciloscopios" href="/" on:click={() => hideNavBar()}>
+					<SidebarItem label="Osciloscopios" href="/osciloscopio" on:click={() => hideNavBar()}>
 						<svelte:fragment slot="icon">
 							<DrawSquareOutline
 								class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"

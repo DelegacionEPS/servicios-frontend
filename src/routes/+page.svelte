@@ -151,7 +151,7 @@
 				Osciloscopios
 			</p>
 			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
-				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./")}}>
+				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./osciloscopio")}}>
 					Reserva un osciloscopio en el despacho
 				</button>
 				<button class="w-auto sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent cursor-pointer">
@@ -279,7 +279,7 @@
 	<button
 		class="text-white lg:text-3xl text-xl px-8 lg:py-3 py-6 bg-dele-accent hover:bg-dele-accent-hove rounded-2xl lg:w-1/3 w-5/6 flex gap-2 dark:bg-dark-primary dark:hover:bg-dark-accent"
 		on:click={() => {
-			goto('./');
+			goto('./osciloscopio');
 		}}
 	>
 		<DrawSquareOutline class="mt-1 h-8 w-1/4" />

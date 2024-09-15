@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions} from './$types';
-import {addUserRol, backupDB, deleteDB, BASE_URL_API, TOKEN} from '$lib/api_taquillas';
+import {addUserRol, backupDB, deleteDB, BASE_URL_API, TOKEN, getReservasDia} from '$lib/api_taquillas';
 
 export const load = (async (event) => {
     const fetchAuthorizedEmails = async () => {
@@ -46,6 +46,12 @@ export const actions = {
 		const email_admin = data.get('email_admin');
 		const result = deleteDB(email_admin);
 		return result;
-	}
-
+	},
+	ReservasDia: async ({cookies, request}) => {
+		const data = await request.formData();
+		// -------- Aquí se llama a la función de la API que busca el estado de una Taquilla --------
+		const dia = data.get('dia_r');
+		const result = getReservasDia(dia);
+		return result;
+	} 
 } satisfies Actions;
