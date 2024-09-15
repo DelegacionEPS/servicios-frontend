@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ parent, data }) => {
 	const { session } = await parent();
-	if (!session?.user?.email?.endsWith('@alumnos.uc3m.es') || session?.user?.email?.endsWith('@alumnos.uc3m.es')) { 
+	if (!session?.user?.email?.endsWith('100472310@alumnos.uc3m.es'))) { 
 		throw redirect(302, '/');
 	}
 
