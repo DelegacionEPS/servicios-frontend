@@ -27,7 +27,8 @@
 		LockOpenOutline,
 		LockOutline,
 		UserCircleOutline,
-		ArrowLeftToBracketOutline
+		ArrowLeftToBracketOutline,
+		DrawSquareSolid
 	} from 'flowbite-svelte-icons';
 	import { sineIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -238,7 +239,7 @@
 						{/await}
 					{/await}
 
-					<SidebarItem label="Osciloscopios">
+					<SidebarItem label="Osciloscopios" href="/" on:click={() => hideNavBar()}>
 						<svelte:fragment slot="icon">
 							<DrawSquareOutline
 								class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -255,7 +256,7 @@
 										on:click={() => hideNavBar()}
 									>
 										<svelte:fragment slot="icon">
-											<LockOutline
+											<DrawSquareSolid
 												class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
 											/>
 										</svelte:fragment>

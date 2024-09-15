@@ -14,6 +14,12 @@ export const load = (async () => {
 		return data;
 	};
 
+	const fetchBannedUsers = async () => {
+		const res = await fetch(`${BASE_URL_API}/api/bannedUsers${TOKEN}`);
+		const data = await res.json();
+		return data;
+	}
+
 	let emailsDespacho = await fetchAuthorizedEmails('atencion');
 	if (emailsDespacho === null) {
 		emailsDespacho = [];
@@ -30,6 +36,7 @@ export const load = (async () => {
         authorizedEmailsTaquillasEscuela: emailsEscuela,
 		authorizedEmailsTaquillasDespacho: emailsDespacho,
 		tablaPabloOsciloscopios: await fetchTablaPabloOsciloscopios(),
+		bannedUsers: await fetchBannedUsers()
     };
 }) satisfies PageServerLoad;
 

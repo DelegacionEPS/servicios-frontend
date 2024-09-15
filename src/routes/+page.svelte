@@ -8,7 +8,8 @@
 		UsersSolid,
 		LockOutline,
 		QuestionCircleSolid,
-		UserCircleOutline
+		UserCircleOutline,
+		DrawSquareSolid
 	} from 'flowbite-svelte-icons';
 	import { page } from '$app/stores';
 	import Konami from './Konami.svelte';
@@ -172,7 +173,7 @@
 								slot="header"
 								class="flex gap-2 w-full"
 							>
-								<LockOutline class="mt-1 h-8 w-8" />
+								<DrawSquareSolid class="mt-1 h-8 w-8" />
 								Gestión de Osciloscopios
 							</p>
 							<div class="w-full grid grid-cols-1 place-items-center">

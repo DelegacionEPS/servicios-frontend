@@ -5,6 +5,8 @@
 	import { Card, Indicator } from 'flowbite-svelte';
 	export let data: PageData;
 
+	const dias_por_mes = []
+
 	function getMonday(d: Date) {
 		d = new Date(d);
 		var day = d.getDay(),
@@ -20,10 +22,14 @@
 	let week2 = [monday2];
 	for (let i = 0; i < 4; i++) {
 		let day = new Date();
+		day.setMonth(week1[i].getMonth());
+		day.setFullYear(week1[i].getFullYear());
 		day.setDate(week1[i].getDate() + 1);
 		week1.push(day);
 
 		let day_2 = new Date();
+		day_2.setMonth(week2[i].getMonth());
+		day_2.setFullYear(week2[i].getFullYear());
 		day_2.setDate(week2[i].getDate() + 1);
 		week2.push(day_2);
 	}

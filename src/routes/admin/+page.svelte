@@ -12,10 +12,24 @@
 		{ value: 'general', name: 'General' }
 	];
 
+	const puestos = [
+		{ value: 1, name: "Puesto 1"},
+		{ value: 2, name: "Puesto 2"},
+		{ value: 3, name: "Puesto 3"}
+	];
+
+	const estados = [
+		{ value: 0, name: "No Disponible"},
+		{ value: 1, name: "Disponible"}
+	];
+
 	export let data;
 	let openConfirmation = false;
+	let puestoModal = false;
 	let successToast = false;
 	let unSuccessToast = false;
+	let successChangeToast = false;
+	let unSuccessChangeToast = false;
 	let successBackupToast = false;
 	let unSuccessBackupToast = false;
 	$: session = $page.data.session;
@@ -86,6 +100,53 @@
 			}, 2000);
 		} else {
 			unSuccessToast = true;
+		}
+	}
+
+	let puestoOsciloscopio;
+	let stateOsciloscopio;
+	let nameStateOsciloscopio;
+	function change_osciloscopio_modal() {
+		puestoOsciloscopio = document.getElementById('puesto').value;
+		stateOsciloscopio = document.getElementById('estado_puesto').value;
+		if (stateOsciloscopio == 1) {
+			nameStateOsciloscopio = 'Disponible'
+		}
+		else {
+			nameStateOsciloscopio = 'No Disponible'
+		}
+		if (puestoOsciloscopio && stateOsciloscopio) {
+			puestoModal = true;
+		}
+	}
+
+	async function change_osciloscopio_state() {
+		puestoModal = false;
+
+		// Call a function that only runs in the server side:
+		let res_email = session?.user?.email || '';
+		if (res_email === '') {
+			puestoModal = false;
+			return;
+		}
+		const response = await fetch('/api/change_osciloscopio_state', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email: res_email, puesto: puestoOsciloscopio, estado: stateOsciloscopio })
+		});
+
+		let result = await response.json();
+		result = result['result']['message'];
+		if (result.includes('cambiado')) {
+			successChangeToast = true;
+			setTimeout(() => {
+				successChangeToast = false;
+				location.reload();
+			}, 1000);
+		} else {
+			unSuccessChangeToast = true;
 		}
 	}
 </script>
@@ -279,6 +340,66 @@
 			</section>
 		</section>
 	</TabItem>
+
+	<TabItem
+		title="Gestionar Osciloscopios"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+	>
+		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
+			Gestionar Osciloscopios
+		</h2>
+
+		<div class="w-auto grid grid-cols-1 place-items-center mb-4">
+			<Button id="pop_db" class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent">
+				<QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10"/>
+			</Button>
+		</div>
+		
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Gestionar Osciloscopios" triggeredBy="#pop_db">
+			<p class=" dark:text-white text-sm sm:text-base text-justify">
+				Esta página sirve para marcar la disponibilidad de los Osciloscopios.<br><br>
+				Antes de marcarlo como no disponible ten en cuenta que se mandarán correos a todas las personas afectadas. 
+			</p>
+		</Popover >
+		<section class="grid grid-rows-3 place-items-center mt-8">
+			<form method="post" use:enhance>
+				<div class="grid grid-cols-1 w-screen">
+					<div class="w-4/5 m-auto">
+						<Label class="w-4/5 text-xl m-auto text-dele-color">Puesto del Osciloscopio</Label>
+						<Select
+							class="mt-2 w-4/5 m-auto"
+							id="puesto"
+							name="puesto"
+							items={puestos}
+							required
+							placeholder="Puesto:"
+						/>
+					</div>
+					<div class="w-4/5 m-auto">
+						<Label class="w-4/5 text-xl m-auto text-dele-color">Estado</Label>
+						<Select
+							class="mt-2 w-4/5 m-auto"
+							id="estado_puesto"
+							name="estado_puesto"
+							items={estados}
+							required
+							placeholder="Estado:"
+						/>
+					</div>
+					<Button
+						type="button"
+						class="w-1/6 m-auto mt-8 text-xl bg-dele-color hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+						on:click={() => {
+							change_osciloscopio_modal();
+						}}
+					>
+						Cambiar estado</Button
+					>
+				</div>
+			</form>
+		</section>
+	</TabItem>
 	
 </Tabs>
 
@@ -301,6 +422,35 @@
 			Borrar la Base de Datos
 		</Button>
 	</div>
+</Modal>
+
+<Modal bind:open={puestoModal} size="xs" autoclose={false} class="w-full">
+	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Eliminar la base de datos</h3>
+	<p class="text-black dark:text-white">
+		Antes de cambiar el estado del Osciloscopio, ten en cuenta que si lo marcas como no disponible se eliminarán las reservas.
+	</p>
+
+	<form class="flex flex-col space-y-6">
+		<Label class="space-y-2">
+			<span>Puesto</span>
+			<Input type="text" id="puesto_modal" name="puesto_modal" value={puestoOsciloscopio} readonly required/>
+		</Label>
+		<Label class="space-y-2">
+			<span>Estado</span>
+			<Input type="text" id="estado_modal" name="estado_modal" value={nameStateOsciloscopio} readonly required/>
+		</Label>
+		<p class="font-bold text-xl text-center">Haz click en el siguiente botón para confirmar el cambio</p>
+		<Button
+			type="button"
+			class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+			on:click={() => {
+				change_osciloscopio_state();
+			}}
+		>
+			Cambiar el Estado del Osciloscopio
+		</Button>
+	</form>
+
 </Modal>
 
 {#if successBackupToast}
@@ -327,6 +477,20 @@
 	<div class="fixed bottom-0 right-0 m-5">
 		<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
 			<p class="p-2">No se ha podido borrar la base de datos.</p>
+		</Card>
+	</div>
+{/if}
+
+{#if successChangeToast}
+	<div class="fixed bottom-0 right-0 m-5">
+		<Card class="bg-green-500 dark:text-white text-white dark:bg-green-500">
+			<p class="p-2">Estado del puesto cambiado.</p>
+		</Card>
+	</div>
+{:else if unSuccessChangeToast}
+	<div class="fixed bottom-0 right-0 m-5">
+		<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
+			<p class="p-2">No se ha podido cambiar el estado del puesto.</p>
 		</Card>
 	</div>
 {/if}

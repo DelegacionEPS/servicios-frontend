@@ -18,11 +18,15 @@
 
 	let reservas: {} = {};
 	data.reservas.then((value) => {
-		let reservas_aux = Object.entries(value);
-		reservas = reservas_aux.reduce((acc, [key, value]) => {
-    		acc[key] = value;
-    		return acc;
-		}, {});
+		if (value) {
+			let reservas_aux = Object.entries(value);
+			reservas = reservas_aux.reduce((acc, [key, value]) => {
+				acc[key] = value;
+				return acc;
+			}, {});
+    	} else {
+        	console.error("Value is null or undefined.");
+    	}
 	});
 
 	const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];

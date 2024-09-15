@@ -12,11 +12,18 @@ export const load: PageLoad = async ({ parent, data }) => {
 	let tablaPabloOsciloscopios = data.tablaPabloOsciloscopios ?? [{
 			nombre: "No se ha ",
 			nia: "Podido encontrar",
-			puesto: "ninguna taquilla.",
+			puesto: "ninguna reserva.",
 			hora: "La base está al",
-			fecha: 100000000,
+			fecha: "100000000",
 			status: "% de su capacidad.",
 		}];
+
+	let bannedUsers = data.bannedUsers ?? [{
+		nombre: "No se ha podido",
+		nia: "encontrar ningun usuario sancionado. ",
+		start: "La base de datos está al 1000000000",
+		end: "% de su capacidad."
+	}]
 
 	if ((authorizedEmailsDespacho.includes(session?.user?.email) === -1 && authorizedEmailsEscuela.includes(session?.user?.email) === -1) || !session?.user?.email || (authorizedEmailsDespacho.includes(session?.user?.email) === false && authorizedEmailsEscuela.includes(session?.user?.email) === false)) { 
 		throw redirect(302, '/');
@@ -26,6 +33,7 @@ export const load: PageLoad = async ({ parent, data }) => {
 		session: session,
 		authorizedEmailsDespacho: authorizedEmailsDespacho,
 		authorizedEmailsEscuela: authorizedEmailsEscuela,
-		tablaPabloOsciloscopios : tablaPabloOsciloscopios
+		tablaPabloOsciloscopios : tablaPabloOsciloscopios,
+		bannedUsers: bannedUsers,
 	};
 };

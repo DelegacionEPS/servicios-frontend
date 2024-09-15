@@ -13,7 +13,7 @@ export const load = (async (event) => {
 		const data = await res.json();
 		return data;
 	};
-
+	
     return {
         authorizedEmails: await fetchAuthorizedEmails(),
 		users: await fetchUsers()
