@@ -194,7 +194,7 @@
 			setTimeout(() => {
 				successChangeToast = false;
 				location.reload();
-			}, 1000);
+			}, 500);
 		} else {
 			unSuccessChangeToast = true;
 		}
@@ -266,7 +266,7 @@
 			setTimeout(() => {
 				successToast = false;
 				location.reload();
-			}, 1500);
+			}, 500);
 		} else {
 			unSuccessToastPlantilla = true;
 		}
