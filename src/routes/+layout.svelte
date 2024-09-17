@@ -239,7 +239,7 @@
 						{/await}
 					{/await}
 
-					<SidebarItem label="Osciloscopios" href="/osciloscopio" on:click={() => hideNavBar()}>
+					<SidebarItem label="Puestos de Electrónica" href="/osciloscopio" on:click={() => hideNavBar()}>
 						<svelte:fragment slot="icon">
 							<DrawSquareOutline
 								class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -251,7 +251,7 @@
 							{#if session?.user?.email != null}
 								{#if authorizedEmailsDespacho != null && authorizedEmailsDespacho.includes(session?.user?.email) == true}
 									<SidebarItem
-										label="Gestionar Osciloscopios"
+										label="Gestionar Puestos"
 										href="/gestion_osciloscopios"
 										on:click={() => hideNavBar()}
 									>

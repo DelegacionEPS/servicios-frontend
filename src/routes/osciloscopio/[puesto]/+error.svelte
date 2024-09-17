@@ -10,6 +10,6 @@
 		class=" btn-xl bg-slate-400 rounded-lg text-white font-bold py-2 px-4 mt-4"
 		on:click={() => goto('/osciloscopios')}
 	>
-		Volver a la página de osciloscopios
+		Volver a la página de puestos
 	</button>
 </div>

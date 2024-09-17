@@ -25,7 +25,16 @@
 		{ value: 1, name: "Disponible"}
 	];
 
-	const franjas = [9, 11, 15, 17]
+	// Días
+	const days = [
+		{ name: "Lunes", 		value: 1},
+		{ name: "Martes",		value: 2}, 
+		{ name: "Miércoles",	value: 3},  
+		{ name: "Jueves", 		value: 4},
+		{ name: "Viernes", 		value: 5},
+	];
+
+	const franjas = [9, 11, 15, 17];
 
 	// Calendar
 	const theme = {
@@ -69,8 +78,11 @@
 	let successBackupToast = false;
 	let unSuccessBackupToast = false;
 	let unSuccessAvailabilityToast = false;
+	let successToastPlantilla = false;
+	let unSuccessToastPlantilla = false;
 	$: session = $page.data.session;
 	let store;
+	let plantilla = $page.data.plantilla;
 	
 	let users = $page.data.users;
 	let searchTerm = '';
@@ -232,6 +244,33 @@
 	}
 
 	export let form;
+
+	async function change_plantilla(dia, hora, estado) {
+		let res_email = session?.user?.email || '';
+		if (res_email === '') {
+			availabilityModal = false;
+			return;
+		}
+		const response = await fetch('/api/change_plantilla', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email: res_email, dia: dia, hora: hora, estado: estado })
+		});
+
+		let result = await response.json();
+		result = result['result']['message'];
+		if (result.includes('correctamente')) {
+			successToastPlantilla = true;
+			setTimeout(() => {
+				successToast = false;
+				location.reload();
+			}, 1500);
+		} else {
+			unSuccessToastPlantilla = true;
+		}
+	}
 	
 </script>
 
@@ -433,9 +472,8 @@
 			</section>
 		</section>
 	</TabItem>
-
 	<TabItem
-		title="Gestionar Osciloscopios"
+		title="Gestionar Puestos"
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
 		on:focus={() => {
@@ -443,7 +481,7 @@
 		}}
 	>
 		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
-			Gestionar Osciloscopios
+			Gestionar Puestos
 		</h2>
 
 		<div class="w-auto grid grid-cols-1 place-items-center mb-4">
@@ -452,9 +490,9 @@
 			</Button>
 		</div>
 		
-		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Gestionar Osciloscopios" triggeredBy="#pop_db">
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Gestionar Puestos" triggeredBy="#pop_db">
 			<p class=" dark:text-white text-sm sm:text-base text-justify">
-				Esta página sirve para marcar la disponibilidad de los Osciloscopios.<br><br>
+				Esta página sirve para marcar la disponibilidad de los puestos.<br><br>
 				Antes de marcarlo como no disponible ten en cuenta que se mandarán correos a todas las personas afectadas. 
 			</p>
 		</Popover >
@@ -462,7 +500,7 @@
 			<form method="post" use:enhance>
 				<div class="grid grid-cols-1 w-screen">
 					<div class="w-4/5 m-auto">
-						<Label class="w-4/5 text-xl m-auto text-dele-color">Puesto del Osciloscopio</Label>
+						<Label class="w-4/5 text-xl m-auto text-dele-color">Puesto de Electrónica</Label>
 						<Select
 							class="mt-2 w-4/5 m-auto"
 							id="puesto"
@@ -495,6 +533,62 @@
 				</div>
 			</form>
 		</section>
+	</TabItem>
+	<TabItem
+		title="Plantilla de Turnos"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		on:focus={() => {
+			form = '';
+		}}
+	>
+		<h2 class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat">
+			Plantilla de Turnos
+		</h2>
+		<table
+		style="border: 2px solid black; border-radius: 13px; border-spacing: 0;"
+		class="m-auto mt-12"
+	>
+			<thead>
+				<tr>
+					{#each days as day}
+						<th
+							style="border: 1px solid black; "
+							class="text-center px-3 py-1 border-collapse bg-[#c6c6c6ff]"
+							>
+							{day["name"]}
+						</th>
+					{/each}
+				</tr>
+			</thead>
+			<tbody>
+				{#if plantilla && plantilla["plantilla"]}
+					{#each franjas as start_hour}
+						<tr>
+							{#each days as day}
+								{#if plantilla["plantilla"][day["value"] + "-" + start_hour] == 0}
+									<td 
+										style="border: 1px solid black;"
+										class="bg-black text-white text-center p-3 cursor-pointer"
+										on:click={()=> {change_plantilla(day["value"], start_hour, 1);}}
+										>
+										{start_hour}:00 - {start_hour + 2}:00
+									</td>
+								{:else}
+									<td 
+										style="border: 1px solid black;"
+										class="bg-green-500 text-black text-center p-3 cursor-pointer"
+										on:click={()=> {change_plantilla(day["value"], start_hour, 0);}}
+										>
+										{start_hour}:00 - {start_hour + 2}:00
+									</td>
+								{/if}
+							{/each}
+						</tr>
+					{/each}
+				{/if}
+			</tbody>
+		</table>
 	</TabItem>
 	<TabItem
 		title="Turnos de Despacho"
@@ -533,7 +627,7 @@
 		</form>
 		{#if form != null && form && form.reservas}
 			<div class="grid grid-cols-1 place-self-center mt-6">
-				<div class="w-auto m-auto dark:text-white grid sm:grid-cols-3 grid-cols-2">
+				<div class="w-auto m-auto dark:text-white grid sm:grid-cols-4 grid-cols-2">
 					<span class="flex items-center"
 						><Indicator size="lg" color="green" class="me-1.5" />Libre</span
 					>
@@ -543,6 +637,9 @@
 					<span class="flex items-center"
 						><Indicator size="lg" color="dark" class="me-1.5" />No Disponible</span
 					>
+					<span class="flex items-center"
+						><Indicator size="lg" color="dark" class="me-1.5" />(P) No Disponible en Plantilla</span
+					>
 				</div>
 			</div>
 			<table
@@ -551,44 +648,54 @@
 			>
 				<tbody>
 					<tr>
-						{#each franjas as start_hour}
-							{#if form.reservas[(dayjs($store?.selected).format('D/M/YYYY')) + "-" + start_hour]}
-								{#if form.reservas[(dayjs($store?.selected).format('D/M/YYYY')) + "-" + start_hour] == 'no_disponible'}
-									<td 
-										style="border: 1px solid black;"
-										class="bg-black text-white text-center p-3 cursor-pointer"
-										on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'disponible');}}
-										>
-										
-										{start_hour}:00 - {start_hour + 2}:00
-									</td>
+						{#if plantilla && plantilla["plantilla"]}
+							{#each franjas as start_hour}
+								{#if plantilla["plantilla"][(dayjs($store?.selected).format('d')) + "-" + start_hour] != 0}
+									{#if form.reservas[(dayjs($store?.selected).format('D/M/YYYY')) + "-" + start_hour]}
+										{#if form.reservas[(dayjs($store?.selected).format('D/M/YYYY')) + "-" + start_hour] == 'no_disponible'}
+											<td 
+												style="border: 1px solid black;"
+												class="bg-black text-white text-center p-3 cursor-pointer"
+												on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'disponible');}}
+												>
+												
+												{start_hour}:00 - {start_hour + 2}:00
+											</td>
+										{:else}
+											<td 
+												style="border: 1px solid black;"
+												class="bg-red-500 text-center p-3 cursor-pointer"
+												on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'no_disponible');}}
+												>
+												
+												{start_hour}:00 - {start_hour + 2}:00
+											</td>
+										{/if}
+									{:else}
+										<td 
+											style="border: 1px solid black;"
+											class="bg-green-500 text-center p-3 cursor-pointer"
+											on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'no_disponible');}}
+											>
+											
+											{start_hour}:00 - {start_hour + 2}:00
+										</td>
+									{/if}
 								{:else}
 									<td 
 										style="border: 1px solid black;"
-										class="bg-red-500 text-center p-3 cursor-pointer"
-										on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'no_disponible');}}
-										>
+										class="bg-black text-white text-center p-3 cursor-pointer">
 										
-										{start_hour}:00 - {start_hour + 2}:00
-									</td>
+										{start_hour}:00 - {start_hour + 2}:00 (P)
+									</td>	
 								{/if}
-							{:else}
-								<td 
-									style="border: 1px solid black;"
-									class="bg-green-500 text-center p-3 cursor-pointer"
-									on:click={()=> {change_availability_modal(dayjs($store?.selected).format('D/M/YYYY'), start_hour, 'no_disponible');}}
-									>
-									
-									{start_hour}:00 - {start_hour + 2}:00
-								</td>
-							{/if}
-						{/each}
+							{/each}
+						{/if}
 					</tr>
 				</tbody>
 			</table>
 		{/if}
 	</TabItem>
-	
 </Tabs>
 
 <Modal bind:open={openConfirmation} size="xs" autoclose={false} class="w-full">
@@ -615,7 +722,7 @@
 <Modal bind:open={puestoModal} size="xs" autoclose={false} class="w-full">
 	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Eliminar la base de datos</h3>
 	<p class="text-black dark:text-white">
-		Antes de cambiar el estado del Osciloscopio, ten en cuenta que si lo marcas como no disponible se eliminarán las reservas.
+		Antes de cambiar el estado del puesto, ten en cuenta que si lo marcas como no disponible se eliminarán las reservas.
 	</p>
 
 	<form class="flex flex-col space-y-6">
@@ -635,7 +742,7 @@
 				change_osciloscopio_state();
 			}}
 		>
-			Cambiar el Estado del Osciloscopio
+			Cambiar el Estado del Puesto
 		</Button>
 	</form>
 
@@ -707,9 +814,25 @@
 {/if}
 
 {#if unSuccessAvailabilityToast}
-<div class="fixed bottom-0 right-0 m-5">
-	<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
-		<p class="p-2">No se ha podido cambiar el estado de la hora</p>
-	</Card>
-</div>
+	<div class="fixed bottom-0 right-0 m-5">
+		<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
+			<p class="p-2">No se ha podido cambiar el estado de la hora</p>
+		</Card>
+	</div>
 {/if}
+
+
+{#if successToastPlantilla}
+	<div class="fixed bottom-0 right-0 m-5">
+		<Card class="bg-green-500 dark:text-white text-white dark:bg-green-500">
+			<p class="p-2">Estado de la plantilla cambiado</p>
+		</Card>
+	</div>
+{:else if unSuccessToastPlantilla}
+	<div class="fixed bottom-0 right-0 m-5">
+		<Card class="bg-red-500 dark:text-white text-white dark:bg-red-500">
+			<p class="p-2">No se ha podido cambiar el estado de la plantilla</p>
+		</Card>
+	</div>
+{/if}
+

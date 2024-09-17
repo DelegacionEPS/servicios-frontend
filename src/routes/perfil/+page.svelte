@@ -8,7 +8,6 @@
 	let session = $page.data.session;
 	let reservas = $page.data.reservas.reservas;
 	let osciloscopios = $page.data.osciloscopios.reservas;
-	console.log(osciloscopios);
 
 	// Reactive statement to update session whenever $page.data.session changes
 	$: session = $page.data.session;
@@ -65,7 +64,7 @@
 		</div>
 	</TabItem>
 	<TabItem
-		title="Mis Reservas de Osciloscopios"
+		title="Mis Puestos de Electrónica"
 		class=""
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"

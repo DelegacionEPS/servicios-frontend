@@ -652,3 +652,30 @@ export async function changeHoraState(email: FormDataEntryValue | null | String,
 		console.error(error);
 	}
 }
+
+export async function changePlantilla(email: FormDataEntryValue | null | String, dia: FormDataEntryValue | null | Number, hora: FormDataEntryValue | null | Number, estado: FormDataEntryValue | null | Number) {
+	try {
+		const response = await fetch(`${BASE_URL_API}/api/changePlantilla${TOKEN}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
+			body: JSON.stringify({
+				email: email,
+				dia: dia,
+				hora: hora,
+				estado: estado,
+			})
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			return data;
+		} else {
+			console.error('Server response was not OK when changing the template', response.status, response.statusText);
+		}
+	} catch (error) {
+		console.error(error);
+	}
+}

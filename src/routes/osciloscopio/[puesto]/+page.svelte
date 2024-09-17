@@ -5,8 +5,6 @@
 	import { Card, Indicator } from 'flowbite-svelte';
 	export let data: PageData;
 
-	const dias_por_mes = []
-
 	function getMonday(d: Date) {
 		d = new Date(d);
 		var day = d.getDay(),
@@ -53,20 +51,6 @@
 <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-4 text-dele-color dark:text-dark-primary">
 	Selección de Hora
 </h1>
-
-<div class="grid grid-cols-1 place-self-center mt-6">
-	<div class="w-auto m-auto dark:text-white grid sm:grid-cols-3 grid-cols-2">
-		<span class="flex items-center"
-			><Indicator size="lg" color="green" class="me-1.5" />Libre</span
-		>
-		<span class="flex items-center"
-			><Indicator size="lg" color="red" class="me-1.5" />Ocupada</span
-		>
-		<span class="flex items-center"
-			><Indicator size="lg" color="dark" class="me-1.5" />No Disponible</span
-		>
-	</div>
-</div>
 
 <TablaOsciloscopios bind:week1 bind:week2 bind:data></TablaOsciloscopios>
 

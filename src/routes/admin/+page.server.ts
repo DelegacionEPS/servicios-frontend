@@ -13,10 +13,17 @@ export const load = (async (event) => {
 		const data = await res.json();
 		return data;
 	};
+
+	const fetchPlantilla = async () => {
+		const res = await fetch(`${BASE_URL_API}/api/plantilla${TOKEN}`);
+		const data = await res.json();
+		return data;
+	}
 	
     return {
         authorizedEmails: await fetchAuthorizedEmails(),
-		users: await fetchUsers()
+		users: await fetchUsers(),
+		plantilla: await fetchPlantilla()
     };
 }) satisfies PageServerLoad;
 

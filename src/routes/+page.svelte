@@ -49,7 +49,7 @@
 		<p class=" dark:text-white text-sm sm:text-base text-justify">
 			Para poder reservar una <span class="underline hover:dark:text-dark-accent hover:text-accent"
 				><a href="/taquillas">taquilla</a></span
-			>, o un osciloscopio, necesitas
+			>, o un puesto de electrónica, necesitas
 			<button
 				on:click={() => {
 					signIn('google');
@@ -148,11 +148,11 @@
 				class="flex gap-2 w-full"
 			>
 				<DrawSquareOutline class="mt-1 h-8 w-8" />
-				Osciloscopios
+				Puestos de Electrónica
 			</p>
 			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
 				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./osciloscopio")}}>
-					Reserva un osciloscopio en el despacho
+					Reserva un puesto de electrónica en el despacho
 				</button>
 				<button class="w-auto sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent cursor-pointer">
 					<a href="#Osciloscopios" class="w-auto">
@@ -174,11 +174,11 @@
 								class="flex gap-2 w-full"
 							>
 								<DrawSquareSolid class="mt-1 h-8 w-8" />
-								Gestión de Osciloscopios
+								Gestión de Puestos
 							</p>
 							<div class="w-full grid grid-cols-1 place-items-center">
 								<button class="sm:text-base text-sm text-white dark:text-white bg-dele-color dark:bg-dark-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent dark:hover:bg-dark-accent" on:click={() => {goto("./gestion_osciloscopios")}}>
-									Administra y consulta las reservas de los osciloscopios
+									Administra y consulta las reservas de los puestos de electrónica
 								</button>
 							</div>
 						</AccordionItem>
@@ -283,13 +283,13 @@
 		}}
 	>
 		<DrawSquareOutline class="mt-1 h-8 w-1/4" />
-		<p class="text-left text-2xl w-full">Osciloscopios</p>
+		<p class="text-left text-2xl w-full">Puestos de Electrónica</p>
 	</button>
 	<div
 		class="rounded-full bg-dele-color py-6 flex items-center justify-center text-center lg:aspect-square lg:w-1/2 border-solid border-4 text-white w-11/12 dark:border-dark-primary dark:bg-dark-secondary"
 	>
 		<p class="flex items-center justify-center text-lg sm:p-12 p-16 sm:text-2xl">
-			El despacho de delegación cuenta con tres osciloscopios que los estudiantes pueden usar y prestamos un servicio de reserva.
+			El despacho de delegación cuenta con tres puestos de electrónica que los estudiantes pueden usar y prestamos un servicio de reserva.
 			Para dar servicio a la máxima cantidad posible de estudiantes, sólo se podrá reservar una franja de 2 horas por semana.
 		</p>
 	</div>

@@ -235,39 +235,6 @@
 	</form>
 </Modal>
 
-<Modal bind:open={completeModal} size="md" autoclose={false} class="w-full">
-	<form class="flex flex-col space-y-6">
-		<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Completar Reserva</h3>
-		<p>Vas a completar una reserva con los siguientes datos:</p>
-		<Label class="space-y-2">
-			<span>NIA:</span>
-			<Input type="text" id="nia_c" name="nia_c" value={currentReserva['nia']} readonly required />
-		</Label>
-		<Label class="space-y-2">
-			<span>Puesto</span>
-			<Input type="text" id="puesto_c" name="puesto_c" value={currentReserva['puesto']} readonly required/>
-		</Label>
-		<Label class="space-y-2">
-			<span>Fecha</span>
-			<Input type="text" id="fecha_c" name="fecha_c" value={currentReserva['fecha']} readonly required/>
-		</Label>
-		<Label class="space-y-2">
-			<span>Franja Horaria</span>
-			<Input type="text" id="hora_c" name="hora_c" value={(currentReserva['hora']) + ":00 - " + (currentReserva['hora'] + 2) + ":00"} readonly required/>
-		</Label>
-		<p class="font-bold text-xl text-center">Hazlo para confirmar que la persona ha asistido a su reserva</p>
-		<Button
-			type="submit"
-			class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
-			on:click={(ev) => {
-				ev.preventDefault();
-				completeModal = false;
-				completar_reserva();
-			}}>Completar Reserva</Button
-		>
-	</form>
-</Modal>
-
 <Modal bind:open={decompleteModal} size="md" autoclose={false} class="w-full">
 	<form class="flex flex-col space-y-6">
 		<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Descompletar Reserva</h3>
@@ -349,12 +316,12 @@
 </Modal>
 
 <h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
-	Gestión de Osciloscopios
+	Gestión de Puestos
 </h1>
 <Tabs tabStyle="underline" contentClass="p-4" class="px-8">
 	<TabItem
 		open
-		title="Tabla Osciloscopios"
+		title="Tabla Puestos de Eléctronica"
 		class=""
 		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
 		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
@@ -389,24 +356,11 @@
 							<TableBodyCell>
 								<div class="grid grid-cols-1 xl:grid-cols-2">
 									{#if item.status === "reservada"}
-										<Button class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-green-500 rounded p-1"
-											on:click={() => {
-												change_complete_modal(item);
-											}}>
-											Completar	
-										</Button>
 										<Button class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-red-500 rounded p-1"
 											on:click={() => {
 												change_delete_modal(item);
 											}}>
 											Eliminar	
-										</Button>
-									{:else if item.status === "completada"}
-										<Button class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-red-500 rounded p-1"
-											on:click={() => {
-												change_decomplete_modal(item);
-											}}>
-											Descompletar	
 										</Button>
 									{/if}
 								</div>

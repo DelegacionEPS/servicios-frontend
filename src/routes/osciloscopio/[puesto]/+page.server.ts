@@ -12,9 +12,16 @@ export const load: PageServerLoad = async ({ request }) => {
 		return data;
 	}
 
+	const fetchPlantilla = async () => {
+		const res = await fetch(`${BASE_URL_API}/api/plantilla${TOKEN}`);
+		const data = await res.json();
+		return data;
+	}
+
 	return {
 		puesto: puesto,
         reservas: fetchOcupacionOsciloscopios(),
+		plantilla: await fetchPlantilla(),
 	};
 };
 
