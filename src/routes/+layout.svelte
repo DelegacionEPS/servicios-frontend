@@ -65,11 +65,11 @@
 		let _breadcrumItems = [];
 		let text: String;
 		let inTaquillas = false;
-		let inEdificio = true;		
+		let inEdificio = true;
+		let inOsciloscopios = false;		
 		for (let i = 0; i < urlSegments.length; i++) {
 			text = urlSegments[i].charAt(0).toUpperCase() + urlSegments[i].slice(1).replace('_', ' ');
 			if (inTaquillas) {
-
 				if (inEdificio) {
 					text = "Edificio " + text;
 					inEdificio = false;
@@ -78,9 +78,19 @@
 					text = "Planta " + text;
 				}
 			}
+
+			if (inOsciloscopios) {
+				text = "Puesto " + text;
+			}
+
 			if (text === "Taquillas") {
 				inTaquillas = true;
 			}
+			else if (text === "Osciloscopio") {
+				inOsciloscopios = true;
+				text = "Puestos"
+			}
+			
 			_breadcrumItems.push({
 				text: text,
 				href: `/${urlSegments.slice(0, i + 1).join('/')}`

@@ -55,7 +55,7 @@
 <TablaOsciloscopios bind:week1 bind:week2 bind:data></TablaOsciloscopios>
 
 {#if form}
-	{#if form.message.includes('Error')}
+	{#if form.message.includes('Error') || form.message.includes('Ya') || form.message.includes('sancionado')}
 		<div
 			class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-dashed border-4 border-red-500 dark:border-red-500 p-4 mx-auto text-center"
 		>

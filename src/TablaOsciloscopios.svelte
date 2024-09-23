@@ -25,9 +25,7 @@
 				acc[key] = value;
 				return acc;
 			}, {});
-    	} else {
-        	console.error("Value is null or undefined.");
-    	}
+    	} 
 	});
 
 	const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
@@ -39,7 +37,9 @@
 		selectedDia = day;
 		selectedHora = start_hour;
 		current_week = moment(selectedDia).isoWeek();
-		if (selectedDia < new Date()) {
+		let currentDate = new Date();
+
+		if (selectedDia < currentDate && selectedHora < currentDate.getHours()) {
 			formModalDateError = true;
 		}
 		else if (NIA != '100XXXXXX') {
