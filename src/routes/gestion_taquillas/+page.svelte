@@ -333,12 +333,12 @@
 				{#if filteredItems != null && filteredItems}
 					{#each filteredItems as item}
 						<TableBodyRow>
-							<TableBodyCell>{item.nombre}</TableBodyCell>
-							<TableBodyCell>{item.nia}</TableBodyCell>
-							<TableBodyCell>{item.taquilla}</TableBodyCell>
-							<TableBodyCell>{item.codigo}</TableBodyCell>
-							<TableBodyCell>{item.date}</TableBodyCell>
-							<TableBodyCell>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.nombre}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.nia}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.taquilla}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.codigo}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.date}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
 							<TableBodyCell>
 								<div class="grid grid-cols-1 xl:grid-cols-2">
 									{#if item.status === "reservada"}
@@ -414,11 +414,11 @@
 				{#if filteredItems_a != null && filteredItems_a}
 					{#each filteredItems_a as item}
 						<TableBodyRow>
-							<TableBodyCell>{item.nombre}</TableBodyCell>
-							<TableBodyCell>{item.taquilla}</TableBodyCell>
-							<TableBodyCell>{item.codigo}</TableBodyCell>
-							<TableBodyCell>{item.date}</TableBodyCell>
-							<TableBodyCell>{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.nombre}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.taquilla}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.codigo}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.date}</TableBodyCell>
+							<TableBodyCell class="select-all">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
 							<TableBodyCell>
 								<div class="grid grid-cols-1 xl:grid-cols-2">
 									{#if item.status === "reservada"}
