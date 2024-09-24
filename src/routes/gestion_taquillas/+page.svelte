@@ -4,7 +4,7 @@
 
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
-	import { Tabs, TabItem, Input, Label, Button, Modal, Card } from 'flowbite-svelte';
+	import { Tabs, TabItem, Input, Label, Button, Modal, Card, Popover } from 'flowbite-svelte';
 	import {
 		Table,
 		TableBody,
@@ -47,7 +47,6 @@
 	let TablaPabloAsociacionesItems: [Taquilla] = $page.data.tablaPablo.filter((item) => {
 		return (!item.nia);
 	});
-	console.log($page.data.tablaPablo);
 
 	let asociaciones = $page.data.asociaciones;
 	let association_selected = {"nombre": "", "correo": ""};
@@ -218,6 +217,16 @@
             event.target.submit();
         }
     }
+
+	function count_reservas(size, list) {
+		let count = 0;
+		for (let taquilla of list) {
+			if (taquilla.taquilla[6] == size) {
+				count += 1;
+			}
+		}
+		return count;
+	}
 </script>
 
 <h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
@@ -303,13 +312,17 @@
 		{@const reservadas = TablaPabloItems.filter((item) => item.status === 'reservada').length}
 		{@const ocupadas = TablaPabloItems.filter((item) => item.status === 'ocupada').length}
 		{@const no_disponibles = TablaPabloItems.filter((item) => item.status === 'rota').length}
+		{@const reservadas_s = count_reservas("P", TablaPabloItems.filter((item) => item.status === 'reservada'))}
+		{@const reservadas_l = count_reservas("G", TablaPabloItems.filter((item) => item.status === 'reservada'))}
+		{@const ocupadas_s = count_reservas("P", TablaPabloItems.filter((item) => item.status === 'ocupada'))}
+		{@const ocupadas_l = count_reservas("G", TablaPabloItems.filter((item) => item.status === 'ocupada'))}
 
 		<div class="grid grid-cols-3 place-items-center">
-			<div class="text-center">
+			<div class="text-center" id="pop_reservadas">
 				<p class="text-dele-color dark:text-dark-primary">Reservadas</p>
 				<p class="text-2xl dark:text-dark-accent">{reservadas}</p>
 			</div>
-			<div class="text-center">
+			<div class="text-center" id="pop_ocupadas">
 				<p class="text-dele-color dark:text-dark-primary">Ocupadas</p>
 				<p class="text-2xl dark:text-dark-accent">{ocupadas}</p>
 			</div>
@@ -318,6 +331,20 @@
 				<p class="text-2xl dark:text-dark-accent">{no_disponibles}</p>
 			</div>
 		</div>
+
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Reservadas" triggeredBy="#pop_reservadas">
+			<div class="grid grid-cols-2">
+				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas:<p class="text-black dark:text-white">{reservadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center">Grandes:<p class="text-black dark:text-white">{reservadas_l}</p></div>
+			</div>
+		</Popover>
+
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Ocupadas" triggeredBy="#pop_ocupadas">
+			<div class="grid grid-cols-2 ">
+				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas<p class="text-black dark:text-white">{ocupadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center">Grandes<p class="text-black dark:text-white">{ocupadas_l}</p></div>
+			</div>
+		</Popover>
 
 		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
 			<TableHead>
@@ -385,13 +412,18 @@
 		{@const reservadas = TablaPabloAsociacionesItems.filter((item) => item.status === 'reservada').length}
 		{@const ocupadas = TablaPabloAsociacionesItems.filter((item) => item.status === 'ocupada').length}
 		{@const no_disponibles = $page.data.tablaPablo.filter((item) => item.status === 'rota').length}
+		{@const reservadas_s = count_reservas("P", TablaPabloAsociacionesItems.filter((item) => item.status === 'reservada'))}
+		{@const reservadas_l = count_reservas("G", TablaPabloAsociacionesItems.filter((item) => item.status === 'reservada'))}
+		{@const ocupadas_s = count_reservas("P", TablaPabloAsociacionesItems.filter((item) => item.status === 'ocupada'))}
+		{@const ocupadas_l = count_reservas("G", TablaPabloAsociacionesItems.filter((item) => item.status === 'ocupada'))}
+
 
 		<div class="grid grid-cols-3 place-items-center">
-			<div class="text-center">
+			<div class="text-center" id="pop_reservadas_a">
 				<p class="text-dele-color dark:text-dark-primary">Reservadas</p>
 				<p class="text-2xl dark:text-dark-accent">{reservadas}</p>
 			</div>
-			<div class="text-center">
+			<div class="text-center" id="pop_ocupadas_a">
 				<p class="text-dele-color dark:text-dark-primary">Ocupadas</p>
 				<p class="text-2xl dark:text-dark-accent">{ocupadas}</p>
 			</div>
@@ -400,6 +432,20 @@
 				<p class="text-2xl dark:text-dark-accent">{no_disponibles}</p>
 			</div>
 		</div>
+
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Reservadas" triggeredBy="#pop_reservadas_a">
+			<div class="grid grid-cols-2">
+				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas:<p class="text-black dark:text-white">{reservadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center">Grandes:<p class="text-black dark:text-white">{reservadas_l}</p></div>
+			</div>
+		</Popover>
+
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Ocupadas" triggeredBy="#pop_ocupadas_a">
+			<div class="grid grid-cols-2 ">
+				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas<p class="text-black dark:text-white">{ocupadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center">Grandes<p class="text-black dark:text-white">{ocupadas_l}</p></div>
+			</div>
+		</Popover>
 
 		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
 			<TableHead>
