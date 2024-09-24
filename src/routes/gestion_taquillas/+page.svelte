@@ -18,7 +18,7 @@
 		DropdownDivider, 
 		DropdownHeader
 	} from 'flowbite-svelte';
-	import { ChevronDownOutline } from "flowbite-svelte-icons";
+	import { ChevronDownOutline,  CaretDownSolid, CaretUpSolid } from "flowbite-svelte-icons";
 	import ModalIniciaSesion from '../../ModalIniciaSesion.svelte';
 	import { goto } from '$app/navigation';
   	import TablaTaquillas from '../../TablaTaquillas.svelte';
@@ -227,6 +227,81 @@
 		}
 		return count;
 	}
+
+	$: sortedItems = filteredItems;
+	let sorting = false;
+	let sorting_dir = true;
+
+	function change_sorting() {
+		sorting = !sorting;
+		if (!sorting) {
+			sortedItems = filteredItems;
+		}
+		else {
+			if (!sorting_dir) {
+			sortedItems = [...filteredItems].sort((a, b) => {
+				return a.taquilla.localeCompare(b.taquilla);
+			});
+			}
+			else {
+				sortedItems = [...filteredItems].sort((a, b) => {
+					return b.taquilla.localeCompare(a.taquilla);
+				});
+			}
+		}
+	}
+	
+	function change_sorting_dir() {
+		if (sorting_dir) {
+			sortedItems = [...filteredItems].sort((a, b) => {
+				return a.taquilla.localeCompare(b.taquilla);
+			});
+		}
+		else {
+			sortedItems = [...filteredItems].sort((a, b) => {
+				return b.taquilla.localeCompare(a.taquilla);
+			});
+		}
+		sorting_dir = !sorting_dir;
+	}
+
+	$: sortedItems_a = filteredItems_a;
+	let sorting_a = false;
+	let sorting_dir_a = true;
+
+	function change_sorting_a() {
+		sorting_a = !sorting_a;
+		if (!sorting_a) {
+			sortedItems_a = filteredItems_a;
+		}
+		else {
+			if (!sorting_dir_a) {
+			sortedItems_a = [...filteredItems_a].sort((a, b) => {
+				return a.taquilla.localeCompare(b.taquilla);
+			});
+			}
+			else {
+				sortedItems_a = [...filteredItems_a].sort((a, b) => {
+					return b.taquilla.localeCompare(a.taquilla);
+				});
+			}
+		}
+	}
+
+	function change_sorting_dir_a() {
+		if (sorting_dir_a) {
+			sortedItems_a = [...filteredItems_a].sort((a, b) => {
+				return a.taquilla.localeCompare(b.taquilla);
+			});
+		}
+		else {
+			sortedItems_a = [...filteredItems_a].sort((a, b) => {
+				return b.taquilla.localeCompare(a.taquilla);
+			});
+		}
+		sorting_dir_a = !sorting_dir_a;
+	}
+
 </script>
 
 <h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
@@ -350,15 +425,28 @@
 			<TableHead>
 				<TableHeadCell>Nombre</TableHeadCell>
 				<TableHeadCell>Nia</TableHeadCell>
-				<TableHeadCell>Taquilla</TableHeadCell>
+				<TableHeadCell class="grid grid-cols-2 ">
+					<div class="cursor-pointer w-1/2 hover:bg-gray-400" on:click={() => change_sorting()}>Taquilla</div>
+					{#if sorting}
+						{#if sorting_dir}
+							<button on:click={() => change_sorting_dir()} class="w-1/12">
+								<CaretDownSolid/>
+							</button>
+						{:else}
+							<button on:click={() => change_sorting_dir()} class="w-1/12">
+								<CaretUpSolid/>
+							</button>
+						{/if}
+					{/if}
+				</TableHeadCell>
 				<TableHeadCell>Código</TableHeadCell>
 				<TableHeadCell>Fecha</TableHeadCell>
 				<TableHeadCell>Estado</TableHeadCell>
 				<TableHeadCell>Acciones</TableHeadCell>
 			</TableHead>
 			<TableBody tableBodyClass="divide-y">
-				{#if filteredItems != null && filteredItems}
-					{#each filteredItems as item}
+				{#if sortedItems != null && sortedItems}
+					{#each sortedItems as item}
 						<TableBodyRow>
 							<TableBodyCell class="select-all">{item.nombre}</TableBodyCell>
 							<TableBodyCell class="select-all">{item.nia}</TableBodyCell>
@@ -417,7 +505,6 @@
 		{@const ocupadas_s = count_reservas("P", TablaPabloAsociacionesItems.filter((item) => item.status === 'ocupada'))}
 		{@const ocupadas_l = count_reservas("G", TablaPabloAsociacionesItems.filter((item) => item.status === 'ocupada'))}
 
-
 		<div class="grid grid-cols-3 place-items-center">
 			<div class="text-center" id="pop_reservadas_a">
 				<p class="text-dele-color dark:text-dark-primary">Reservadas</p>
@@ -448,55 +535,68 @@
 		</Popover>
 
 		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
-			<TableHead>
-				<TableHeadCell>Nombre</TableHeadCell>
-				<TableHeadCell>Taquilla</TableHeadCell>
-				<TableHeadCell>Código</TableHeadCell>
-				<TableHeadCell>Fecha</TableHeadCell>
-				<TableHeadCell>Estado</TableHeadCell>
-				<TableHeadCell>Acciones</TableHeadCell>
-			</TableHead>
-			<TableBody tableBodyClass="divide-y">
-				{#if filteredItems_a != null && filteredItems_a}
-					{#each filteredItems_a as item}
-						<TableBodyRow>
-							<TableBodyCell class="select-all">{item.nombre}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.taquilla}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.codigo}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.date}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
-							<TableBodyCell>
-								<div class="grid grid-cols-1 xl:grid-cols-2">
-									{#if item.status === "reservada"}
-										<button
-											class="xl:w-[95%] w-full mb-2 xl:mb-0 text-xs lg:text-md text-white bg-green-500 rounded p-1"
-											on:click={() => {
-												realizar_reserva(item.taquilla);
-											}}>
-											Confirmar
-										</button>
-										<button
-											class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-red-500 rounded p-1"
-											on:click={() => {
-												change_delete_modal_asociaciones(item);
-											}}>
-											Eliminar
-										</button>
-									{:else if item.status === "ocupada"}
-										<button
-											class="w-full text-xs lg:text-md text-white bg-red-500 rounded p-1 xl:col-span-2"
-											on:click={() => {
-												change_delete_modal_asociaciones(item);
-											}}>
-											Eliminar
-										</button>
-									{/if}
-								</div>
-							</TableBodyCell>
-						</TableBodyRow>
-					{/each}
-				{/if}
-			</TableBody>
+				<TableHead>
+					<TableHeadCell>Nombre</TableHeadCell>
+					<TableHeadCell class="grid grid-cols-2">
+						<div class="cursor-pointer w-1/2 hover:bg-gray-400" on:click={() => change_sorting_a()}>Taquilla</div>
+						{#if sorting_a}
+							{#if sorting_dir_a}
+								<button on:click={() => change_sorting_dir_a()} class="w-1/12">
+									<CaretDownSolid/>
+								</button>
+							{:else}
+								<button on:click={() => change_sorting_dir_a()} class="w-1/12">
+									<CaretUpSolid/>
+								</button>
+							{/if}
+						{/if}
+					</TableHeadCell>
+					<TableHeadCell>Código</TableHeadCell>
+					<TableHeadCell>Fecha</TableHeadCell>
+					<TableHeadCell>Estado</TableHeadCell>
+					<TableHeadCell>Acciones</TableHeadCell>
+				</TableHead>
+				<TableBody tableBodyClass="divide-y">
+					{#if sortedItems_a != null && sortedItems_a}
+						{#each sortedItems_a as item}
+							<TableBodyRow>
+								<TableBodyCell class="select-all">{item.nombre}</TableBodyCell>
+								<TableBodyCell class="select-all">{item.taquilla}</TableBodyCell>
+								<TableBodyCell class="select-all">{item.codigo}</TableBodyCell>
+								<TableBodyCell class="select-all">{item.date}</TableBodyCell>
+								<TableBodyCell class="select-all">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
+								<TableBodyCell>
+									<div class="grid grid-cols-1 xl:grid-cols-2">
+										{#if item.status === "reservada"}
+											<button
+												class="xl:w-[95%] w-full mb-2 xl:mb-0 text-xs lg:text-md text-white bg-green-500 rounded p-1"
+												on:click={() => {
+													realizar_reserva(item.taquilla);
+												}}>
+												Confirmar
+											</button>
+											<button
+												class="xl:w-[95%] w-full text-xs lg:text-md text-white bg-red-500 rounded p-1"
+												on:click={() => {
+													change_delete_modal_asociaciones(item);
+												}}>
+												Eliminar
+											</button>
+										{:else if item.status === "ocupada"}
+											<button
+												class="w-full text-xs lg:text-md text-white bg-red-500 rounded p-1 xl:col-span-2"
+												on:click={() => {
+													change_delete_modal_asociaciones(item);
+												}}>
+												Eliminar
+											</button>
+										{/if}
+									</div>
+								</TableBodyCell>
+							</TableBodyRow>
+						{/each}
+					{/if}
+				</TableBody>
 		</TableSearch>
 	</TabItem>
 	<TabItem
