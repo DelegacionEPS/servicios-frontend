@@ -56,6 +56,7 @@ export const actions = {
 		const result = getReservasTaquilla(taquilla);
 		return result;
 	},
+	
 	registerTaquilla: async ({ cookies, request }) => {
 		const data = await request.formData();
 		const taquilla = data.get('taquilla');
