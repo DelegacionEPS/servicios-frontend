@@ -17,7 +17,7 @@
 	Perfil
 </h1>
 
-<Tabs tabStyle="underline" contentClass="p-4" class="px-8">
+<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-scroll" tabStyle="underline" contentClass="p-4" class="px-8">
 	<TabItem
 		open
 		title="Mis Taquillas"

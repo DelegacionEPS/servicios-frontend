@@ -307,7 +307,7 @@
 <h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
 	Gestión de Taquillas
 </h1>
-<Tabs tabStyle="underline" contentClass="p-4" class="px-8">
+<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-scroll" class="px-8" tabStyle="underline" contentClass="p-4">
 	<TabItem
 		open
 		title="Búsqueda por NIA"
@@ -780,7 +780,7 @@
 		{:else}<span class="font-bold"> 4€ </span>
 		{/if} el año completo y la mitad por el segundo cuatrimestre.
 	</p>
-	<Tabs>
+	<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-scroll">
 		<TabItem
 			open
 			title="Estudiantes"
@@ -789,7 +789,6 @@
 			inactiveClasses="text-gray-500 hover:text-dele-color p-2 dark:hover:text-dark-primary sm:text-base text-xs"
 			>
 			<form class="flex flex-col" action="?/registerTaquilla" method="post">
-				<Input type="hidden" id="correo" name="correo" value={session?.user?.email} required />
 				<Label class="mb-4">
 					<span>NIA:</span>
 					<Input type="text" id="nia" name="nia" placeholder="100xxxxxx" required />
