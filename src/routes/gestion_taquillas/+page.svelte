@@ -240,12 +240,16 @@
 		else {
 			if (!sorting_dir) {
 			sortedItems = [...filteredItems].sort((a, b) => {
-				return a.taquilla.localeCompare(b.taquilla);
+				let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+				let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+				return trimmed_a.localeCompare(trimmed_b);
 			});
 			}
 			else {
 				sortedItems = [...filteredItems].sort((a, b) => {
-					return b.taquilla.localeCompare(a.taquilla);
+					let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+					let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+					return trimmed_b.localeCompare(trimmed_a);
 				});
 			}
 		}
@@ -254,12 +258,16 @@
 	function change_sorting_dir() {
 		if (sorting_dir) {
 			sortedItems = [...filteredItems].sort((a, b) => {
-				return a.taquilla.localeCompare(b.taquilla);
+				let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+				let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+				return trimmed_a.localeCompare(trimmed_b);
 			});
 		}
 		else {
 			sortedItems = [...filteredItems].sort((a, b) => {
-				return b.taquilla.localeCompare(a.taquilla);
+				let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+				let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+				return trimmed_b.localeCompare(trimmed_a);
 			});
 		}
 		sorting_dir = !sorting_dir;
@@ -277,12 +285,16 @@
 		else {
 			if (!sorting_dir_a) {
 			sortedItems_a = [...filteredItems_a].sort((a, b) => {
-				return a.taquilla.localeCompare(b.taquilla);
+				let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+				let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+				return trimmed_a.localeCompare(trimmed_b);
 			});
 			}
 			else {
 				sortedItems_a = [...filteredItems_a].sort((a, b) => {
-					return b.taquilla.localeCompare(a.taquilla);
+					let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+					let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+					return trimmed_b.localeCompare(trimmed_a);
 				});
 			}
 		}
@@ -291,12 +303,16 @@
 	function change_sorting_dir_a() {
 		if (sorting_dir_a) {
 			sortedItems_a = [...filteredItems_a].sort((a, b) => {
-				return a.taquilla.localeCompare(b.taquilla);
+				let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+				let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+				return trimmed_a.localeCompare(trimmed_b);
 			});
 		}
 		else {
 			sortedItems_a = [...filteredItems_a].sort((a, b) => {
-				return b.taquilla.localeCompare(a.taquilla);
+				let trimmed_a = a.taquilla.substring(0, 4) + a.taquilla.substring(7);
+				let trimmed_b = b.taquilla.substring(0, 4) + b.taquilla.substring(7);
+				return trimmed_b.localeCompare(trimmed_a);
 			});
 		}
 		sorting_dir_a = !sorting_dir_a;
