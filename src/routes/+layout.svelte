@@ -10,6 +10,7 @@
 		CloseButton,
 		DarkMode,
 		Drawer,
+		Popover,
 		Sidebar,
 		SidebarDropdownItem,
 		SidebarDropdownWrapper,
@@ -168,11 +169,17 @@
 			{:else}
 				<div></div>
 			{/if}
-			<button on:click={() => login()} class="bg-white rounded-3xl h-10 w-10 place-self-center">
+			<button on:click={() => login()} class="bg-white rounded-3xl h-10 w-10 place-self-center" id = "pop_account">
 				<UserCircleOutline class="h-8 w-8 m-auto" />
 			</button>
 		{/if}
 	</header>
+
+	<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Cuenta de la UC3M" triggeredBy="#pop_account">
+		<p class=" dark:text-white text-sm sm:text-base text-justify">
+			Recuerda iniciar sesión con tu cuenta de la universidad
+		</p>
+	</Popover >
 
 	<Breadcrumb
 		solidClass="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-none bg-gray-50 dark:bg-[#111719] dark:border-black"
