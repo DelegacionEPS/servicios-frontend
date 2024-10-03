@@ -318,7 +318,7 @@
 <h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
 	Gestión de Puestos
 </h1>
-<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-scroll" tabStyle="underline" contentClass="p-4" class="px-8">
+<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-auto" tabStyle="underline" contentClass="p-4" class="px-8">
 	<TabItem
 		open
 		title="Tabla Puestos de Eléctronica"

@@ -323,7 +323,7 @@
 <h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
 	Gestión de Taquillas
 </h1>
-<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-scroll" class="px-8" tabStyle="underline" contentClass="p-4">
+<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-auto" class="px-8" tabStyle="underline" contentClass="p-4">
 	<TabItem
 		open
 		title="Búsqueda por NIA"
@@ -796,7 +796,7 @@
 		{:else}<span class="font-bold"> 4€ </span>
 		{/if} el año completo y la mitad por el segundo cuatrimestre.
 	</p>
-	<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-scroll">
+	<Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-auto">
 		<TabItem
 			open
 			title="Estudiantes"
