@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
 	import { _handleResult } from './+page.ts';
 	import { Gallery, Thumbnails, Carousel, Popover, Button  } from 'flowbite-svelte';
 	import {QuestionCircleSolid} from 'flowbite-svelte-icons';
@@ -52,12 +53,12 @@
 <div class="grid grid-cols-1 place-items-center w-screen mt-6 mb-6">
 	<div class="max-w-4xl space-y-4">
 		<Carousel {images} {forward} let:Indicators let:Controls bind:index>
-			<a class="group" slot="slide" href={images[index]?.href} let:Slide let:index>
-				<Slide image={images[index]} href={images[index]?.href}/>
+			<a class="group" slot="slide" on:click={goto(images[index]?.href)} let:Slide let:index>
+				<Slide image={images[index]} on:click={goto(images[index]?.href)}/>
 				<h1
 					class="absolute left-1/2 top-1/2 md:text-2xl sm:text-lg text-sm text-dele-color px-6 py-2 rounded block dark:text-dark-primary"
 					style="transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.8)"
-					href={images[index]?.href}
+					on:click={goto(images[index]?.href)}
 				>
 					{titulos[index]}
 				</h1>

@@ -325,10 +325,10 @@
 </div>
 
 <div class="text-justified" style="min-height: 50vh;">
-	<h1 class="sm:text-4xl text-2xl text-center w-full py-6 dark:text-white dark:bg-[#070a17] mt-6 mb-6">
+	<h1 class="md:text-4xl text-2xl text-center w-full py-6 dark:text-white dark:bg-[#070a17] mt-6 mb-6">
 		INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS
 	</h1>
-	<div class="w-10/12 m-auto grid grid-cols-3">
+	<div class="w-10/12 m-auto grid md:grid-cols-3 grid-cols-2">
 		<h2 class="w-11/12 text-dele-color dark:text-dark-primary">RESPONSABLE DEL TRATAMIENTO
 			<p class="text-black dark:text-white">Universidad Carlos III de Madrid</p>
 		</h2> 
