@@ -320,7 +320,7 @@
 
 </script>
 
-<h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary">
+<h1 class="text-4xl text-center text-dele-color m-5 dark:bg-dark-background dark:text-dark-primary recompensa:bg-recompensa-secondarybackground recompensa:text-recompensa-primary">
 	Gestión de Taquillas
 </h1>
 <Tabs defaultClass="flex flex-coll space-x-2 rtl:space-x-reverse overflow-x-auto" class="px-8" tabStyle="underline" contentClass="p-4">
@@ -328,8 +328,8 @@
 		open
 		title="Búsqueda por NIA"
 		class=""
-		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent recompensa:text-recompensa-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary recompensa:text-recompensa-primary hover:recompensa:text-white sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -337,7 +337,7 @@
 		<form action="?/busquedaNia" method="post" use:enhance>
 			<div class="grid grid-cols-1 w-auto">
 				<div>
-					<Label class="w-4/5 m-auto text-xl text-dele-color">NIA</Label>
+					<Label class="w-4/5 m-auto text-xl text-dele-color recompensa:text-recompensa-primary">NIA</Label>
 					<Input
 						type="text"
 						id="NIA_s"
@@ -345,14 +345,14 @@
 						placeholder="NIA del usuario..."
 						pattern={'100[0-9]{6}'}
 						required
-						class="w-4/5 m-auto"
+						class="w-4/5 m-auto recompensa:bg-[#e0e0e0]"
 					/>
 				</div>
 			</div>
 			<div class="mt-8 grid grid-cols-1 w-auto place-items-center">
 				<Button
 					type="submit"
-					class="bg-dele-color text-white px-8 py-2 text-xl hover:bg-dele-color dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="bg-dele-color text-white px-8 py-2 text-xl hover:bg-dele-color dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent"
 					>Buscar</Button
 				>
 			</div>
@@ -361,8 +361,8 @@
 	<TabItem
 		title="Búsqueda por Taquilla"
 		class=""
-		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent recompensa:text-recompensa-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary recompensa:text-recompensa-primary hover:recompensa:text-white sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -370,7 +370,7 @@
 		<form action="?/busquedaTaquilla" method="post" use:enhance>
 			<div class="grid grid-cols-1 w-auto">
 				<div>
-					<Label class="w-4/5 m-auto text-xl text-dele-color">Taquilla</Label>
+					<Label class="w-4/5 m-auto text-xl text-dele-color recompensa:text-recompensa-primary">Taquilla</Label>
 					<Input
 						type="text"
 						id="Taquilla_s"
@@ -378,14 +378,14 @@
 						placeholder="Taquilla..."
 						pattern={'([0-9].){2}[A-Z].(G|P)[0-9]{3}'}
 						required
-						class="w-4/5 m-auto"
+						class="w-4/5 m-auto recompensa:bg-[#e0e0e0]"
 					/>
 				</div>
 			</div>
 			<div class="grid grid-cols-1 w-auto place-items-center">
 				<Button
 					type="submit"
-					class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-dele-color dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-dele-color dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent"
 					>Buscar</Button
 				>
 			</div>
@@ -394,8 +394,8 @@
 	<TabItem
 		title="Tabla Pablo"
 		class=""
-		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent recompensa:text-recompensa-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary recompensa:text-recompensa-primary hover:recompensa:text-white sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -410,38 +410,38 @@
 
 		<div class="grid grid-cols-3 place-items-center">
 			<div class="text-center" id="pop_reservadas">
-				<p class="text-dele-color dark:text-dark-primary">Reservadas</p>
-				<p class="text-2xl dark:text-dark-accent">{reservadas}</p>
+				<p class="text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">Reservadas</p>
+				<p class="text-2xl dark:text-dark-accent recompensa:text-recompensa-accent">{reservadas}</p>
 			</div>
 			<div class="text-center" id="pop_ocupadas">
-				<p class="text-dele-color dark:text-dark-primary">Ocupadas</p>
-				<p class="text-2xl dark:text-dark-accent">{ocupadas}</p>
+				<p class="text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">Ocupadas</p>
+				<p class="text-2xl dark:text-dark-accent recompensa:text-recompensa-accent">{ocupadas}</p>
 			</div>
 			<div class="text-center">
-				<p class="text-dele-color dark:text-dark-primary">No disponibles</p>
-				<p class="text-2xl dark:text-dark-accent">{no_disponibles}</p>
+				<p class="text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">No disponibles</p>
+				<p class="text-2xl dark:text-dark-accent recompensa:text-recompensa-accent">{no_disponibles}</p>
 			</div>
 		</div>
 
-		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Reservadas" triggeredBy="#pop_reservadas">
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary" title="Reservadas" triggeredBy="#pop_reservadas">
 			<div class="grid grid-cols-2">
-				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas:<p class="text-black dark:text-white">{reservadas_s}</p></div>
-				<div class="text-dele-color dark:text-dark-primary text-center">Grandes:<p class="text-black dark:text-white">{reservadas_l}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Pequeñas<p class="text-black dark:text-white recompensa:text-white">{reservadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Grandes<p class="text-black dark:text-white recompensa:text-white">{reservadas_l}</p></div>
 			</div>
 		</Popover>
 
-		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Ocupadas" triggeredBy="#pop_ocupadas">
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary" title="Ocupadas" triggeredBy="#pop_ocupadas">
 			<div class="grid grid-cols-2 ">
-				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas<p class="text-black dark:text-white">{ocupadas_s}</p></div>
-				<div class="text-dele-color dark:text-dark-primary text-center">Grandes<p class="text-black dark:text-white">{ocupadas_l}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Pequeñas<p class="text-black dark:text-white recompensa:text-white">{ocupadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Grandes<p class="text-black dark:text-white recompensa:text-white">{ocupadas_l}</p></div>
 			</div>
 		</Popover>
 
 		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
 			<TableHead>
-				<TableHeadCell>Nombre</TableHeadCell>
-				<TableHeadCell>Nia</TableHeadCell>
-				<TableHeadCell class="grid grid-cols-2 ">
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Nombre</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Nia</TableHeadCell>
+				<TableHeadCell class="grid grid-cols-2 recompensa:bg-recompensa-primary recompensa:text-white">
 					<div class="cursor-pointer w-1/2 hover:bg-gray-400" on:click={() => change_sorting()}>Taquilla</div>
 					{#if sorting}
 						{#if sorting_dir}
@@ -455,22 +455,22 @@
 						{/if}
 					{/if}
 				</TableHeadCell>
-				<TableHeadCell>Código</TableHeadCell>
-				<TableHeadCell>Fecha</TableHeadCell>
-				<TableHeadCell>Estado</TableHeadCell>
-				<TableHeadCell>Acciones</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Código</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Fecha</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Estado</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Acciones</TableHeadCell>
 			</TableHead>
 			<TableBody tableBodyClass="divide-y">
 				{#if sortedItems != null && sortedItems}
 					{#each sortedItems as item}
 						<TableBodyRow>
-							<TableBodyCell class="select-all">{item.nombre}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.nia}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.taquilla}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.codigo}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.date}</TableBodyCell>
-							<TableBodyCell class="select-all">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
-							<TableBodyCell>
+							<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.nombre}</TableBodyCell>
+							<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.nia}</TableBodyCell>
+							<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.taquilla}</TableBodyCell>
+							<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.codigo}</TableBodyCell>
+							<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.date}</TableBodyCell>
+							<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
+							<TableBodyCell class="recompensa:bg-[#e0e0e0]">
 								<div class="grid grid-cols-1 xl:grid-cols-2">
 									{#if item.status === "reservada"}
 										<button
@@ -507,8 +507,8 @@
 	<TabItem
 		title="Tabla Asociaciones"
 		class=""
-		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent recompensa:text-recompensa-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary recompensa:text-recompensa-primary hover:recompensa:text-white sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
@@ -523,37 +523,37 @@
 
 		<div class="grid grid-cols-3 place-items-center">
 			<div class="text-center" id="pop_reservadas_a">
-				<p class="text-dele-color dark:text-dark-primary">Reservadas</p>
-				<p class="text-2xl dark:text-dark-accent">{reservadas}</p>
+				<p class="text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">Reservadas</p>
+				<p class="text-2xl dark:text-dark-accent recompensa:text-recompensa-accent">{reservadas}</p>
 			</div>
 			<div class="text-center" id="pop_ocupadas_a">
-				<p class="text-dele-color dark:text-dark-primary">Ocupadas</p>
-				<p class="text-2xl dark:text-dark-accent">{ocupadas}</p>
+				<p class="text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">Ocupadas</p>
+				<p class="text-2xl dark:text-dark-accent recompensa:text-recompensa-accent">{ocupadas}</p>
 			</div>
 			<div class="text-center">
-				<p class="text-dele-color dark:text-dark-primary">No disponibles</p>
-				<p class="text-2xl dark:text-dark-accent">{no_disponibles}</p>
+				<p class="text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">No disponibles</p>
+				<p class="text-2xl dark:text-dark-accent recompensa:text-recompensa-accent">{no_disponibles}</p>
 			</div>
 		</div>
 
-		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Reservadas" triggeredBy="#pop_reservadas_a">
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary" title="Reservadas" triggeredBy="#pop_reservadas_a">
 			<div class="grid grid-cols-2">
-				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas:<p class="text-black dark:text-white">{reservadas_s}</p></div>
-				<div class="text-dele-color dark:text-dark-primary text-center">Grandes:<p class="text-black dark:text-white">{reservadas_l}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Pequeñas<p class="text-black dark:text-white recompensa:text-white">{reservadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Grandes<p class="text-black dark:text-white recompensa:text-white">{reservadas_l}</p></div>
 			</div>
 		</Popover>
 
-		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm" title="Ocupadas" triggeredBy="#pop_ocupadas_a">
+		<Popover class="text-black dark:text-white dark:bg-dark-secondary md:w-1/4 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary" title="Ocupadas" triggeredBy="#pop_ocupadas_a">
 			<div class="grid grid-cols-2 ">
-				<div class="text-dele-color dark:text-dark-primary text-center">Pequeñas<p class="text-black dark:text-white">{ocupadas_s}</p></div>
-				<div class="text-dele-color dark:text-dark-primary text-center">Grandes<p class="text-black dark:text-white">{ocupadas_l}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Pequeñas<p class="text-black dark:text-white recompensa:text-white">{ocupadas_s}</p></div>
+				<div class="text-dele-color dark:text-dark-primary text-center recompensa:text-recompensa-primary">Grandes<p class="text-black dark:text-white recompensa:text-white">{ocupadas_l}</p></div>
 			</div>
 		</Popover>
 
 		<TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
 				<TableHead>
-					<TableHeadCell>Nombre</TableHeadCell>
-					<TableHeadCell class="grid grid-cols-2">
+					<TableHeadCell class="recompensa:bg-recompensa-primary text-white">Nombre</TableHeadCell>
+					<TableHeadCell class="recompensa:bg-recompensa-primary text-white grid grid-cols-2">
 						<div class="cursor-pointer w-1/2 hover:bg-gray-400" on:click={() => change_sorting_a()}>Taquilla</div>
 						{#if sorting_a}
 							{#if sorting_dir_a}
@@ -567,21 +567,21 @@
 							{/if}
 						{/if}
 					</TableHeadCell>
-					<TableHeadCell>Código</TableHeadCell>
-					<TableHeadCell>Fecha</TableHeadCell>
-					<TableHeadCell>Estado</TableHeadCell>
-					<TableHeadCell>Acciones</TableHeadCell>
+					<TableHeadCell class="recompensa:bg-recompensa-primary text-white">Código</TableHeadCell>
+					<TableHeadCell class="recompensa:bg-recompensa-primary text-white">Fecha</TableHeadCell>
+					<TableHeadCell class="recompensa:bg-recompensa-primary text-white">Estado</TableHeadCell>
+					<TableHeadCell class="recompensa:bg-recompensa-primary text-white">Acciones</TableHeadCell>
 				</TableHead>
 				<TableBody tableBodyClass="divide-y">
 					{#if sortedItems_a != null && sortedItems_a}
 						{#each sortedItems_a as item}
 							<TableBodyRow>
-								<TableBodyCell class="select-all">{item.nombre}</TableBodyCell>
-								<TableBodyCell class="select-all">{item.taquilla}</TableBodyCell>
-								<TableBodyCell class="select-all">{item.codigo}</TableBodyCell>
-								<TableBodyCell class="select-all">{item.date}</TableBodyCell>
-								<TableBodyCell class="select-all">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
-								<TableBodyCell>
+								<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.nombre}</TableBodyCell>
+								<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.taquilla}</TableBodyCell>
+								<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.codigo}</TableBodyCell>
+								<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.date}</TableBodyCell>
+								<TableBodyCell class="select-all recompensa:bg-[#e0e0e0]">{item.status.charAt(0).toUpperCase() + item.status.slice(1)}</TableBodyCell>
+								<TableBodyCell class="recompensa:bg-[#e0e0e0]">
 									<div class="grid grid-cols-1 xl:grid-cols-2">
 										{#if item.status === "reservada"}
 											<button
@@ -618,25 +618,25 @@
 	<TabItem
 		title="Taquillas Rotas"
 		class=""
-		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent"
-		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary sm:text-base text-xs"
+		activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent recompensa:text-recompensa-accent"
+		inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary recompensa:text-recompensa-primary hover:recompensa:text-white sm:text-base text-xs"
 		on:focus={() => {
 			form = '';
 		}}
 	>
 		<TableSearch placeholder="Busca por Taquilla" hoverable={true} bind:inputValue={searchTerm}>
 			<TableHead>
-				<TableHeadCell>Taquilla</TableHeadCell>
-				<TableHeadCell>No disponible desde</TableHeadCell>
-				<TableHeadCell>Reparar</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Taquilla</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">No disponible desde</TableHeadCell>
+				<TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">Reparar</TableHeadCell>
 			</TableHead>
 			<TableBody tableBodyClass="divide-y">
 				{#if taquillasRotas != null && taquillasRotas}
 					{#each taquillasRotas as item}
 						<TableBodyRow>
-							<TableBodyCell>{item.taquilla}</TableBodyCell>
-							<TableBodyCell>{item.date}</TableBodyCell>
-							<TableBodyCell>
+							<TableBodyCell class="recompensa:bg-[#e0e0e0]">{item.taquilla}</TableBodyCell>
+							<TableBodyCell class="recompensa:bg-[#e0e0e0]">{item.date}</TableBodyCell>
+							<TableBodyCell class="recompensa:bg-[#e0e0e0]">
 								<button
 									class="w-full text-white bg-green-500 dark:text-white rounded p-1"
 									on:click={() => {
@@ -657,9 +657,9 @@
 <div class="w-screen grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center mt-2">
 	{#if form != null && form && form.reservas}
 		{#each form.reservas as taquilla}
-			<Card class="mt-2">
+			<Card class="mt-2 recompensa:bg-recompensa-secondary recompensa:border-recompensa-primary">
 				<div class="flex place-content-between ">
-					<h5 class="text-2xl font-medium underline text-dele-color dark:text-dark-primary">
+					<h5 class="text-2xl font-medium underline text-dele-color dark:text-dark-primary recompensa:text-white">
 						{taquilla['taquilla']}
 					</h5>
 					{#if taquilla['status'] === 'reservada'}
@@ -679,13 +679,13 @@
 				</div>
 				{#if taquilla['status'] === 'reservada' || taquilla['status'] === 'ocupada'}
 					{#if taquilla["nia"]}
-						<p class="text-black text-sm mt-4 dark:text-white">
+						<p class="text-black text-sm mt-4 dark:text-white recompensa:text-white">
 							Reservada por {taquilla['nombre']} (<b>{taquilla['nia']}</b>) el {taquilla['date'].split(' ')[0]} a las {taquilla[
 								'date'
 							].split(' ')[1]}
 						</p>
 					{:else}
-						<p class="text-black text-sm mt-4 dark:text-white">
+						<p class="text-black text-sm mt-4 dark:text-white recompensa:text-white">
 							Reservada por {taquilla['asociacion']} el {taquilla['date'].split(' ')[0]} a las {taquilla['date'].split(' ')[1]}
 						</p>
 					{/if}
@@ -788,9 +788,9 @@
 	{/if}
 </div>
 
-<Modal bind:open={formModalReservation} size="xs" autoclose={false} class="w-full">
-	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Reservar Taquilla</h3>
-	<p>
+<Modal bind:open={formModalReservation} size="xs" autoclose={false} class="w-full recompensa:bg-recompensa-secondary">
+	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white recompensa:text-white">Reservar Taquilla</h3>
+	<p class="dark:text-white recompensa:text-white">
 		El precio de la taquilla es de
 		{#if selectedTaquilla.includes('G')}<span class="font-bold"> 6€ </span>
 		{:else}<span class="font-bold"> 4€ </span>
@@ -801,26 +801,26 @@
 			open
 			title="Estudiantes"
 			class=""
-			activeClasses="sm:text-base text-xs p-2 text-dele-accent dark:text-dark-accent"
-			inactiveClasses="text-gray-500 hover:text-dele-color p-2 dark:hover:text-dark-primary sm:text-base text-xs"
+			activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent recompensa:text-recompensa-accent"
+			inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary recompensa:text-recompensa-primary hover:recompensa:text-white sm:text-base text-xs"
 			>
 			<form class="flex flex-col" action="?/registerTaquilla" method="post">
 				<Label class="mb-4">
-					<span>NIA:</span>
-					<Input type="text" id="nia" name="nia" placeholder="100xxxxxx" required />
+					<span class="recompensa:text-recompensa-primary">NIA:</span>
+					<Input class="recompensa:bg-[#e0e0e0]" type="text" id="nia" name="nia" placeholder="100xxxxxx" required />
 				</Label>
 				<Label class="mb-4">
-					<span>Taquilla</span>
-					<Input type="text" id="taquilla" name="taquilla" value={selectedTaquilla} readonly required />
+					<span class="recompensa:text-recompensa-primary">Taquilla</span>
+					<Input class="recompensa:bg-[#e0e0e0]" type="text" id="taquilla" name="taquilla" value={selectedTaquilla} readonly required />
 				</Label>
 				<Label class="mb-4">
-					<span>Nombre:</span>
-					<Input type="text" id="nombre" name="nombre" required />
+					<span class="recompensa:text-recompensa-primary">Nombre:</span>
+					<Input class="recompensa:bg-[#e0e0e0]" type="text" id="nombre" name="nombre" required />
 				</Label>
 				
 				<Button
 					type="submit"
-					class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent"
 					on:click={() => {
 						show_results = false;
 					}}>
@@ -831,18 +831,18 @@
 		<TabItem
 			title="Asociaciones"
 			class=""
-			activeClasses="sm:text-base text-xs p-2 text-dele-accent dark:text-dark-accent"
-			inactiveClasses="text-gray-500 hover:text-dele-color p-2 dark:hover:text-dark-primary sm:text-base text-xs"
+			activeClasses="sm:text-base text-xs p-4 text-dele-accent dark:text-dark-accent recompensa:text-recompensa-accent"
+			inactiveClasses="text-gray-500 hover:text-dele-color p-4 dark:hover:text-dark-primary recompensa:text-recompensa-primary hover:recompensa:text-white sm:text-base text-xs"
 		>
 			<form class="flex flex-col" action="?/registerTaquillaAssociation" method="post" on:submit|preventDefault={handleFormSubmit}>
 				<Label class="mb-4">
-					<span>Taquilla</span>
-					<Input type="text" id="taquilla" name="taquilla" value={selectedTaquilla} readonly required />
+					<span class="recompensa:text-recompensa-primary">Taquilla</span>
+					<Input class="recompensa:bg-[#e0e0e0]" type="text" id="taquilla" name="taquilla" value={selectedTaquilla} readonly required />
 				</Label>
 				<Input type="hidden" id="correo" name="correo" value={association_selected["correo"]} required />
 				<Input type="hidden" id="nombre" name="nombre" value={association_selected["nombre"]} required />
 				<Label class="mb-4">
-					<Button class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent">
+					<Button class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent">
 						Asociación: 
 							{#if association_selected["nombre"]}
 								{association_selected["nombre"]} 
@@ -851,13 +851,13 @@
 							{/if}
 							<ChevronDownOutline class="w-6 h-6 ms-2 text-white dark:text-white" />
 					</Button>
-					<Dropdown bind:open={openDropdown}>
+					<Dropdown bind:open={openDropdown} class="recompensa:bg-recompensa-secondary">
 						<div slot="header" class="px-4 py-2">
 							<span class="block text-sm text-gray-900 dark:text-white">Selecciona una asociación</span>
 						</div>
 						{#each asociaciones as asociacion}
 							<DropdownItem 
-							class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+							class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600 recompensa:text-white hover:recompensa:bg-recompensa-accent"
 							on:click={() => closeModalAssignAssociation(asociacion)}>
 								{#if asociacion["nombre"] && asociacion["nombre"] != ""}
 									{asociacion["nombre"]}
@@ -868,7 +868,7 @@
 				</Label>
 				<Button
 					type="submit"
-					class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+					class="w-full bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent"
 					on:click={() => {
 						show_results = false;
 					}}>Reservar Taquilla</Button
@@ -881,16 +881,16 @@
 
 <ModalIniciaSesion bind:openForm={openModalIniciaSesion}></ModalIniciaSesion>
 
-<Modal bind:open={deleteModal} size="xs" autoclose={false} class="w-full">
+<Modal bind:open={deleteModal} size="xs" autoclose={false} class="w-full recompensa:bg-recompensa-secondary">
 	<form class="flex flex-col space-y-6">
-		<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">Eliminar Reserva</h3>
-		<p>Vas a eliminar una reserva con los siguientes datos:</p>
+		<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white recompensa:text-white">Eliminar Reserva</h3>
+		<p class="dark:text-white recompensa:text-white">Vas a eliminar una reserva con los siguientes datos:</p>
 		<Label class="space-y-2">
-			<span>NIA:</span>
+			<span class="recompensa:text-recompensa-primary">NIA:</span>
 			<Input type="text" id="nia" name="nia" value={currentTaquilla['nia']} readonly required />
 		</Label>
 		<Label class="space-y-2">
-			<span>Taquilla</span>
+			<span class="recompensa:text-recompensa-primary">Taquilla</span>
 			<Input
 				type="text"
 				id="taquilla"
@@ -902,7 +902,7 @@
 		</Label>
 		<Button
 			type="submit"
-			class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent"
+			class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent"
 			on:click={(ev) => {
 				ev.preventDefault();
 				deleteModal = false;
