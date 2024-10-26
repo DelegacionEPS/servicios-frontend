@@ -59,7 +59,7 @@
 	}
 
 	function logout() {
-		signOut();
+		signOut(); 
 		doing_login = false;
 	}
 
