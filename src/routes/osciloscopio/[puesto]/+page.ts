@@ -4,9 +4,15 @@ import { error } from '@sveltejs/kit';
 // Page sizes 
 
 export const load = (({params, data}) => {
+    
+    if (params?.session != null && !params?.session?.user?.email?.endsWith('@alumnos.uc3m.es')) {
+        throw redirect(302, '/');
+    }
+
 	if (!['1', '2', '3'].includes(params.puesto)) {
 		error(404, `Esta página no se ha podido encontrar el puesto: "${params.puesto}"`);
 	}
+
 
 	let plantilla = data.plantilla ?? {"plantilla": {}};
 

@@ -140,15 +140,17 @@
 <Modal bind:open={formModalInformationError} size="xs" autoclose={false} class="w-full recompensa:bg-recompensa-secondary">
 	<h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white recompensa:text-white">Error</h3>
 	<p class="dark:text-white recompensa:text-white">Debes iniciar sesión para reservar un puesto</p>
-	<Button
-		type="button"
-		class="w-full1 bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent"
-		on:click={() => {
+    <div class="grid grid-cols-1 place-items-center">
+	    <Button
+		    type="button"
+		    class="bg-green-500 hover:bg-dele-accent dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent m-auto"
+		    on:click={() => {
 			signIn();
-		}}
-	>
-		Iniciar Sesión
-	</Button>
+		    }}
+	    >
+		    Iniciar Sesión
+	    </Button>
+    </div>
 </Modal>
 
 <Modal bind:open={formModalDateError} size="xs" autoclose={false} class="w-full recompensa:bg-recompensa-secondary">

@@ -12,7 +12,9 @@
 		return new Date(d.setDate(diff));
 	}
 
-	let monday1 = getMonday(new Date());	
+	let monday1 = getMonday(new Date());
+	monday1.setDate(monday1.getDate() - 7);
+
 	let monday2 = new Date();
 	monday2.setDate(monday1.getDate() + 7);
 	
