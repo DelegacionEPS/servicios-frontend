@@ -220,7 +220,7 @@
 				class="flex gap-2 w-full"
 			>
 				<AnnotationSolid class="mt-1 h-8 w-8" />
-				Encuestas 2ºC 2024
+				Encuestas 1ºC 24/25
 			</p>
 			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
 				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent" on:click={() => {goto("./encuestas")}}>
@@ -307,7 +307,7 @@
 		<p class="flex items-center justify-center text-lg sm:p-12 p-16 sm:text-2xl">
 			Si quieres saber el porcentaje de participación por grado en las encuestas de evaluación del
 			profesorado, haz click en el siguiente botón. Actualmente, se muestran las encuestas del
-			segundo cuatrimeste del curso 2023/2024.
+			primer cuatrimeste del curso 2024/2025.
 			<br /><br />
 			Es muy importante participar en las encuestas, ya que con los resultados, podemos centrar los
 			esfuerzos en las asignaturas que más lo necesitan.
