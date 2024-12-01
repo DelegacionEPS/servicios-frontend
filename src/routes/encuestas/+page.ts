@@ -30,8 +30,8 @@ Grado en Ingeniería Informática - Colmenarejo,17.69%
 Grado en Ingeniería Mecánica,14.35%
 Grado en Ingeniería Robótica,07.53%
 Grado en Ingeniería Telemática,07.75%
-Grado en Matemática Aplicada y Computación,10.6%
-`;
+Grado en Matemática Aplicada y Computación,10.6%`;
+
 function parseCSV(csv: String) {
 	// Parse CSV
 	const parsedData = Papa.parse(csv, { header: true });
