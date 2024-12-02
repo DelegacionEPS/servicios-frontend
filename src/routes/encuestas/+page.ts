@@ -9,28 +9,28 @@ export const load = (async () => {
 }) satisfies PageLoad;
 
 let csv_data = `GRADO,P
-ESCUELA POLITÉCNICA SUPERIOR,13.65%
-Doble Grado Ciencia e Ingeniería de Datos - Ingeniería en Tecnologías de Telecomunicación,09.09%
+ESCUELA POLITÉCNICA SUPERIOR,14.6%
+Doble Grado Ciencia e Ingeniería de Datos - Ingeniería en Tecnologías de Telecomunicación,09.74%
 Doble Grado en Ingeniería Informática y Administración de Empresas - Colmenarejo,21.21%
 Doble Grado en Ingeniería Informática y Administración de Empresas - Leganés,13.09%
-Grado en Ciencia e Ingeniería de Datos,08.14%
+Grado en Ciencia e Ingeniería de Datos,08.92%
 Grado en Ciencias,25.00%
-Grado en Ingeniería Aeroespacial,15.34%
-Grado en Ingeniería Biomédica,09.26%
-Grado en Ingeniería de Comunicaciones Móviles y Espaciales,12.28%
-Grado en Ingeniería de la Energía,10.46%
+Grado en Ingeniería Aeroespacial,17.49%
+Grado en Ingeniería Biomédica,09.49%
+Grado en Ingeniería de Comunicaciones Móviles y Espaciales,13.55%
+Grado en Ingeniería de la Energía,11.13%
 Grado en Ingeniería de Sonido e Imagen,09.41%
-Grado en Ingeniería Eléctrica,10.58%
-Grado en Ingeniería Electrónica Industrial y Automática,13.66%
-Grado en Ingeniería en Tecnologías de Telecomunicación,14.85%
-Grado en Ingeniería en Tecnologías Industriales,12.98%
-Grado en Ingeniería Física,26.09%
-Grado en Ingeniería Informática - Leganés,18.13%
+Grado en Ingeniería Eléctrica,11.14%
+Grado en Ingeniería Electrónica Industrial y Automática,14.74%
+Grado en Ingeniería en Tecnologías de Telecomunicación,15.8%
+Grado en Ingeniería en Tecnologías Industriales,13.67%
+Grado en Ingeniería Física,26.55%
+Grado en Ingeniería Informática - Leganés,19.48%
 Grado en Ingeniería Informática - Colmenarejo,17.69%
-Grado en Ingeniería Mecánica,14.35%
-Grado en Ingeniería Robótica,07.53%
-Grado en Ingeniería Telemática,07.75%
-Grado en Matemática Aplicada y Computación,10.6%`;
+Grado en Ingeniería Mecánica,15.34%
+Grado en Ingeniería Robótica,10.75%
+Grado en Ingeniería Telemática,08.05%
+Grado en Matemática Aplicada y Computación,11.6%`;
 
 function parseCSV(csv: String) {
 	// Parse CSV
