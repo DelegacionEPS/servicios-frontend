@@ -1,36 +1,36 @@
 import type { PageLoad } from './$types';
 import Papa from 'papaparse';
 
-const FCSJ = '33.80%';
-const FHCD = '32.80%';
+const FCSJ = '36.57%';
+const FHCD = '37.26%';
 
 export const load = (async () => {
 	return {};
 }) satisfies PageLoad;
 
 let csv_data = `GRADO,P
-ESCUELA POLITÉCNICA SUPERIOR,35.71%
-Doble Grado Ciencia e Ingeniería de Datos - Ingeniería en Tecnologías de Telecomunicación,29.22%
-Doble Grado en Ingeniería Informática y Administración de Empresas - Colmenarejo,45.45%
-Doble Grado en Ingeniería Informática y Administración de Empresas - Leganés,29.9%
-Grado en Ciencia e Ingeniería de Datos,38.01%
+ESCUELA POLITÉCNICA SUPERIOR,38.7%
+Doble Grado Ciencia e Ingeniería de Datos - Ingeniería en Tecnologías de Telecomunicación,32.25%
+Doble Grado en Ingeniería Informática y Administración de Empresas - Colmenarejo,48.48%
+Doble Grado en Ingeniería Informática y Administración de Empresas - Leganés,35.81%
+Grado en Ciencia e Ingeniería de Datos,40.78%
 Grado en Ciencias,5.00%
-Grado en Ingeniería Aeroespacial,46.87%
-Grado en Ingeniería Biomédica,33.89%
-Grado en Ingeniería de Comunicaciones Móviles y Espaciales,41.3%
-Grado en Ingeniería de la Energía,31.66%
-Grado en Ingeniería de Sonido e Imagen,34.69%
-Grado en Ingeniería Eléctrica,27.62%
-Grado en Ingeniería Electrónica Industrial y Automática,36.53%
-Grado en Ingeniería en Tecnologías de Telecomunicación,35.58%
-Grado en Ingeniería en Tecnologías Industriales,30.64%
-Grado en Ingeniería Física,53.85%
-Grado en Ingeniería Informática - Leganés,36.12%
-Grado en Ingeniería Informática - Colmenarejo,34.5%
-Grado en Ingeniería Mecánica,31.87%
-Grado en Ingeniería Robótica,44.8%
-Grado en Ingeniería Telemática,35.87%
-Grado en Matemática Aplicada y Computación,48.14%`;
+Grado en Ingeniería Aeroespacial,49.73%
+Grado en Ingeniería Biomédica,39.46%
+Grado en Ingeniería de Comunicaciones Móviles y Espaciales,44.37%
+Grado en Ingeniería de la Energía,34.04%
+Grado en Ingeniería de Sonido e Imagen,35.98%
+Grado en Ingeniería Eléctrica,30.4%
+Grado en Ingeniería Electrónica Industrial y Automática,39.11%
+Grado en Ingeniería en Tecnologías de Telecomunicación,37.65%
+Grado en Ingeniería en Tecnologías Industriales,33.17%
+Grado en Ingeniería Física,59.28%
+Grado en Ingeniería Informática - Leganés,40.37%
+Grado en Ingeniería Informática - Colmenarejo,36.39%
+Grado en Ingeniería Mecánica,33.63%
+Grado en Ingeniería Robótica,46.95%
+Grado en Ingeniería Telemática,37.23%
+Grado en Matemática Aplicada y Computación,54.01%`;
 
 function parseCSV(csv: String) {
 	// Parse CSV
