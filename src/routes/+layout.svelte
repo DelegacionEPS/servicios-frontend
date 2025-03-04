@@ -147,7 +147,7 @@
 		localStorage.setItem('theme', newTheme);
 	}
 
-	const correos_premiados = ['100472310@alumnos.uc3m.es', '100472175@alumnos.uc3m.es', '100495832@alumnos.uc3m.es', '100550037@alumnos.uc3m.es', '100522166@alumnos.uc3m.es'];
+	const correos_premiados = ['100472310@alumnos.uc3m.es', '100472175@alumnos.uc3m.es', '100495832@alumnos.uc3m.es', '100550037@alumnos.uc3m.es', '100522166@alumnos.uc3m.es' ];
 </script>
 
 <link
