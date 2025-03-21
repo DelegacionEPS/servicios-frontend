@@ -137,7 +137,7 @@
 		}
 	});
 
-	function setTheme(newTheme) {
+	function setTheme(newTheme: string) {
 		// Remueve todas las clases de tema antes de añadir la nueva
 		document.documentElement.classList.remove('light', 'dark', 'recompensa');
 		document.documentElement.classList.add(newTheme);
@@ -155,9 +155,9 @@
 	rel="stylesheet"
 />
 
-<body class="dark:bg-dark-background recompensa:bg-recompensa-background">
+<body class="dark:bg-dark-background recompensa:bg-recompensa-background selection:bg-[#FFB300] selection:text-white">
 	<header
-		class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary recompensa:bg-recompensa-primary"
+		class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary recompensa:bg-recompensa-primary navbar sticky top-0 z-50 shadow-md"
 	>
 		<button class="sm:w-12 sm:h-12 w-16 h-10" on:click={() => (hidden2 = !hidden2)}>
 			<BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />

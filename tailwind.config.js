@@ -47,7 +47,7 @@ const config = {
     'recompensa-primary': '#757575',      // Plata
     'recompensa-secondary': '#111719',      // Negro
     'recompensa-accent': '#9a0f0f',         // Rojo
-    'recompensa-background': '#020202ff',  // Negro              
+    'recompensa-background': '#020202ff',  // Negro     
     },
   },
  },
