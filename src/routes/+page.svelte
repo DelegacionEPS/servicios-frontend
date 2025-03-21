@@ -46,7 +46,7 @@
 
 <!-- Hero Section - Enhanced with gradient and animation -->
 <div
-	class="bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-dark-background dark:via-gray-900 dark:to-dark-secondary recompensa:from-recompensa-background recompensa:via-gray-900 recompensa:to-recompensa-secondary"
+	class="bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-200 dark:from-blue-900 dark:via-indigo-900 dark:to-purple-900 recompensa:from-green-500 recompensa:via-green-600 recompensa:to-green-700"
 >
 	<div class="container mx-auto px-4 py-20 md:py-12">
 		<div class="text-center mb-14 animate-fadeIn">
@@ -101,6 +101,8 @@
 		<a
 			class="underline text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary hover:text-dele-accent hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent cursor-pointer font-medium"
 			on:click={copy}
+			role="button"
+			aria-label="Copy email address to clipboard"
 		>
 			delegeps@uc3m.es
 		</a>.
@@ -273,7 +275,7 @@
 <!-- Info Sections - Enhanced with better styling and animations -->
 <section
 	id="Taquillas"
-	class="py-20 bg-gradient-to-br from-dele-color to-dele-accent dark:from-dark-secondary dark:to-dark-primary recompensa:from-recompensa-secondary recompensa:to-recompensa-primary"
+	class="py-20 bg-gradient-to-br from-purple-200 via-pink-200 to-red-200 dark:from-purple-900 dark:via-pink-900 dark:to-red-900 recompensa:from-teal-500 recompensa:via-teal-600 recompensa:to-teal-700"
 >
 	<div class="container mx-auto px-6">
 		<div class="flex flex-col lg:flex-row items-center justify-between gap-16">
@@ -289,7 +291,11 @@
 					>
 						La delegación de estudiantes gestiona las taquillas de la universidad. Si quieres
 						alquilar una, simplemente tendrás que elegir la que quieres y luego rellenar un
-						formulario para reservarla.
+						<span
+							class="underline hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium"
+						>
+							<a href="/taquillas">formulario para reservarla.</a></span
+						>
 						<br /><br />
 						Para poder reservar, primero debes escoger el edificio y la planta. Tras ello, deberás seleccionar
 						un bloque para escoger la taquilla que quieras reservar.
@@ -313,13 +319,13 @@
 
 <section
 	id="Osciloscopios"
-	class="py-20 bg-white dark:bg-dark-background recompensa:bg-recompensa-background"
+	class="py-20 bg-gradient-to-br from-indigo-200 via-blue-200 to-green-200 dark:from-indigo-900 dark:via-blue-900 dark:to-green-900 recompensa:from-orange-500 recompensa:via-orange-600 recompensa:to-orange-700"
 >
 	<div class="container mx-auto px-6">
 		<div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-16">
 			<div class="lg:w-1/3 w-full">
 				<button
-					class="w-full text-white text-xl px-10 py-8 bg-dele-accent hover:bg-dele-accent-hove rounded-2xl flex items-center gap-5 dark:bg-dark-primary recompensa:bg-recompensa-primary hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
+					class="w-full text-white text-xl px-10 py-8 bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm rounded-2xl flex items-center gap-5 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border border-white border-opacity-30"
 					on:click={() => {
 						goto('./osciloscopio');
 					}}
@@ -330,10 +336,14 @@
 			</div>
 			<div class="lg:w-1/2 w-full">
 				<div
-					class="bg-gradient-to-br from-dele-color to-dele-accent dark:from-dark-secondary dark:to-dark-primary recompensa:from-recompensa-secondary recompensa:to-recompensa-primary rounded-3xl shadow-2xl p-10 transform hover:scale-105 transition-transform duration-300 text-white border-4 border-white border-opacity-10"
+					class="bg-white dark:bg-dark-background recompensa:bg-recompensa-background rounded-3xl shadow-2xl p-10 transform hover:scale-105 transition-transform duration-300 border-4 dark:border-dark-primary recompensa:border-recompensa-primary"
 				>
-					<h2 class="text-3xl font-bold mb-6">Puestos de Electrónica</h2>
-					<p class="text-gray-100 text-lg leading-relaxed">
+					<h2 class="text-3xl font-bold mb-6 text-dele-color dark:text-white recompensa:text-white">
+						Puestos de Electrónica
+					</h2>
+					<p
+						class="text-gray-700 dark:text-gray-200 recompensa:text-gray-200 text-lg leading-relaxed"
+					>
 						El despacho de delegación cuenta con tres puestos de electrónica que los estudiantes
 						pueden usar y prestamos un servicio de reserva. Para dar servicio a la máxima cantidad
 						posible de estudiantes, sólo se podrá reservar una franja de 2 horas por semana.
@@ -346,7 +356,7 @@
 
 <section
 	id="Encuestas"
-	class="py-20 bg-gradient-to-br from-dele-color to-dele-accent dark:from-dark-secondary dark:to-dark-primary recompensa:from-recompensa-secondary recompensa:to-recompensa-primary"
+	class="py-20 bg-gradient-to-br from-yellow-200 via-orange-200 to-red-200 dark:from-yellow-900 dark:via-orange-900 dark:to-red-900 recompensa:from-purple-500 recompensa:via-purple-600 recompensa:to-purple-700"
 >
 	<div class="container mx-auto px-6">
 		<div class="flex flex-col lg:flex-row items-center justify-between gap-16">
