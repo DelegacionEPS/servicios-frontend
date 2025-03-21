@@ -43,6 +43,9 @@
 		"vite": "^5.0.3"
 	},
 	"type": "module",
+	"engines": {
+		"node": "^18.0.0 || ^20.0.0"
+	},
 	"dependencies": {
 		"@auth/core": "^0.31.0",
 		"@auth/sveltekit": "^1.1.0",
