@@ -1,18 +1,17 @@
-import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import { error } from "@sveltejs/kit"
+import type { PageLoad } from "./$types"
 
 export const load: PageLoad = ({ params }) => {
-	if (params.slug === 'helloworld') {
-		return {
-			title: 'Hello world!',
-			content: ''
-		};
-	}
-	if (params.slug === 'entrada-supersecretisima') {
-		return {
-			title:
-				'Entrada<a class="cursor-text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D">&nbsp</a>supersecretísima',
-			content: `Enhorabuena, has encontrado la entrada supersecretísima. ¡Felicidades! <br />
+    if (params.slug === "helloworld") {
+        return {
+            title: "Hello world!",
+            content: ""
+        }
+    }
+    if (params.slug === "entrada-supersecretisima") {
+        return {
+            title: 'Entrada<a class="cursor-text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D">&nbsp</a>supersecretísima',
+            content: `Enhorabuena, has encontrado la entrada supersecretísima. ¡Felicidades! <br />
 			Con esta entrada podrás acceder a la zona VIP de la web. ¡Disfrútala! <br />
 			No todo el mundo ha podido llegar hasta aquí, así que siéntete afortunado. ¡Enhorabuena! <br /><br />
 			Además, si pasas una captura de esta página a algun administrador de la misma, podrás desbloquear una recompensa.<br />
@@ -32,8 +31,8 @@ export const load: PageLoad = ({ params }) => {
 			Sintiendo la alegría, con su risa al reír. <br />
 			
 			P.D: ¿Encontrarás el segundo easter egg?`
-		};
-	}
+        }
+    }
 
-	error(404, `Esta página no se ha podido encontrar: "${params.slug}"`);
-};
+    error(404, `Esta página no se ha podido encontrar: "${params.slug}"`)
+}
