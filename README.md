@@ -1,7 +1,7 @@
 Proyecto desarrollado por Eduardo Alarcón y Manuel Gómez Plana en la Delegacion de Estudiantes de la Escuela Politécnica Superior de la Universidad Carlos III de Madrid.
 
-
 ## create-svelte
+
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
 ## Creating a project
@@ -15,7 +15,6 @@ npm create svelte@latest
 # create a new project in my-app
 npm create svelte@latest my-app
 ```
-
 
 ## Developing
 
@@ -39,4 +38,3 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
