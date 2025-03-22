@@ -1,72 +1,97 @@
 <script lang="ts">
     import { goto } from "$app/navigation"
     import { _handleResult } from "./+page.ts"
-    import { Gallery, Thumbnails, Carousel, Popover, Button } from "flowbite-svelte"
+    import { Popover, Button, Card } from "flowbite-svelte"
     import { QuestionCircleSolid } from "flowbite-svelte-icons"
-    let images = [
+
+    let buildings = [
         {
-            alt: "Edificio 1. Agustín de Betancourt",
-            src: "edificios/1-betancourt.webp",
+            id: 1,
+            name: "Agustín de Betancourt",
+            image: "edificios/1-betancourt.webp",
             href: "/taquillas/1"
         },
         {
-            alt: "Edificio 2. Sabatini",
-            src: "edificios/2-sabatini.webp",
+            id: 2,
+            name: "Sabatini",
+            image: "edificios/2-sabatini.webp",
             href: "/taquillas/2"
         },
         {
-            alt: "Edificio 4. Torres Quevedo",
-            src: "edificios/4-Torres_Quevedo.webp",
+            id: 4,
+            name: "Torres Quevedo",
+            image: "edificios/4-Torres_Quevedo.webp",
             href: "/taquillas/4"
         },
         {
-            alt: "Edificio 7. Juan Benet",
-            src: "edificios/7-Juan_Benet.webp",
+            id: 7,
+            name: "Juan Benet",
+            image: "edificios/7-Juan_Benet.webp",
             href: "/taquillas/7"
         }
     ]
-    let index = 0
-    let forward = true
 </script>
 
-<h1
-    class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-8 text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
-    Selección de Edificio
-</h1>
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1
+            class="text-3xl sm:text-4xl lg:text-5xl font-montserrat text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
+            Selección de Edificio
+        </h1>
 
-<div class="w-screen grid grid-cols-1 place-items-center mb-4">
-    <Button
-        id="pop_edificio"
-        class="dark:text-dark-primary dark:hover:text-dark-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent text-dele-color hover:text-dele-accent">
-        <QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10" />
-    </Button>
-</div>
+        <Button
+            id="pop_edificio"
+            class="dark:text-dark-primary dark:hover:text-dark-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent text-dele-color hover:text-dele-accent">
+            <QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6" />
+        </Button>
+    </div>
 
-<Popover
-    class="text-black dark:text-white dark:bg-dark-secondary recompensa:text-white recompensa:bg-recompensa-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm"
-    title="Tutorial Taquillas - Selección de Edificio"
-    triggeredBy="#pop_edificio">
-    Primero, selecciona el edificio usando la galeria haciendo click en la imagen con el edificio
-    donde quieres reservar la taquilla. Usa las flechas de la galería o las imágenes inferiores para
-    rotar entre los edificios.
-</Popover>
+    <Popover
+        class="text-black dark:text-white dark:bg-dark-secondary recompensa:text-white recompensa:bg-recompensa-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm mr-8 "
+        title="Tutorial Taquillas - Selección de Edificio"
+        triggeredBy="#pop_edificio"
+        placement="bottom"
+        style="z-index: 50;">
+        Selecciona el edificio donde quieres reservar tu taquilla haciendo clic en la tarjeta
+        correspondiente. Cada tarjeta muestra una imagen del edificio y su nombre.
+    </Popover>
 
-<div class="grid grid-cols-1 place-items-center w-screen mt-6 mb-6">
-    <div class="max-w-4xl space-y-4">
-        <Carousel {images} {forward} let:Indicators let:Controls bind:index>
-            <a class="group" slot="slide" on:click={goto(images[index]?.href)} let:Slide let:index>
-                <Slide image={images[index]} on:click={goto(images[index]?.href)} />
-                <h1
-                    class="absolute left-1/2 top-1/2 md:text-2xl sm:text-lg text-sm text-dele-color px-6 py-2 rounded block dark:text-dark-primary recompensa:text-recompensa-primary"
-                    style="transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.8)"
-                    on:click={goto(images[index]?.href)}>
-                    {images[index].alt}
-                </h1>
-            </a>
-            <Controls
-                class="items-center dark:text-red-400 text-green-400 recompensa:text-blue-400 pt-4" />
-            <Indicators />
-        </Carousel>
-        <Thumbnails {images} {forward} bind:index />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 place-items-center">
+        {#each buildings as building}
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div
+                class="cursor-pointer transform transition-transform duration-300 hover:scale-105 w-full max-w-sm"
+                on:click={() => goto(building.href)}
+                on:keydown={e => e.key === "Enter" && goto(building.href)}
+                tabindex="0">
+                <Card padding="none" class="h-full overflow-hidden shadow-lg hover:shadow-xl">
+                    <div class="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+                        <img
+                            src={building.image}
+                            alt={`Edificio ${building.id}. ${building.name}`}
+                            class="w-full h-full object-cover transition-all duration-300 hover:brightness-90" />
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-30 hover:bg-opacity-20 transition-opacity duration-300 flex items-center justify-center">
+                            <div class="text-center px-4 py-2 bg-black bg-opacity-70 rounded">
+                                <span class="text-lg font-semibold text-white">
+                                    Edificio {building.id}
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white">
+                                    {building.name}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-gray-800 text-center">
+                        <Button
+                            color="primary"
+                            class="w-full hover:scale-105 transition-transform duration-300 text-black dark:text-white recompensa:text-white">
+                            Seleccionar Edificio {building.id}
+                        </Button>
+                    </div>
+                </Card>
+            </div>
+        {/each}
     </div>
 </div>
