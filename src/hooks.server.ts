@@ -1,5 +1,6 @@
 import { SvelteKitAuth } from "@auth/sveltekit"
 import Google from "@auth/sveltekit/providers/google"
+import dropcss from 'dropcss';
 import "dotenv/config"
 
 const { handle: authHandle } = SvelteKitAuth({

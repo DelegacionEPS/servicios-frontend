@@ -154,7 +154,38 @@
         "100550037@alumnos.uc3m.es",
         "100522166@alumnos.uc3m.es"
     ]
+
+    // Improve accessibility and SEO with better page titles
+    $: pageTitle = generatePageTitle($page.url.pathname)
+
+    /**
+     * Generates a descriptive page title based on the current route
+     * @param {string} path - The current URL path
+     * @returns {string} - A formatted page title
+     */
+    function generatePageTitle(path: string): string {
+        const baseName = "Delegación EPS UC3M"
+        if (path === "/") return `Servicios de ${baseName}`
+
+        const segments = path.split("/").filter(segment => segment !== "")
+        if (segments.length === 0) return baseName
+
+        // Convert path segments to readable titles
+        const pageName = segments[segments.length - 1]
+            .replace(/-/g, " ")
+            .replace(/_/g, " ")
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+
+        return `${pageName} | ${baseName}`
+    }
 </script>
+
+<svelte:head>
+    <title>{pageTitle}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</svelte:head>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
@@ -163,21 +194,26 @@
 <body
     class="dark:bg-dark-background recompensa:bg-recompensa-background selection:bg-[#FFB300] selection:text-white">
     <header
-        class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary recompensa:bg-recompensa-primary navbar sticky top-0 z-50 shadow-md">
-        <button class="sm:w-12 sm:h-12 w-16 h-10" on:click={() => (hidden2 = !hidden2)}>
+        class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary recompensa:bg-recompensa-primary navbar sticky top-0 z-50 shadow-md"
+        role="banner">
+        <button
+            class="sm:w-12 sm:h-12 w-16 h-10"
+            on:click={() => (hidden2 = !hidden2)}
+            aria-label="Abrir menú de navegación">
             <BarsOutline class="sm:w-10 sm:h-10 w-8 h-8 ml-2" />
         </button>
-        <a href="/" class="sm:block hidden p-1">
+        <a href="/" class="sm:block hidden p-1" aria-label="Inicio">
             <img
                 class="sm:w-12 sm:h-auto w-10 h-auto bg-white dark:bg-dark-primary recompensa:bg-recompensa-primary rounded-xl p-1"
                 src="/eps_logo.png"
-                alt="logo" />
+                alt="Logo Delegación EPS" />
         </a>
         <button
             class="font-bold-italic text-white text-center py-2 lg:text-2xl sm:text-xl text-base hover:underline w-auto"
             on:click={() => {
                 goto("/")
-            }}>
+            }}
+            aria-label="Ir a la página principal">
             Delegación EPS
         </button>
         {#if session}
@@ -226,24 +262,27 @@
         </p>
     </Popover>
 
-    <Breadcrumb
-        solidClass="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-none bg-gray-50 dark:bg-[#111719] dark:border-black recompensa:bg-recompensa-secondary recompensa:border-white recompensa:border-x-0 recompensa:border-t-0"
-        aria-label="Solid background breadcrumb example"
-        solid>
-        <BreadcrumbItem
-            homeClass="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary"
-            href="/"
-            home>
-            Inicio
-        </BreadcrumbItem>
-        {#each breadcrumItems as item}
+    <nav aria-label="Breadcrumb" role="navigation">
+        <Breadcrumb
+            solidClass="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-none bg-gray-50 dark:bg-[#111719] dark:border-black recompensa:bg-recompensa-secondary recompensa:border-white recompensa:border-x-0 recompensa:border-t-0"
+            aria-label="Navegación de migas de pan"
+            solid>
             <BreadcrumbItem
-                linkClass="ms-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ms-2 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary"
-                href={item.href}>
-                {item.text}
+                homeClass="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary"
+                href="/"
+                home>
+                Inicio
             </BreadcrumbItem>
-        {/each}
-    </Breadcrumb>
+            {#each breadcrumItems as item, index}
+                <BreadcrumbItem
+                    linkClass="ms-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ms-2 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary"
+                    href={item.href}
+                    aria-current={index === breadcrumItems.length - 1 ? "page" : undefined}>
+                    {item.text}
+                </BreadcrumbItem>
+            {/each}
+        </Breadcrumb>
+    </nav>
 
     <Drawer
         transitionType="fly"
