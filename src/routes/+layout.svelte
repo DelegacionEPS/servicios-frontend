@@ -268,14 +268,14 @@
             aria-label="Navegación de migas de pan"
             solid>
             <BreadcrumbItem
-                homeClass="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary"
+                homeClass="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary hover:underline"
                 href="/"
                 home>
                 Inicio
             </BreadcrumbItem>
             {#each breadcrumItems as item, index}
                 <BreadcrumbItem
-                    linkClass="ms-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ms-2 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary"
+                    linkClass="ms-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ms-2 dark:text-gray-400 dark:hover:text-white hover:recompensa:text-white recompensa:text-recompensa-primary hover:underline"
                     href={item.href}
                     aria-current={index === breadcrumItems.length - 1 ? "page" : undefined}>
                     {item.text}
