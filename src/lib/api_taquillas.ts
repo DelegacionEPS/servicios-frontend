@@ -158,6 +158,20 @@ export async function ocupacionBloque(edificio: String, planta: String) {
     }
 }
 
+export async function ocupacionEdificios() {
+    try {
+        const response = await fetch(`${BASE_URL_API}/api/ocupacionEdificios${TOKEN}`)
+        if (!response.ok) {
+            throw new Error("Network response was not ok when getting buildings occupancy")
+        }
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error("Error:", error)
+    }
+}
+
+
 export async function addUserRol(
     nia: FormDataEntryValue | null | String,
     rol: FormDataEntryValue | null | String,

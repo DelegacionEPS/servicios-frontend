@@ -1,6 +1,7 @@
 import type { PageServerLoad, Actions } from "./$types"
 import { error } from "@sveltejs/kit"
-import { prueba, reservaTaquilla } from "$lib/api_taquillas"
+import size from "$lib/size"
+import { BASE_URL_API, prueba, reservaTaquilla, TOKEN, ocupacionEdificios } from "$lib/api_taquillas"
 
 export const actions = {
     registerTaquilla: async ({ cookies, request }) => {
@@ -18,3 +19,14 @@ export const actions = {
         return result
     }
 } satisfies Actions
+
+
+export const load: PageServerLoad = async ({ }) => {
+    const ocupacionEdificiosResponse = await ocupacionEdificios()
+    console.log(ocupacionEdificiosResponse)
+
+    return {
+        size: size,
+        ocupancy: ocupacionEdificiosResponse
+    }
+}

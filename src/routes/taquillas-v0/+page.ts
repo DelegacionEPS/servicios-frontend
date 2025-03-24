@@ -10,3 +10,10 @@ export function _handleResult(result: any) {
         alert("Error al reservar la taquilla")
     }
 }
+
+export const load = (({ params, data }) => {
+    return {
+        size: data.size,
+        ocupancy: data.ocupancy,
+    }
+}) satisfies PageLoad
