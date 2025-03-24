@@ -40,6 +40,14 @@
     $: isLoggedIn = Boolean(userEmail)
     $: isDespachoAuthorized = isLoggedIn && authorizedEmailsDespacho?.includes(userEmail)
     $: isEscuelaAuthorized = isLoggedIn && authorizedEmailsEscuela?.includes(userEmail)
+
+    // Add a keyboard event handler for accessibility
+    const handleKeyDown = (event: KeyboardEvent) => {
+        // Trigger sign in when Enter or Space is pressed
+        if (event.key === "Enter" || event.key === " ") {
+            signIn("google")
+        }
+    }
 </script>
 
 <Konami />
@@ -82,24 +90,26 @@
             <a href="/taquillas">taquilla</a>
         </span>
         , o un puesto de electrónica, necesitas
-        <button on:click={() => signIn("google")}>
-            <span
-                class="underline italic hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium">
-                iniciar sesión
-            </span>
+        <button
+            type="button"
+            on:click={() => signIn("google")}
+            on:keydown={handleKeyDown}
+            class="underline italic hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium">
+            iniciar sesión
         </button>
         con tu cuenta de Google de la universidad.
         <br />
         <br />
         Si tienes algún problema, puedes contactar con nosotros en el despacho de delegación localizado
         en la sala 1.0.H01 (al lado del banco Santander) o escríbenos un correo a
-        <a
+        <button
+            type="button"
             class="underline text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary hover:text-dele-accent hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent cursor-pointer font-medium"
             on:click={copy}
-            role="button"
+            on:keydown={e => e.key === "Enter" && copy()}
             aria-label="Copy email address to clipboard">
             delegeps@uc3m.es
-        </a>
+        </button>
         .
     </p>
 </Popover>

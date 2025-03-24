@@ -23,7 +23,6 @@ export const actions = {
 
 export const load: PageServerLoad = async ({ }) => {
     const ocupacionEdificiosResponse = await ocupacionEdificios()
-    console.log(ocupacionEdificiosResponse)
 
     return {
         size: size,
