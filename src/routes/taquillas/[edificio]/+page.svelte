@@ -65,6 +65,7 @@
             <article>
                 <a
                     href="{building}/{i}"
+                    data-sveltekit-preload-data="off"
                     class="flex justify-center group relative"
                     aria-label={`Seleccionar Piso ${i} del Edificio ${building}`}>
                     <img

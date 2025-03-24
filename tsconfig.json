@@ -13,7 +13,6 @@
         "allowImportingTsExtensions": true,
         "noEmit": true,
         "jsx": "preserve",
-        "jsxImportSource": "svelte-jsx",
         "plugins": [
             {
                 "name": "typescript-plugin-css-modules",

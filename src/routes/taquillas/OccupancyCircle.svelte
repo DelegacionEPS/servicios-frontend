@@ -3,7 +3,7 @@
     import { cubicOut } from 'svelte/easing';
     
     export let percentage: number;
-    export let size = 16; // Size in rem
+    let size = 16; // Size in rem
     
     // Tweened value for smooth animation
     const progress = tweened(0, {
@@ -68,12 +68,6 @@
 
 <style>
     :global(:root) {
-        --occupancy-low: rgb(72, 187, 120);
-        --occupancy-medium: rgb(237, 137, 54);
-        --occupancy-high: rgb(245, 101, 101);
-    }
-    
-    :global(.dark) {
         --occupancy-low: rgb(72, 187, 120);
         --occupancy-medium: rgb(237, 137, 54);
         --occupancy-high: rgb(245, 101, 101);

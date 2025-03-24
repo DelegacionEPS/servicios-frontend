@@ -41,12 +41,6 @@
         --occupancy-high: rgb(245, 101, 101);
     }
     
-    :global(.dark) {
-        --occupancy-low: rgb(72, 187, 120);
-        --occupancy-medium: rgb(237, 137, 54);
-        --occupancy-high: rgb(245, 101, 101);
-    }
-    
     :global(.recompensa) {
         --occupancy-low: rgb(104, 211, 145);
         --occupancy-medium: rgb(247, 171, 10);
