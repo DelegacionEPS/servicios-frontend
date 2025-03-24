@@ -48,6 +48,16 @@
 
     export let data: PageData
 
+    // Check if the occupancy data is available. If it is not, set a default value.
+    if (browser) {
+        if (!data.ocupancy) {
+            data.ocupancy = {}
+            buildings.forEach(building => {
+                data.ocupancy[building.id] = 0
+            })
+        }
+    }
+
     // Calculate occupancy percentage for each building
     const getOccupancyPercentage = (buildingId: number) => {
         const occupied = data.ocupancy[buildingId]
