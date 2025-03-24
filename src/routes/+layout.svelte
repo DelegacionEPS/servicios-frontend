@@ -194,8 +194,7 @@
 <body
     class="dark:bg-dark-background recompensa:bg-recompensa-background selection:bg-[#FFB300] selection:text-white">
     <header
-        class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary recompensa:bg-recompensa-primary navbar sticky top-0 z-50 shadow-md"
-        role="banner">
+        class="bg-dele-color grid sm:grid-cols-5 grid-cols-4 gap-x-4 md:gap-x-10 dark:bg-dark-primary recompensa:bg-recompensa-primary navbar sticky top-0 z-50 shadow-md">
         <button
             class="sm:w-12 sm:h-12 w-16 h-10"
             on:click={() => (hidden2 = !hidden2)}
@@ -262,7 +261,7 @@
         </p>
     </Popover>
 
-    <nav aria-label="Breadcrumb" role="navigation">
+    <nav aria-label="Breadcrumb">
         <Breadcrumb
             solidClass="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-none bg-gray-50 dark:bg-[#111719] dark:border-black recompensa:bg-recompensa-secondary recompensa:border-white recompensa:border-x-0 recompensa:border-t-0"
             aria-label="Navegación de migas de pan"
