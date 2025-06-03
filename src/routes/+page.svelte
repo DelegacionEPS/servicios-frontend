@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AccordionItem, Accordion, Button, Popover, Alert } from 'flowbite-svelte';
+	import { AccordionItem, Accordion, Button, Popover, Alert, Fileupload } from 'flowbite-svelte';
 	import { goto } from '$app/navigation';
 	import {
 		AnnotationSolid,
@@ -9,15 +9,18 @@
 		LockOutline,
 		QuestionCircleSolid,
 		UserCircleOutline,
-		DrawSquareSolid
+		DrawSquareSolid,
+        CloudArrowUpSolid
 	} from 'flowbite-svelte-icons';
 	import { page } from '$app/stores';
 	import Konami from './Konami.svelte';
 	import { signIn, signOut } from '@auth/sveltekit/client';
-	
+    import * as XLSX from 'xlsx';
+
 	$: session = $page.data.session;
 	$: authorizedEmailsEscuela = $page.data.authorizedEmailsLayoutEscuela;
 	$: authorizedEmailsDespacho = $page.data.authorizedEmailsLayoutDespacho;
+
 	let infoModal = false;
 	$: copied = false;
 
@@ -28,6 +31,33 @@
 			copied = false;	
 		}, 2000);
 	}
+
+    const modify_surveys_emails = ["100472310@alumnos.uc3m.es"];
+    let excelData: string[][] = [];
+    let fileName = '';
+	
+    const handleChange = (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const file = input.files?.[0];
+        if (!file) return;
+
+        fileName = file.name;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const data = new Uint8Array(event.target?.result as ArrayBuffer);
+            const workbook = XLSX.read(data, { type: 'array' });
+
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+    
+            excelData = json as string[][];
+        };
+
+        reader.readAsArrayBuffer(file);
+    };
+
 </script>
 
 <Konami />
@@ -71,7 +101,7 @@
 	</Popover >
 	<Accordion class="md:w-1/2 w-11/12 mb-36">
 		{#await session then}
-			{#if session?.user?.email != null}
+			{#if session?.user?.email != null && modify_surveys_emails.includes(session?.user?.email) == false }
 				<AccordionItem
 					class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
 					activeClass="bg-dele-accent"
@@ -91,33 +121,38 @@
 				</AccordionItem>
 			{/if}
 		{/await}
-		<AccordionItem
-			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 rounded-2xl hover:bg-dele-accent hover:dark:bg-dark-accent dark:text-white dark:border-black dark:bg-dark-primary hover:recompensa:bg-recompensa-accent recompensa:text-white recompensa:border-black recompensa:bg-recompensa-primary"
-			activeClass="bg-dele-accent"
-		>
-			<p
-				slot="header"
-				class="flex gap-2 w-full"
-			>
-				<LockOpenOutline class="mt-1 h-8 w-8" />
-				Taquillas
-			</p>
-			
-			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
-				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent" on:click={() => {goto("./taquillas")}}>
-					Reserva o comprueba el estado de una taquilla
-				</button>
-				<button class="w-auto sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent cursor-pointer">
-					<a href="#Taquillas" class="w-auto">
-							Más info...
-					</a>
-				</button>
-			</div>
-		</AccordionItem>
+
+        {#await session then}
+            {#if session?.user?.email == null || modify_surveys_emails.includes(session?.user?.email) == false}
+		        <AccordionItem
+		    	    class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 rounded-2xl hover:bg-dele-accent hover:dark:bg-dark-accent dark:text-white dark:border-black dark:bg-dark-primary hover:recompensa:bg-recompensa-accent recompensa:text-white recompensa:border-black recompensa:bg-recompensa-primary"
+		    	    activeClass="bg-dele-accent"
+		        >
+		    	    <p
+		    		    slot="header"
+		    		    class="flex gap-2 w-full"
+		    	    >
+		    		    <LockOpenOutline class="mt-1 h-8 w-8" />
+		    		    Taquillas
+		    	    </p>
+		    	
+		    	    <div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
+		    		    <button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent" on:click={() => {goto("./taquillas")}}>
+		    			    Reserva o comprueba el estado de una taquilla
+		    		    </button>
+		    		    <button class="w-auto sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent cursor-pointer">
+		    			    <a href="#Taquillas" class="w-auto">
+		    					Más info...
+		    			    </a>
+		    		    </button>
+		    	    </div>
+		        </AccordionItem>
+            {/if}
+        {/await}
 		{#await authorizedEmailsDespacho then}
 			{#await session then}
 				{#if session?.user?.email != null}
-					{#if authorizedEmailsDespacho != null && authorizedEmailsDespacho.includes(session?.user?.email) == true}
+					{#if authorizedEmailsDespacho != null && authorizedEmailsDespacho.includes(session?.user?.email) == true && modify_surveys_emails.includes(session?.user?.email) == false}
 						<AccordionItem
 							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
 							activeClass="bg-dele-accent"
@@ -139,32 +174,36 @@
 				{/if}
 			{/await}
 		{/await}
-		<AccordionItem
-			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
-			activeClass="bg-dele-accent"
-		>
-			<p
-				slot="header"
-				class="flex gap-2 w-full"
-			>
-				<DrawSquareOutline class="mt-1 h-8 w-8" />
-				Puestos de Electrónica
-			</p>
-			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
-				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent" on:click={() => {goto("./osciloscopio")}}>
-					Reserva un puesto de electrónica en el despacho
-				</button>
-				<button class="w-auto sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent cursor-pointer">
-					<a href="#Osciloscopios" class="w-auto">
-							Más info...
-					</a>
-				</button>
-			</div>
-		</AccordionItem>
+        {#await session then}
+            {#if session?.user?.email == null || modify_surveys_emails.includes(session?.user?.email) == false}
+		        <AccordionItem
+			        class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color mb-2 hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
+			        activeClass="bg-dele-accent"
+		        >
+			        <p
+				        slot="header"
+				        class="flex gap-2 w-full"
+			        >
+				        <DrawSquareOutline class="mt-1 h-8 w-8" />
+				        Puestos de Electrónica
+			        </p>
+			        <div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
+				        <button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent" on:click={() => {goto("./osciloscopio")}}>
+					        Reserva un puesto de electrónica en el despacho
+				        </button>
+				        <button class="w-auto sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent cursor-pointer">
+					        <a href="#Osciloscopios" class="w-auto">
+							        Más info...
+					        </a>
+				        </button>
+			        </div>
+		        </AccordionItem>
+            {/if}
+        {/await}
 		{#await authorizedEmailsDespacho then}
 			{#await session then}
 				{#if session?.user?.email != null}
-					{#if authorizedEmailsDespacho != null && authorizedEmailsDespacho.includes(session?.user?.email) == true}
+					{#if authorizedEmailsDespacho != null && authorizedEmailsDespacho.includes(session?.user?.email) == true && modify_surveys_emails.includes(session?.user?.email) == false}
 						<AccordionItem
 							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
 							activeClass="bg-dele-accent"
@@ -189,7 +228,7 @@
 		{#await authorizedEmailsEscuela then}
 			{#await session then}
 				{#if session?.user?.email != null}
-					{#if authorizedEmailsEscuela != null && authorizedEmailsEscuela.includes(session?.user?.email) == true}
+					{#if authorizedEmailsEscuela != null && authorizedEmailsEscuela.includes(session?.user?.email) == true && modify_surveys_emails.includes(session?.user?.email) == false}
 						<AccordionItem
 							class="text-white sm:text-3xl text-2xl px-8 py-3 mb-2 bg-dele-color hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
 							activeClass="bg-dele-accent"
@@ -212,26 +251,26 @@
 			{/await}
 		{/await}
 		<AccordionItem
-			class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
-			activeClass="bg-dele-accent"
-		>
-			<p
-				slot="header"
-				class="flex gap-2 w-full"
-			>
-				<AnnotationSolid class="mt-1 h-8 w-8" />
-				Encuestas 1ºC 24/25
-			</p>
-			<div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
-				<button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent" on:click={() => {goto("./encuestas")}}>
-					Consulta el índice de participación de las encuestas
-				</button>
-				<button class="w-auto sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent cursor-pointer">
-					<a href="#Encuestas" class="w-auto">
-							Más info...
-					</a>
-				</button>
-			</div>
+		    class="text-white sm:text-3xl text-2xl px-8 py-3 bg-dele-color hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent rounded-2xl dark:text-white recompensa:text-white dark:border-black recompensa:border-black dark:bg-dark-primary recompensa:bg-recompensa-primary"
+		   	    activeClass="bg-dele-acent"
+		    >
+		    <p
+		  	    slot="header"
+		   	    class="flex gap-2 w-full"
+		    >
+		   	    <AnnotationSolid class="mt-1 h-8 w-8" />
+		  	    Encuestas 2ºC 24/25
+		    </p>
+		    <div class="grid sm:grid-cols-3 grid-cols-1 place-items-center">
+		  	    <button class="sm:col-span-2 sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 sm:mb-0 mb-2 rounded-xl cursor-pointer hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent" on:click={() => {goto("./encuestas")}}>
+		   		    Consulta el índice de participación de las encuestas
+		   	    </button>
+		   	    <button class="w-auto sm:text-base text-sm text-white dark:text-white recompensa:text-white bg-dele-color dark:bg-dark-primary recompensa:bg-recompensa-primary p-2 px-4 rounded-xl hover:bg-dele-accent hover:dark:bg-dark-accent hover:recompensa:bg-recompensa-accent cursor-pointer">
+		   		    <a href="#Encuestas" class="w-auto">
+		  		    		Más info...
+		   		    </a>
+		   	    </button>
+		    </div>
 		</AccordionItem>
 	</Accordion>
 	
