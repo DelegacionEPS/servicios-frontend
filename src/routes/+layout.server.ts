@@ -19,11 +19,11 @@ export const load: LayoutServerLoad = async event => {
     }
 
     let emailsDespacho = await fetchAuthorizedEmails("atencion")
-    if (emailsDespacho === null) {
+    if (!Array.isArray(emailsDespacho)) {
         emailsDespacho = []
     }
     let emailsEscuela = await fetchAuthorizedEmails("escuela")
-    if (emailsEscuela === null) {
+    if (!Array.isArray(emailsEscuela)) {
         emailsEscuela = []
     }
 
