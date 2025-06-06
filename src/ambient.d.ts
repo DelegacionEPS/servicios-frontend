@@ -1,4 +1,3 @@
-
 type Taquilla = {
     taquilla: String,
     date: String,

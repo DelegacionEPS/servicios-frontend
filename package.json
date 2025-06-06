@@ -51,6 +51,7 @@
 		"chart.js": "^4.4.2",
 		"dotenv": "^16.4.5",
 		"next-auth": "^4.24.7",
-		"papaparse": "^5.4.1"
+		"papaparse": "^5.4.1",
+		"xlsx": "^0.18.5"
 	}
 }

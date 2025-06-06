@@ -12,10 +12,10 @@ const config = {
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter({
-			// Explicitly specify Node.js runtime version
-			runtime: 'nodejs20.x'
-		})
-	}
+			out: 'public'
+		}),
+	},
+	preprocess: vitePreprocess(),
 };
 
 export default config;
