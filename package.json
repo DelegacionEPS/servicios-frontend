@@ -42,8 +42,7 @@
         "typescript": "^5.0.0",
         "vite": "^5.0.3",
         "eslint-plugin-jsx-a11y": "^6.7.1",
-        "typescript-plugin-css-modules": "^5.0.2",
-        "@types/xlsx": "^0.0.36"
+        "typescript-plugin-css-modules": "^5.0.2"
     },
     "type": "module",
     "dependencies": {
