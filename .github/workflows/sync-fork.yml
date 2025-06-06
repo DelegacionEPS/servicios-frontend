@@ -1,0 +1,36 @@
+name: Sync Fork
+
+on:
+  schedule:
+    # Run every day at 2 AM UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # STEP 1: Check out your repository so the runner has the code
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+
+      # STEP 2: Run the sync action now that the repo is checked out
+      - name: Sync upstream changes
+        id: sync
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        with:
+          upstream_sync_repo: Delegacion-EPS-UC3M/servicios-frontend
+          upstream_sync_branch: main
+          target_sync_branch: main
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # STEP 3: Report the result
+      - name: Report status
+        run: |
+          if [ "${{ steps.sync.outputs.has_new_commits }}" = "true" ]; then
+            echo "✅ New commits were synced from the upstream repository."
+          else
+            echo "ℹ️ No new commits to sync. Your fork is up-to-date."
+          fi
