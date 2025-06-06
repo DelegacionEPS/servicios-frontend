@@ -1,131 +1,97 @@
 <script lang="ts">
     import { goto } from "$app/navigation"
+    import { _handleResult } from "./+page.ts"
+    import { Popover, Button, Card } from "flowbite-svelte"
     import { QuestionCircleSolid } from "flowbite-svelte-icons"
 
-    // Building data
-    const buildings = [
+    let buildings = [
         {
             id: 1,
-            name: "Edificio 1. Agustín de Betancourt",
+            name: "Agustín de Betancourt",
             image: "edificios/1-betancourt.webp",
             href: "/taquillas/1"
         },
         {
             id: 2,
-            name: "Edificio 2. Sabatini",
+            name: "Sabatini",
             image: "edificios/2-sabatini.webp",
             href: "/taquillas/2"
         },
         {
             id: 4,
-            name: "Edificio 4. Torres Quevedo",
+            name: "Torres Quevedo",
             image: "edificios/4-Torres_Quevedo.webp",
             href: "/taquillas/4"
         },
         {
             id: 7,
-            name: "Edificio 7. Juan Benet",
+            name: "Juan Benet",
             image: "edificios/7-Juan_Benet.webp",
             href: "/taquillas/7"
         }
     ]
-
-    // State for help tooltip
-    let showHelp = false
-
-    // Handle building selection
-    const selectBuilding = (href: string) => {
-        goto(href)
-    }
 </script>
 
-<div class="container mx-auto px-4 py-8 max-w-6xl">
-    <h1
-        class="text-3xl sm:text-4xl lg:text-5xl text-center font-montserrat mb-8 text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
-        Selección de Edificio
-    </h1>
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1
+            class="text-3xl sm:text-4xl lg:text-5xl font-montserrat text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
+            Selección de Edificio
+        </h1>
 
-    <!-- Help button -->
-    <div class="flex justify-center mb-6">
-        <button
-            class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
-            on:click={() => (showHelp = !showHelp)}>
-            <QuestionCircleSolid class="h-5 w-5" />
-            <span>Ayuda</span>
-        </button>
+        <Button
+            id="pop_edificio"
+            class="dark:text-dark-primary dark:hover:text-dark-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent text-dele-color hover:text-dele-accent">
+            <QuestionCircleSolid class="md:h-8 md:w-8 h-6 w-6" />
+        </Button>
     </div>
 
-    <!-- Help tooltip -->
-    {#if showHelp}
-        <div class="relative mb-8">
-            <div
-                class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
-                <h3 class="font-bold text-lg mb-2">Tutorial Taquillas - Selección de Edificio</h3>
-                <p>
-                    Selecciona el edificio donde quieres reservar la taquilla haciendo clic en la
-                    tarjeta correspondiente. Cada tarjeta muestra una imagen y el nombre del
-                    edificio.
-                </p>
-                <button
-                    class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white"
-                    on:click={() => (showHelp = false)}>
-                    ✕
-                </button>
-            </div>
-        </div>
-    {/if}
+    <Popover
+        class="text-black dark:text-white dark:bg-dark-secondary recompensa:text-white recompensa:bg-recompensa-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm mr-8 "
+        title="Tutorial Taquillas - Selección de Edificio"
+        triggeredBy="#pop_edificio"
+        placement="bottom"
+        style="z-index: 50;">
+        Selecciona el edificio donde quieres reservar tu taquilla haciendo clic en la tarjeta
+        correspondiente. Cada tarjeta muestra una imagen del edificio y su nombre.
+    </Popover>
 
-    <!-- Building grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 place-items-center">
         {#each buildings as building}
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div
-                class="building-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary"
-                on:click={() => selectBuilding(building.href)}
-                on:keydown={e => e.key === "Enter" && selectBuilding(building.href)}
-                tabindex="0"
-                role="button"
-                aria-label={`Seleccionar ${building.name}`}>
-                <div class="relative h-48 overflow-hidden">
-                    <img
-                        src={building.image || "/placeholder.svg"}
-                        alt={building.name}
-                        class="w-full h-full object-cover transition-transform hover:scale-110" />
-                    <div
-                        class="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-10 transition-opacity">
+                class="cursor-pointer transform transition-transform duration-300 hover:scale-105 w-full max-w-sm"
+                on:click={() => goto(building.href)}
+                on:keydown={e => e.key === "Enter" && goto(building.href)}
+                tabindex="0">
+                <Card padding="none" class="h-full overflow-hidden shadow-lg hover:shadow-xl">
+                    <div class="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+                        <img
+                            src={building.image}
+                            alt={`Edificio ${building.id}. ${building.name}`}
+                            class="w-full h-full object-cover transition-all duration-300 hover:brightness-90" />
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-30 hover:bg-opacity-20 transition-opacity duration-300 flex items-center justify-center">
+                            <div class="text-center px-4 py-2 bg-black bg-opacity-70 rounded">
+                                <span class="text-lg font-semibold text-white">
+                                    Edificio {building.id}
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-bold text-white">
+                                    {building.name}
+                                </h3>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="p-4">
-                    <h2
-                        class="text-lg font-semibold text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
-                        {building.name}
-                    </h2>
-                    <p
-                        class="mt-2 text-sm text-gray-600 dark:text-gray-300 recompensa:text-gray-200">
-                        Edificio {building.id}
-                    </p>
-                </div>
+                    <div class="p-4 bg-white dark:bg-gray-800 text-center">
+                        <Button
+                            color="primary"
+                            class="w-full hover:scale-105 transition-transform duration-300 text-black dark:text-white recompensa:text-white">
+                            Seleccionar Edificio {building.id}
+                        </Button>
+                    </div>
+                </Card>
             </div>
         {/each}
     </div>
 </div>
-
-<style>
-    .building-card:focus {
-        outline: 2px solid var(--dele-color, #4a90e2);
-    }
-
-    .dark .building-card:focus {
-        outline: 2px solid var(--dark-primary, #bb86fc);
-    }
-
-    .recompensa .building-card:focus {
-        outline: 2px solid var(--recompensa-primary, #f48fb1);
-    }
-
-    /* Ensure the cards have a consistent aspect ratio */
-    @media (max-width: 640px) {
-        .building-card .relative {
-            height: 200px;
-        }
-    }
-</style>
