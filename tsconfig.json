@@ -11,24 +11,8 @@
         "strict": true,
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
-        "noEmit": true,
-        "jsx": "preserve",
-        "plugins": [
-            {
-                "name": "typescript-plugin-css-modules",
-                "options": {
-                    "customMatcher": "\\.module\\.(c|le|sa|sc)ss$"
-                }
-            }
-        ]
-    },
-    "include": [
-        "./.svelte-kit/ambient.d.ts", 
-        "./.svelte-kit/types/**/$types.d.ts", 
-        "./vite.config.ts",
-        "./src/**/*.ts",
-        "./src/**/*.svelte"
-    ]
+        "noEmit": true
+    }
     // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
     // except $lib which is handled by https://kit.svelte.dev/docs/configuration#files
     //
