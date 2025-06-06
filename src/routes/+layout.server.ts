@@ -19,11 +19,11 @@ export const load: LayoutServerLoad = async event => {
     }
 
     let emailsDespacho = await fetchAuthorizedEmails("atencion")
-    if (emailsDespacho === null) {
+    if (!Array.isArray(emailsDespacho)) {
         emailsDespacho = []
     }
     let emailsEscuela = await fetchAuthorizedEmails("escuela")
-    if (emailsEscuela === null) {
+    if (!Array.isArray(emailsEscuela)) {
         emailsEscuela = []
     }
 
@@ -31,9 +31,27 @@ export const load: LayoutServerLoad = async event => {
     // remove null values
     emailsDespacho = emailsDespacho.filter((email: String) => email !== null)
 
+    // Improve SEO by adding sitemap metadata
+    const baseUrl = event.url.origin
+    const routes = [
+        "/",
+        "/taquillas",
+        "/osciloscopio",
+        "/encuestas",
+        "/perfil"
+    ]
+    
+    const sitemapData = routes.map(route => ({
+        url: `${baseUrl}${route}`,
+        lastModified: new Date().toISOString().split('T')[0],
+        changeFreq: route === "/" ? "weekly" : "monthly",
+        priority: route === "/" ? 1.0 : 0.8
+    }))
+
     return {
         session: session,
         authorizedEmailsLayoutEscuela: emailsEscuela,
-        authorizedEmailsLayoutDespacho: emailsDespacho
+        authorizedEmailsLayoutDespacho: emailsDespacho,
+        sitemapData: sitemapData
     }
 }

@@ -158,6 +158,26 @@ export async function ocupacionBloque(edificio: String, planta: String) {
     }
 }
 
+export async function ocupacionEdificios() {
+    try {
+        const response = await fetch(`${BASE_URL_API}/api/ocupacionEdificios${TOKEN}`)
+        if (!response.ok) {
+            return {
+                "1": 58,
+                "2": 112,
+                "4": 188,
+                "7": 70,
+            }
+        }
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error("Error:", error)
+
+    }
+}
+
+
 export async function addUserRol(
     nia: FormDataEntryValue | null | String,
     rol: FormDataEntryValue | null | String,

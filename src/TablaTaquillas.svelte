@@ -222,7 +222,7 @@
                             class:p-4={taquilla.taquilla.includes("P")}
                             id={taquilla.taquilla}
                             style="border: 1px solid black; border-collapse: 10px"
-                            class="bg-gray-500 text-center">
+                            class="bg-gray-500 cursor-not-allowed text-center">
                             {taquilla.taquilla}
                         </td>
                     {/if}
