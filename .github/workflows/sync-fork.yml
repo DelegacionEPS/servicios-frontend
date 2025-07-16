@@ -3,7 +3,7 @@ name: Sync Fork
 on:
   schedule:
     # Run every day at 2 AM UTC
-    - cron: "0 2 * * *"
+    - cron: "0 1 * * *"
   workflow_dispatch: # Allow manual trigger
 
 jobs:
