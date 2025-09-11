@@ -13,3 +13,5 @@ public
 
 bun.lock
 package-lock.json
+
+.vercel
