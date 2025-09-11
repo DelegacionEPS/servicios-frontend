@@ -3,10 +3,24 @@ import { BASE_URL_API, TOKEN, add_user_db, add_association_db } from "$lib/api_t
 
 // load serverside data
 export const load: LayoutServerLoad = async event => {
-    const fetchAuthorizedEmails = async (rango: String) => {
-        const res = await fetch(`${BASE_URL_API}/api/authorizedEmails/${rango}${TOKEN}`)
-        const data = await res.json()
-        return data
+    const fetchAuthorizedEmails = async (rango: string) => {
+        try {
+            const url = `${BASE_URL_API}/api/authorizedEmails/${rango}${TOKEN}`
+            console.log(url);
+            const res = await fetch(url)
+
+            if (!res.ok) {
+                console.error("Failed fetching authorized emails", res.status, res.statusText, url)
+                return []
+            }
+
+            const data = await res.json()
+            if (!Array.isArray(data)) return []
+            return data
+        } catch (error) {
+            console.error("Error fetching authorized emails:", error)
+            return []
+        }
     }
 
     let session = await event.locals.auth()
