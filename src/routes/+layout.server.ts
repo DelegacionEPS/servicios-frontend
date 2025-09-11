@@ -6,7 +6,6 @@ export const load: LayoutServerLoad = async event => {
     const fetchAuthorizedEmails = async (rango: string) => {
         try {
             const url = `${BASE_URL_API}/api/authorizedEmails/${rango}${TOKEN}`
-            console.log(url);
             const res = await fetch(url)
 
             if (!res.ok) {
