@@ -160,13 +160,15 @@ export async function ocupacionBloque(edificio: String, planta: String) {
 
 export async function ocupacionEdificios() {
     try {
-        const response = await fetch(`${BASE_URL_API}/api/ocupacionEdificios${TOKEN}`)
+        const url = `${BASE_URL_API}/api/ocupacionEdificios${TOKEN}`
+        const response = await fetch(url)
+
         if (!response.ok) {
             return {
-                "1": 58,
-                "2": 112,
-                "4": 188,
-                "7": 70,
+                "1": 0,
+                "2": 0,
+                "4": 0,
+                "7": 0,
             }
         }
         const data = await response.json()
