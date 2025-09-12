@@ -46,17 +46,11 @@ export const load: LayoutServerLoad = async event => {
 
     // Improve SEO by adding sitemap metadata
     const baseUrl = event.url.origin
-    const routes = [
-        "/",
-        "/taquillas",
-        "/osciloscopio",
-        "/encuestas",
-        "/perfil"
-    ]
-    
+    const routes = ["/", "/taquillas", "/osciloscopio", "/encuestas", "/perfil"]
+
     const sitemapData = routes.map(route => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date().toISOString().split('T')[0],
+        lastModified: new Date().toISOString().split("T")[0],
         changeFreq: route === "/" ? "weekly" : "monthly",
         priority: route === "/" ? 1.0 : 0.8
     }))

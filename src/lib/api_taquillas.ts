@@ -168,17 +168,15 @@ export async function ocupacionEdificios() {
                 "1": 0,
                 "2": 0,
                 "4": 0,
-                "7": 0,
+                "7": 0
             }
         }
         const data = await response.json()
         return data
     } catch (error) {
         console.error("Error:", error)
-
     }
 }
-
 
 export async function addUserRol(
     nia: FormDataEntryValue | null | String,
