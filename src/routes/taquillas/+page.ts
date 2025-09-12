@@ -14,6 +14,6 @@ export function _handleResult(result: any) {
 export const load = (({ params, data }) => {
     return {
         size: data.size,
-        ocupancy: data.ocupancy,
+        ocupancy: data.ocupancy
     }
 }) satisfies PageLoad

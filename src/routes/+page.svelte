@@ -114,7 +114,7 @@
 <main>
     <section
         aria-label="Servicios principales"
-        class="bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-200 dark:from-blue-900 dark:via-indigo-900 dark:to-purple-900 recompensa:from-green-500 recompensa:via-green-600 recompensa:to-green-700">
+        class="bg-white dark:bg-dark-background recompensa:bg-recompensa-background">
         <div class="container mx-auto px-4 py-20 md:py-12">
             <div class="text-center mb-14 animate-fadeIn">
                 <h1
@@ -323,7 +323,7 @@
     <!-- Info Sections - Enhanced with better styling and animations -->
     <section
         id="Taquillas"
-        class="py-20 bg-gradient-to-br from-purple-200 via-pink-200 to-red-200 dark:from-purple-900 dark:via-pink-900 dark:to-red-900 recompensa:from-teal-500 recompensa:via-teal-600 recompensa:to-teal-700">
+        class="py-20 bg-gradient-to-b from-white to-green-200 dark:from-dark-background dark:to-dark-accent recompensa:from-teal-500 recompensa:via-teal-600 recompensa:to-teal-700">
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
                 <div class="lg:w-1/2 w-full">
@@ -352,7 +352,7 @@
                 </div>
                 <div class="lg:w-1/3 w-full">
                     <button
-                        class="w-full text-white text-xl px-10 py-8 bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm rounded-2xl flex items-center gap-5 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border border-white border-opacity-30"
+                        class="w-full text-black text-xl px-10 py-8 bg-white bg-opacity-20 hover:bg-opacity-10 backdrop-blur-sm rounded-2xl flex items-center gap-5 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border border-white border-opacity-30"
                         on:click={() => {
                             goto("./taquillas")
                         }}>
@@ -366,12 +366,12 @@
 
     <section
         id="Osciloscopios"
-        class="py-20 bg-gradient-to-br from-indigo-200 via-blue-200 to-green-200 dark:from-indigo-900 dark:via-blue-900 dark:to-green-900 recompensa:from-orange-500 recompensa:via-orange-600 recompensa:to-orange-700">
+        class="py-20 bg-gradient-to-b from-green-200 via-green-300 to-green-200 dark:from-dark-accent dark:via-violet-500 dark:to-dark-accent recompensa:from-orange-500 recompensa:via-orange-600 recompensa:to-orange-700">
         <div class="container mx-auto px-6">
             <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-16">
                 <div class="lg:w-1/3 w-full">
                     <button
-                        class="w-full text-white text-xl px-10 py-8 bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm rounded-2xl flex items-center gap-5 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border border-white border-opacity-30"
+                        class="w-full text-black text-xl px-10 py-8 bg-white bg-opacity-20 hover:bg-opacity-10 backdrop-blur-sm rounded-2xl flex items-center gap-5 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border border-white border-opacity-30"
                         on:click={() => {
                             goto("./osciloscopio")
                         }}>
@@ -401,7 +401,7 @@
 
     <section
         id="Encuestas"
-        class="py-20 bg-gradient-to-br from-yellow-200 via-orange-200 to-red-200 dark:from-yellow-900 dark:via-orange-900 dark:to-red-900 recompensa:from-purple-500 recompensa:via-purple-600 recompensa:to-purple-700">
+        class="py-20 bg-gradient-to-b from-green-200 to-gray-50 dark:from-dark-accent dark:to-dark-background recompensa:from-purple-500 recompensa:via-purple-600 recompensa:to-purple-700">
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
                 <div class="lg:w-1/2 w-full">
@@ -426,7 +426,7 @@
                 </div>
                 <div class="lg:w-1/3 w-full">
                     <button
-                        class="w-full text-white text-xl px-10 py-8 bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm rounded-2xl flex items-center gap-5 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border border-white border-opacity-30"
+                        class="w-full text-black text-xl px-10 py-8 bg-white bg-opacity-20 hover:bg-opacity-10 backdrop-blur-sm rounded-2xl flex items-center gap-5 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border border-white border-opacity-30"
                         on:click={() => {
                             goto("./encuestas")
                         }}>

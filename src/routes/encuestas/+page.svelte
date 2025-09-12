@@ -115,7 +115,8 @@
     </div>
 
     <div class="text-center">
-        This page is not beeing maintained anymore as we can not get the information from the provider.
+        This page is not beeing maintained anymore as we can not get the information from the
+        provider.
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -1,4 +1,4 @@
-import type { RequestHandler } from './$types';
+import type { RequestHandler } from "./$types"
 
 export const GET: RequestHandler = async ({ url }) => {
     const robotsTxt = `
@@ -13,11 +13,11 @@ Disallow: /admin
 Disallow: /gestion_taquillas
 Disallow: /gestion_osciloscopios
 Disallow: /entrada-supersecretisima
-`;
+`
 
     return new Response(robotsTxt.trim(), {
         headers: {
-            'Content-Type': 'text/plain'
+            "Content-Type": "text/plain"
         }
-    });
-};
+    })
+}
