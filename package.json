@@ -12,10 +12,10 @@
         "format": "prettier --write ."
     },
     "devDependencies": {
-        "@skeletonlabs/skeleton": "^2.11.0",
+        "@skeletonlabs/skeleton": "^3.2.0",
         "@skeletonlabs/tw-plugin": "^0.4.1",
         "@sveltejs/adapter-auto": "^3.3.1",
-        "@sveltejs/kit": "^2.38.1",
+        "@sveltejs/kit": "^2.39.0",
         "@sveltejs/vite-plugin-svelte": "^3.1.2",
         "@types/chart.js": "^2.9.41",
         "@types/eslint": "^8.56.12",
@@ -52,7 +52,7 @@
         "@sveltejs/adapter-vercel": "^5.10.2",
         "@vercel/speed-insights": "^1.2.0",
         "chart.js": "^4.5.0",
-        "dotenv": "^16.6.1",
+        "dotenv": "^17.2.2",
         "papaparse": "^5.5.3"
     }
 }
