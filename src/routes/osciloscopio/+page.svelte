@@ -9,6 +9,8 @@
     data.osciloscopio.then(value => {
         disponibilidad_osciloscopio = Object.entries(value)
     })
+
+    let showHelp = false
 </script>
 
 <h1
@@ -16,21 +18,31 @@
     Selección de Puesto
 </h1>
 
-<div class="w-screen grid grid-cols-1 place-items-center mb-4">
-    <Button
-        id="pop_edificio"
-        class="dark:text-dark-primary dark:hover:text-dark-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent text-dele-color hover:text-dele-accent">
-        <QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10" />
-    </Button>
+<!-- Help button -->
+<div class="flex justify-center mb-6">
+    <button
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+        on:click={() => (showHelp = !showHelp)}>
+        <QuestionCircleSolid class="h-5 w-5" />
+        <span>Ayuda</span>
+    </button>
 </div>
 
-<Popover
-    class="text-black dark:text-white dark:bg-dark-secondary recompensa:text-white recompensa:bg-recompensa-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm"
-    title="Tutorial Puestos de Electrónica - Selección de Puesto"
-    triggeredBy="#pop_edificio">
-    Primero, selecciona el puesto sobre el que quieres realizar la reserva. En delegación, contamos
-    con tres puestos de electrónica, los tres igualmente equipados.
-</Popover>
+<!-- Help tooltip -->
+{#if showHelp}
+    <div class="relative mb-8">
+        <div
+            class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+            <h3 class="font-bold text-lg mb-2">
+                Tutorial Puestos de Electrónica - Selección de Puesto
+            </h3>
+            <p>
+                Primero, selecciona el puesto sobre el que quieres realizar la reserva. En
+                delegación, contamos con tres puestos de electrónica, los tres igualmente equipados.
+            </p>
+        </div>
+    </div>
+{/if}
 
 <div class="grid grid-cols-1 place-items-center w-screen mt-6 mb-6">
     {#if disponibilidad_osciloscopio.length > 0}

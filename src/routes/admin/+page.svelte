@@ -21,8 +21,10 @@
     import { QuestionCircleSolid } from "flowbite-svelte-icons"
     import { enhance } from "$app/forms"
     import { page } from "$app/stores"
-    import { Datepicker, themes } from "svelte-calendar"
     import dayjs from "dayjs"
+    import { DateInput } from "date-picker-svelte"
+    import { getMonthDays } from "date-picker-svelte/date-utils"
+    let date = new Date()
 
     // Users' rols
     const rols = [
@@ -97,7 +99,6 @@
     let successToastPlantilla = false
     let unSuccessToastPlantilla = false
     $: session = $page.data.session
-    let store
     let plantilla = $page.data.plantilla
 
     let users = $page.data.users
@@ -297,6 +298,26 @@
             unSuccessToastPlantilla = true
         }
     }
+
+    // Info bools
+    let showHelpChangeRole = false
+    let showHelpChangeUserRoles = false
+    let showHelpDB = false
+    let showHelpOsciloscopes = false
+    let showHelpShifts = false
+    let showHelpActualShifts = false
+
+    function formatDate(date, symbol) {
+        const day = date.getDate()
+        const month = date.getMonth() + 1 // getMonth() devuelve 0-11
+        const year = date.getFullYear()
+
+        return `${day}${symbol}${month}${symbol}${year}`
+    }
+
+    function getDay(date) {
+        return `${date.getDate()}`
+    }
 </script>
 
 <Tabs
@@ -312,27 +333,34 @@
         on:focus={() => {
             form = ""
         }}>
-        <div class="w-auto grid grid-cols-1 place-items-center mb-4">
-            <Button
-                id="pop_change_rol"
-                class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent">
-                <QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10" />
-            </Button>
+        <!-- Help button -->
+        <div class="flex justify-center mb-6">
+            <button
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+                on:click={() => (showHelpChangeRole = !showHelpChangeRole)}>
+                <QuestionCircleSolid class="h-5 w-5" />
+                <span>Ayuda</span>
+            </button>
         </div>
 
-        <Popover
-            class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary"
-            title="Cambiar rol"
-            triggeredBy="#pop_change_rol">
-            <p class=" dark:text-white text-sm sm:text-base text-justify recompensa:text-white">
-                Este tab sirve para cambiar el rol de un usuario que ya se haya registrado en el
-                sistema
-                <br />
-                <br />
-                Para cambiar el rol de esa persona, simplemente introduce su NIA y selecciona el nuevo
-                rol que debe tener.
-            </p>
-        </Popover>
+        <!-- Help tooltip -->
+        {#if showHelpChangeRole}
+            <div class="relative mb-8">
+                <div
+                    class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                    <h3 class="font-bold text-lg mb-2">Cambiar rol</h3>
+                    <p>
+                        Este tab sirve para cambiar el rol de un usuario que ya se haya registrado
+                        en el sistema.
+                        <br />
+                        <br />
+                        Para cambiar el rol de esa persona, simplemente introduce su NIA y selecciona
+                        el nuevo rol que debe tener.
+                    </p>
+                </div>
+            </div>
+        {/if}
+
         <form action="?/addUserRol" method="post" use:enhance>
             <div class="grid grid-cols-1 w-auto">
                 <div>
@@ -390,22 +418,30 @@
         on:focus={() => {
             form = ""
         }}>
-        <div class="w-auto grid grid-cols-1 place-items-center mb-4">
-            <Button
-                id="pop_table"
-                class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent">
-                <QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10" />
-            </Button>
+        <!-- Help button -->
+        <div class="flex justify-center mb-6">
+            <button
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+                on:click={() => (showHelpChangeUserRoles = !showHelpChangeUserRoles)}>
+                <QuestionCircleSolid class="h-5 w-5" />
+                <span>Ayuda</span>
+            </button>
         </div>
 
-        <Popover
-            class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary"
-            title="Cambiar rol"
-            triggeredBy="#pop_table">
-            <p class=" dark:text-white text-sm sm:text-base text-justify recompensa:text-white">
-                Esta página muestra a todas las personas que tengan un rol de atención o de escuela.
-            </p>
-        </Popover>
+        <!-- Help tooltip -->
+        {#if showHelpChangeUserRoles}
+            <div class="relative mb-8">
+                <div
+                    class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                    <h3 class="font-bold text-lg mb-2">Ver roles</h3>
+                    <p>
+                        Esta página muestra a todas las personas que tengan un rol de atención al
+                        despacho o de escuela.
+                    </p>
+                </div>
+            </div>
+        {/if}
+
         <TableSearch placeholder="Busca por Nombre" hoverable={true} bind:inputValue={searchTerm}>
             <TableHead>
                 <TableHeadCell class="recompensa:bg-recompensa-primary recompensa:text-white">
@@ -450,32 +486,38 @@
         on:focus={() => {
             form = ""
         }}>
-        <h2
-            class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat recompensa:text-recompensa-primary">
-            Administrar la Base de Datos
-        </h2>
-
-        <div class="w-auto grid grid-cols-1 place-items-center mb-4">
-            <Button
-                id="pop_db"
-                class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent">
-                <QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10" />
-            </Button>
+        <!-- Help button -->
+        <div class="flex justify-center mb-6">
+            <button
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+                on:click={() => (showHelpDB = !showHelpDB)}>
+                <QuestionCircleSolid class="h-5 w-5" />
+                <span>Ayuda</span>
+            </button>
         </div>
 
-        <Popover
-            class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary"
-            title="Base de Datos"
-            triggeredBy="#pop_db">
-            <p class=" dark:text-white text-sm sm:text-base text-justify recompensa:text-white">
-                Esta página sirve para hacer copias de seguridad y para eliminar la base de datos.
-                <br />
-                <br />
-                Antes de eliminar la base de datos se realiza una copia de seguridad, pero no la borres
-                a no ser que tengas que hacerlo. Como nota adicional, la eliminación de la base de datos
-                solo borra las reservas y deja a los usuarios intactos.
-            </p>
-        </Popover>
+        <!-- Help tooltip -->
+        {#if showHelpDB}
+            <div class="relative mb-8">
+                <div
+                    class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                    <h3 class="font-bold text-lg mb-2">Gestionar Base de Datos</h3>
+                    <p>
+                        Esta página sirve para hacer copias de seguridad y para eliminar la base de
+                        datos.
+                        <br />
+                        <br />
+                        Antes de eliminar la base de datos se realiza una copia de seguridad, pero no
+                        la borres a no ser que tengas que hacerlo.
+                        <br />
+                        <br />
+                        Como nota adicional, la eliminación de la base de datos solo borra las reservas
+                        de los usuarios (no de las asociaciones) y deja a los usuarios intactos.
+                    </p>
+                </div>
+            </div>
+        {/if}
+
         <section class="grid grid-rows-3 place-items-center mt-8">
             <section>
                 <form method="post" use:enhance>
@@ -552,34 +594,37 @@
         on:focus={() => {
             form = ""
         }}>
-        <h2
-            class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat recompensa:text-recompensa-primary">
-            Gestionar Puestos
-        </h2>
-
-        <div class="w-auto grid grid-cols-1 place-items-center mb-4">
-            <Button
-                id="pop_db"
-                class="dark:text-dark-primary dark:hover:text-dark-accent text-dele-color hover:text-dele-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent">
-                <QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10" />
-            </Button>
+        <!-- Help button -->
+        <div class="flex justify-center mb-6">
+            <button
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+                on:click={() => (showHelpOsciloscopes = !showHelpOsciloscopes)}>
+                <QuestionCircleSolid class="h-5 w-5" />
+                <span>Ayuda</span>
+            </button>
         </div>
 
-        <Popover
-            class="text-black dark:text-white dark:bg-dark-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm recompensa:bg-recompensa-secondary"
-            title="Gestionar Puestos"
-            triggeredBy="#pop_db">
-            <p class=" dark:text-white text-sm sm:text-base text-justify recompensa:text-white">
-                Esta página sirve para marcar la disponibilidad de los puestos.
-                <br />
-                <br />
-                Antes de marcarlo como no disponible ten en cuenta que se mandarán correos a todas las
-                personas afectadas.
-            </p>
-        </Popover>
+        <!-- Help tooltip -->
+        {#if showHelpOsciloscopes}
+            <div class="relative mb-8">
+                <div
+                    class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                    <h3 class="font-bold text-lg mb-2">Gestionar Puestos de Electrónica</h3>
+                    <p>
+                        Esta página sirve para marcar la disponibilidad de los puestos de
+                        electrónica, pudiendo marcarlos como no disponibles.
+                        <br />
+                        <br />
+                        Antes de marcarlo como no disponible ten en cuenta que se mandarán correos a
+                        todas las personas afectadas.
+                    </p>
+                </div>
+            </div>
+        {/if}
+
         <section class="grid grid-rows-3 place-items-center mt-8">
             <form method="post" use:enhance>
-                <div class="grid grid-cols-1 w-screen">
+                <div class="grid grid-cols-1 w-[90vw]">
                     <div class="w-4/5 m-auto">
                         <Label
                             class="w-4/5 text-xl m-auto text-dele-color recompensa:text-recompensa-primary">
@@ -625,10 +670,37 @@
         on:focus={() => {
             form = ""
         }}>
-        <h2
-            class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat recompensa:text-recompensa-primary">
-            Plantilla de Turnos
-        </h2>
+        <!-- Help button -->
+        <div class="flex justify-center mb-6">
+            <button
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+                on:click={() => (showHelpShifts = !showHelpShifts)}>
+                <QuestionCircleSolid class="h-5 w-5" />
+                <span>Ayuda</span>
+            </button>
+        </div>
+
+        <!-- Help tooltip -->
+        {#if showHelpShifts}
+            <div class="relative mb-8">
+                <div
+                    class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                    <h3 class="font-bold text-lg mb-2">Gestionar los turnos semanalmente</h3>
+                    <p>
+                        Esta página sirve para marcar los turnos que se pueden cubrir semanalmente.
+                        <br />
+                        <br />
+                        Las franjas horarias que no se puedan cubrir aparecerán marcadas en negro, y
+                        no podrán ser seleccionadas para ser reservadas en los puestos de electrónica.
+                        <br />
+                        <br />
+                        Es crucial marcar estos horarios al principio de cada cuatrimestre y, si no se
+                        puede cubrir turno un día en específico, marcarlo en la pestaña "Turnos de Despacho".
+                    </p>
+                </div>
+            </div>
+        {/if}
+
         <table
             style="border: 2px solid black; border-radius: 13px; border-spacing: 0;"
             class="m-auto mt-12">
@@ -681,27 +753,48 @@
         on:focus={() => {
             form = ""
         }}>
-        <h2
-            class="text-primary dark:text-gray-300 text-center text-4xl font-montserrat recompensa:text-recompensa-primary">
-            Turnos del Despacho
-        </h2>
-        <div class="grid grid-cols-1 place-items-center mt-6">
-            {#if window.innerWidth <= 768}
-                <Datepicker
-                    bind:store
-                    format="dddd - DD/MM/YYYY"
-                    startOfWeekIndex={1}
-                    start={new Date()}
-                    {theme_mobile} />
-            {:else}
-                <Datepicker
-                    bind:store
-                    format="dddd - DD/MM/YYYY"
-                    startOfWeekIndex={1}
-                    start={new Date()}
-                    {theme} />
-            {/if}
+        <!-- Help button -->
+        <div class="flex justify-center mb-6">
+            <button
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+                on:click={() => (showHelpActualShifts = !showHelpActualShifts)}>
+                <QuestionCircleSolid class="h-5 w-5" />
+                <span>Ayuda</span>
+            </button>
         </div>
+
+        <!-- Help tooltip -->
+        {#if showHelpActualShifts}
+            <div class="relative mb-8">
+                <div
+                    class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                    <h3 class="font-bold text-lg mb-2">Gestionar los turnos día a día</h3>
+                    <p>
+                        Esta página sirve para marcar los turnos que no se puedan cubrir en días
+                        específicos, haz click siempre en buscar tras seleccionar el día.
+                        <br />
+                        <br />
+                        Las franjas horarias que no se puedan cubrir aparecerán marcadas en negro, y
+                        no podrán ser seleccionadas para ser reservadas en los puestos de electrónica.
+                        Además, una franja horaria no se podrá marcar como libre si en la plantilla se
+                        indica lo contrario.
+                        <br />
+                        <br />
+                        Si esa franja horaria estaba ocupada, se enviará un correo de cancelación de
+                        la reserva del osciloscopio a todos los estudiantes afectados.
+                    </p>
+                </div>
+            </div>
+        {/if}
+
+        <div class="grid grid-cols-1 place-items-center mt-12">
+            <DateInput
+                bind:value={date}
+                on:select={() => {
+                    form = null
+                }} />
+        </div>
+
         <form action="?/ReservasDia" method="post" use:enhance>
             <div class="grid grid-cols-1 place-items-center mt-6">
                 <Input
@@ -709,7 +802,7 @@
                     required
                     id="dia_r"
                     name="dia_r"
-                    value={dayjs($store?.selected).format("D-M-YYYY")} />
+                    value={formatDate(date, "-")} />
                 <Button
                     class="bg-dele-color text-white mt-8 px-8 py-2 text-xl hover:bg-dele-color dark:bg-dark-primary dark:hover:bg-dark-accent recompensa:bg-recompensa-primary hover:recompensa:bg-recompensa-accent"
                     type="submit">
@@ -717,6 +810,7 @@
                 </Button>
             </div>
         </form>
+
         {#if form != null && form && form.reservas}
             <div class="grid grid-cols-1 place-self-center mt-6">
                 <div class="w-auto m-auto dark:text-white grid sm:grid-cols-4 grid-cols-2">
@@ -742,15 +836,15 @@
                     <tr>
                         {#if plantilla && plantilla["plantilla"]}
                             {#each franjas as start_hour}
-                                {#if plantilla["plantilla"][dayjs($store?.selected).format("d") + "-" + start_hour] != 0}
-                                    {#if form.reservas[dayjs($store?.selected).format("D/M/YYYY") + "-" + start_hour]}
-                                        {#if form.reservas[dayjs($store?.selected).format("D/M/YYYY") + "-" + start_hour] == "no_disponible"}
+                                {#if plantilla["plantilla"][getDay(date) + "-" + start_hour] != 0}
+                                    {#if form.reservas[formatDate(date, "/") + "-" + start_hour]}
+                                        {#if form.reservas[formatDate(date, "/") + "-" + start_hour] == "no_disponible"}
                                             <td
                                                 style="border: 1px solid black;"
                                                 class="bg-black text-white text-center p-3 cursor-pointer"
                                                 on:click={() => {
                                                     change_availability_modal(
-                                                        dayjs($store?.selected).format("D/M/YYYY"),
+                                                        formatDate(date, "/"),
                                                         start_hour,
                                                         "disponible"
                                                     )
@@ -763,7 +857,7 @@
                                                 class="bg-red-500 text-center p-3 cursor-pointer"
                                                 on:click={() => {
                                                     change_availability_modal(
-                                                        dayjs($store?.selected).format("D/M/YYYY"),
+                                                        formatDate(date, "/"),
                                                         start_hour,
                                                         "no_disponible"
                                                     )
@@ -777,7 +871,7 @@
                                             class="bg-green-500 text-center p-3 cursor-pointer"
                                             on:click={() => {
                                                 change_availability_modal(
-                                                    dayjs($store?.selected).format("D/M/YYYY"),
+                                                    formatDate(date, "/"),
                                                     start_hour,
                                                     "no_disponible"
                                                 )

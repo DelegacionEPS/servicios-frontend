@@ -75,6 +75,9 @@
     }
 
     export let form
+
+    // State for help tooltip
+    let showHelp = false
 </script>
 
 <svelte:head>
@@ -93,36 +96,46 @@
 <header>
     <h1
         class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-4 text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
-        Selección de Taquilla - Edificio {data.edificio} - Planta {data.planta}
+        Selección de Taquilla
     </h1>
+    <h3
+        class="text-xl sm:text-2xl lg:text-3xl xl:text-5xl text-center font-montserrat mt-4 mb-4 text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
+        Edificio {data.edificio} - Planta {data.planta}
+    </h3>
 </header>
 
 <main>
-    <section
-        aria-labelledby="tutorial-section"
-        class="w-screen grid grid-cols-1 place-items-center mb-4">
-        <Button
-            id="pop_edificio"
-            class="dark:text-dark-primary dark:hover:text-dark-accent recompensa:text-recompensa-primary hover:recompensa:text-recompensa-accent text-dele-color hover:text-dele-accent"
-            aria-label="Abrir tutorial">
-            <QuestionCircleSolid class="md:h-8 md:w-8 h-10 w-10" />
-        </Button>
-    </section>
+    <!-- Help button -->
+    <div class="flex justify-center mb-6">
+        <button
+            class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+            on:click={() => (showHelp = !showHelp)}>
+            <QuestionCircleSolid class="h-5 w-5" />
+            <span>Ayuda</span>
+        </button>
+    </div>
 
-    <Popover
-        class="text-black dark:text-white dark:bg-dark-secondary recompensa:text-white recompensa:bg-recompensa-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm"
-        title="Tutorial Taquillas - Selección de Taquilla"
-        triggeredBy="#pop_edificio">
-        Por último, tienes que buscar la taquilla seleccionando el bloque donde se encuentra la
-        misma. Para cambiar entre bloques, puedes usar el menú desplegable o los botones inferiores.
-        Además, tienes un mapa al final de la página para ayudarte a seleccionar el bloque.
-        <br />
-        <br />
-        <b>
-            Recuerda hacer login en una cuenta de la UC3M para reservar la taquilla.
-            <b></b>
-        </b>
-    </Popover>
+    <!-- Help tooltip -->
+    {#if showHelp}
+        <div class="relative mb-8">
+            <div
+                class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                <h3 class="font-bold text-lg mb-2">Tutorial Taquillas - Selección de Taquilla</h3>
+                <p>
+                    Por último, tienes que buscar la taquilla seleccionando el bloque donde se
+                    encuentra la misma. Para cambiar entre bloques, puedes usar el menú desplegable
+                    o los botones inferiores. Además, tienes un mapa al final de la página para
+                    ayudarte a seleccionar el bloque.
+                    <br />
+                    <br />
+                    <b>
+                        Recuerda hacer login en una cuenta de la UC3M para reservar la taquilla.
+                        <b></b>
+                    </b>
+                </p>
+            </div>
+        </div>
+    {/if}
 
     <section
         aria-labelledby="bloque-selector"
