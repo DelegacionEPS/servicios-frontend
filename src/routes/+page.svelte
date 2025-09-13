@@ -97,6 +97,9 @@
             document.head.appendChild(metaDescription)
         }
     })
+
+    // State for help tooltip
+    let showHelp = false
 </script>
 
 <svelte:head>
@@ -128,52 +131,60 @@
                 </p>
             </div>
 
+            <!-- Help button -->
             <div class="flex justify-center mb-6">
-                <Button
-                    id="pop_home"
-                    class="rounded-full p-4 bg-white shadow-xl hover:shadow-2xl transition-all dark:bg-dark-primary recompensa:bg-recompensa-primary dark:text-white recompensa:text-white transform hover:scale-110"
-                    aria-label="Mostrar información">
-                    <QuestionCircleSolid
-                        class="h-9 w-9 text-dele-color dark:text-white recompensa:text-white" />
-                </Button>
+                <button
+                    class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+                    on:click={() => (showHelp = !showHelp)}>
+                    <QuestionCircleSolid class="h-5 w-5" />
+                    <span>Ayuda</span>
+                </button>
             </div>
+
+            <!-- Help tooltip -->
+            {#if showHelp}
+                <div class="relative mb-8">
+                    <div
+                        class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+                        <h3 class="font-bold text-lg mb-2">Información</h3>
+                        Para poder reservar una
+                        <span
+                            class="underline hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium">
+                            <a href="/taquillas">taquilla</a>
+                        </span>
+                        , o un
+                        <span
+                            class="underline hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium">
+                            <a href="/osciloscopio">puesto de electrónica</a>
+                        </span>
+                        , necesitas
+                        <button
+                            type="button"
+                            on:click={() => signIn("google")}
+                            on:keydown={handleKeyDown}
+                            class="underline italic hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium">
+                            iniciar sesión
+                        </button>
+                        con tu cuenta de Google de la universidad.
+                        <br />
+                        <br />
+                        Si tienes algún problema, puedes contactar con nosotros en el despacho de delegación
+                        localizado en la sala 1.0.H01 (al lado del banco Santander) o escríbenos un correo
+                        a
+                        <button
+                            type="button"
+                            class="underline text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary hover:text-dele-accent hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent cursor-pointer font-medium"
+                            on:click={copy}
+                            on:keydown={e => e.key === "Enter" && copy()}
+                            aria-label="Copy email address to clipboard">
+                            delegeps@uc3m.es
+                        </button>
+                        .
+                    </div>
+                </div>
+            {/if}
         </div>
     </section>
-
-    <Popover
-        class="text-black dark:text-white recompensa:text-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary md:w-1/3 sm:w-1/2 w-10/12 sm:text-md text-sm shadow-xl rounded-xl"
-        title="Información"
-        triggeredBy="#pop_home">
-        <p
-            class="dark:text-white recompensa:text-white text-sm sm:text-base text-justify leading-relaxed">
-            Para poder reservar una <span
-                class="underline hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium">
-                <a href="/taquillas">taquilla</a>
-            </span>
-            , o un puesto de electrónica, necesitas
-            <button
-                type="button"
-                on:click={() => signIn("google")}
-                on:keydown={handleKeyDown}
-                class="underline italic hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent hover:text-accent font-medium">
-                iniciar sesión
-            </button>
-            con tu cuenta de Google de la universidad.
-            <br />
-            <br />
-            Si tienes algún problema, puedes contactar con nosotros en el despacho de delegación localizado
-            en la sala 1.0.H01 (al lado del banco Santander) o escríbenos un correo a
-            <button
-                type="button"
-                class="underline text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary hover:text-dele-accent hover:dark:text-dark-accent hover:recompensa:text-recompensa-accent cursor-pointer font-medium"
-                on:click={copy}
-                on:keydown={e => e.key === "Enter" && copy()}
-                aria-label="Copy email address to clipboard">
-                delegeps@uc3m.es
-            </button>
-            .
-        </p>
-    </Popover>
 
     <!-- Services Section - Improved cards with better visual hierarchy -->
     <section class="container mx-auto px-4 py-16 md:py-24">

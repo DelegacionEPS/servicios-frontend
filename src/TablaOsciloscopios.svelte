@@ -85,6 +85,8 @@
             <br />
             - Eres responsable de lo que le ocurra al puesto durante tu reserva.
             <br />
+            - Los delegados presentes podrán imponerte una sanción que te impedirá reservar puestos de
+            electrónica durante el tiempo que consideren adecuado, dependiendo de tu infracción.
         </p>
         <Label class="space-y-2 recompensa:text-white">
             <span>Puesto de Electrónica</span>

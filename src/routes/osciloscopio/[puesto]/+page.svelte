@@ -3,6 +3,7 @@
     import TablaOsciloscopios from "../../../TablaOsciloscopios.svelte"
     import type { PageData } from "./$types"
     import { Card, Indicator } from "flowbite-svelte"
+    import { QuestionCircleSolid } from "flowbite-svelte-icons"
     export let data: PageData
 
     function getMonday(d: Date) {
@@ -47,12 +48,42 @@
     }
 
     export let form
+
+    let showHelp = false
 </script>
 
 <h1
     class="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl text-center font-montserrat mt-4 mb-4 text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary">
     Selección de Hora
 </h1>
+
+<!-- Help button -->
+<div class="flex justify-center mb-6">
+    <button
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-md hover:shadow-lg transition-shadow text-dele-color dark:text-dark-primary recompensa:text-recompensa-primary"
+        on:click={() => (showHelp = !showHelp)}>
+        <QuestionCircleSolid class="h-5 w-5" />
+        <span>Ayuda</span>
+    </button>
+</div>
+
+<!-- Help tooltip -->
+{#if showHelp}
+    <div class="relative mb-8">
+        <div
+            class="mx-auto max-w-2xl p-4 rounded-lg bg-white dark:bg-dark-secondary recompensa:bg-recompensa-secondary shadow-lg text-black dark:text-white recompensa:text-white">
+            <h3 class="font-bold text-lg mb-2">
+                Tutorial Puestos de Electrónica - Selección de Horario
+            </h3>
+            <p>
+                Ahora puedes seleccionar una franja temporal en la tabla que se muestra abajo. Para
+                proporcionar una posibilidad de reserva equitativa entre los estudiantes, solo
+                podrás reservar una franja horaria cada semana. Para cambiar de semana, haz click en
+                el botón que se muestra debajo de la tabla.
+            </p>
+        </div>
+    </div>
+{/if}
 
 <TablaOsciloscopios bind:week1 bind:week2 bind:data></TablaOsciloscopios>
 

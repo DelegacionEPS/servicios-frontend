@@ -64,7 +64,9 @@ export const actions = {
         const data = await request.formData()
         // -------- Aquí se llama a la función de la API que busca el estado de una Taquilla --------
         const dia = data.get("dia_r")
+        console.log(dia, typeof dia)
         const result = getReservasDia(dia)
+        console.log(result)
         return result
     }
 } satisfies Actions
