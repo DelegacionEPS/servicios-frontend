@@ -1,5 +1,6 @@
 import type { PageServerLoad, Actions } from "./$types"
 import size from "$lib/size"
+import dimension from "$lib/dimension.json"
 import { reservaTaquilla, reservaTaquillaAsociacion, BASE_URL_API, TOKEN } from "$lib/api_taquillas"
 
 export const load: PageServerLoad = async ({ request }) => {
@@ -18,6 +19,7 @@ export const load: PageServerLoad = async ({ request }) => {
     return {
         serverMessage: "hello from server load function",
         size: size,
+        dimension: dimension,
         bloques: fetchOcupacionBloques()
     }
 }

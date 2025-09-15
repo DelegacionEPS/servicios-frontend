@@ -24,6 +24,7 @@
     export let data: PageData
 
     const floor_size = Object.keys(data.size[data.edificio][data.planta])
+    const dimensions = data.dimension[data.edificio as keyof typeof data.dimension]
 
     let block = 1
     let openDropdown = false
@@ -126,8 +127,17 @@
                     encuentra la misma. Para cambiar entre bloques, puedes usar el menú desplegable
                     o los botones inferiores. Además, tienes un mapa al final de la página para
                     ayudarte a seleccionar el bloque.
-                    <br />
-                    <br />
+                </p>
+                <p>Los tamaños de las taquillas son: (ancho alto profundo)</p>
+                <ul class="list-disc list-inside">
+                    {#each Object.entries(dimensions) as [size, values]}
+                        <li>
+                            {size.charAt(0).toUpperCase() + size.slice(1)}: {values.join(" x ")} cm
+                        </li>
+                    {/each}
+                </ul>
+
+                <p>
                     <b>
                         Recuerda hacer login en una cuenta de la UC3M para reservar la taquilla.
                         <b></b>
