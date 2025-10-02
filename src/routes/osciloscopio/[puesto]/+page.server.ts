@@ -37,6 +37,7 @@ export const actions = {
         const correo = data.get("correo")
         const nombre = data.get("nombre")
         const semana = data.get("semana")
+        console.log("Semana:" + semana)
         const result = reservaOsciloscopio(puesto, nia, hora, dia, correo, nombre, semana)
         return result
     }
