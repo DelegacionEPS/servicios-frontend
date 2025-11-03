@@ -1068,7 +1068,7 @@
                         Asociación:
                         {#if association_selected["nombre"]}
                             {association_selected["nombre"]}
-                        {:else}{/if}
+                        {/if}
                         <ChevronDownOutline class="w-6 h-6 ms-2 text-white dark:text-white" />
                     </Button>
                     <Dropdown bind:open={openDropdown} class="recompensa:bg-recompensa-secondary">
