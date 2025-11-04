@@ -91,7 +91,7 @@
     <meta name="robots" content="index, follow" />
     <link
         rel="canonical"
-        href={`https://yourwebsite.com/taquillas/${data.edificio}/${data.planta}`} />
+        href={`https://servicios-delegacion.uc3m.es/taquillas/${data.edificio}/${data.planta}`} />
 </svelte:head>
 
 <header>

@@ -32,7 +32,7 @@
     <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={`https://yourwebsite.com/taquillas/${building}`} />
+    <link rel="canonical" href={`https://servicios-delegacion.uc3m.es/taquillas/${building}`} />
 </svelte:head>
 
 <header>
