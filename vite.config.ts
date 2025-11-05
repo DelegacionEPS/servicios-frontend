@@ -4,6 +4,6 @@ import { defineConfig } from "vite"
 export default defineConfig({
     plugins: [sveltekit()],
     preview: {
-        allowedHosts: ["delegacion-interna.uc3m.es"]
+        allowedHosts: ["servicios-dele.uc3m.es", "delegacion-interna.uc3m.es", "delegacion.uc3m.es"] // change in production
     }
 })
