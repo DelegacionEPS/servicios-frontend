@@ -66,17 +66,7 @@
         <h3 class="mb-2 text-xl font-medium text-gray-900 dark:text-white recompensa:text-white">
             Eliminar Reserva
         </h3>
-        <p>Vas tu reserva:</p>
-        <Label class="space-y-2">
-            <span>NIA:</span>
-            <Input
-                type="text"
-                id="nia"
-                name="nia"
-                value={currentReserva["nia"]}
-                readonly
-                required />
-        </Label>
+        <p>Vas a cancelar tu reserva:</p>
         <Label class="space-y-2">
             <span>Puesto</span>
             <Input
